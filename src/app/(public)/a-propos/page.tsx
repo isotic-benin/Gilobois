@@ -3,9 +3,9 @@ import Link from "next/link";
 import { FaShieldHalved, FaLeaf, FaTruck, FaUserGroup } from "react-icons/fa6";
 
 export const metadata: Metadata = {
-  title: "À propos",
+  title: "Über uns",
   description:
-    "Découvrez Perrier Bois, entreprise familiale d'exploitation forestière basée à Melay (Saône-et-Loire) : granulés, bûches compressées et bois de chauffage certifiés.",
+    "Entdecken Sie Brennstoffe Nagler, ein Familienunternehmen in der Forstwirtschaft: zertifizierte Holzpellets, Holzbriketts und Brennholz.",
 };
 
 export default function AProposPage() {
@@ -13,30 +13,30 @@ export default function AProposPage() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
       {/* Hero Banner */}
       <div className="bg-primary text-primary-foreground p-8 md:p-12 mb-10">
-        <h1 className="text-[36px] font-bold tracking-tight md:text-[48px]">À propos de Perrier Bois</h1>
+        <h1 className="text-[36px] font-bold tracking-tight md:text-[48px]">Über Brennstoffe Nagler</h1>
         <p className="mt-4 text-[16px] leading-relaxed opacity-90 max-w-2xl">
-          Entreprise familiale d exploitation forestière, enracinée en Saône-et-Loire depuis 2008.
+          Familienunternehmen in der Forstwirtschaft, seit 2008 verwurzelt.
         </p>
       </div>
 
       <div className="space-y-5 text-[16px] text-muted-foreground leading-relaxed">
         <p>
-          <strong className="text-foreground font-bold">PERRIER BOIS</strong> est une
-          société à responsabilité limitée (SARL) d exploitation forestière,
-          créée le 18 avril 2008 et dirigée par Laurent Perrier. Son siège est
-          situé au 109 Zone des Varennes, à Melay (71340), en Saône-et-Loire.
+          <strong className="text-foreground font-bold">BRENNSTOFFE NAGLER</strong> ist eine
+          Gesellschaft mit beschränkter Haftung (GmbH) in der Forstwirtschaft,
+          gegründet am 18. April 2008 und geleitet von Markus Nagler. Ihr Sitz
+          befindet sich in Zone des Varennes 109, Melay (71340), Saône-et-Loire.
         </p>
         <p>
-          Notre activité (code NAF 02.20Z) couvre l exploitation des forêts,
-          la production et la commercialisation de bois de chauffage, de
-          granulés et de briquettes compressées. Immatriculée sous le SIREN
-          503 747 180, notre entreprise opère en respectant les forêts et les
-          cycles naturels du bois.
+          Unsere Tätigkeit (NAF-Code 02.20Z) umfasst die Forstwirtschaft,
+          die Produktion und den Vertrieb von Brennholz, Holzpellets
+          und Holzbriketts. Eingetragen unter SIREN
+          503 747 180, betreibt unser Unternehmen unter Respektierung der Wälder und
+          natürlichen Holzzyklen.
         </p>
         <p>
-          Nous sélectionnons chaque référence avec soin pour vous offrir des
-          combustibles certifiés, aux meilleurs prix, livrés directement chez
-          vous ou retirés dans nos dépôts.
+          Wir wählen jedes Produkt sorgfältig aus, um Ihnen
+          zertifizierte Brennstoffe zu den besten Preisen anzubieten, direkt zu
+          Ihnen geliefert oder in unseren Lagern abgeholt.
         </p>
       </div>
 
@@ -44,23 +44,23 @@ export default function AProposPage() {
         {[
           {
             icone: FaTruck,
-            titre: "Livraison rapide",
-            texte: "Dans toute la France, avec suivi de commande.",
+            titre: "Schnelle Lieferung",
+            texte: "In ganz Deutschland, mit Sendungsverfolgung.",
           },
           {
             icone: FaLeaf,
-            titre: "Exploitation forestière",
-            texte: "Une entreprise issue du terrain, de la forêt au foyer.",
+            titre: "Forstwirtschaft",
+            texte: "Ein Unternehmen aus der Praxis, vom Wald zum Heim.",
           },
           {
             icone: FaShieldHalved,
-            titre: "Produits certifiés",
-            texte: "Granulés ENplus, bûches compressées et bois de chauffage.",
+            titre: "Zertifizierte Produkte",
+            texte: "ENplus-Holzpellets, Holzbriketts und Brennholz.",
           },
           {
             icone: FaUserGroup,
-            titre: "Support dédié",
-            texte: "Notre équipe vous accompagne avant et après l achat.",
+            titre: "Dedizierter Kundendienst",
+            texte: "Unser Team begleitet Sie vor und nach dem Kauf.",
           },
         ].map(({ icone: Icone, titre, texte }) => (
           <div key={titre} className="rounded-none border-2 border-border bg-card p-6 hover:border-primary transition-colors">
@@ -75,9 +75,9 @@ export default function AProposPage() {
 
       <div className="mt-10 bg-secondary text-secondary-foreground p-6">
         <p className="font-bold">
-          Une question ?{" "}
+          Eine Frage?{" "}
           <Link href="/contact" className="text-primary hover:underline underline-offset-4">
-            Contactez-nous
+            Kontaktieren Sie uns
           </Link>
           .
         </p>

@@ -14,12 +14,12 @@ const urlApp = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
 
   const corps = await request.json().catch(() => null);
   const commandeId = corps?.commandeId;
   if (!commandeId || !estObjectId(commandeId)) {
-    return apiErreur("Identifiant de commande invalide", 400);
+    return apiErreur("Ungültige Bestell-ID", 400);
   }
 
   if (!cleSecrete) {
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
   await dbConnect();
   const commande = await Order.findById(commandeId).lean();
-  if (!commande) return apiErreur("Commande introuvable", 404);
+  if (!commande) return apiErreur("Bestellung nicht gefunden", 404);
 
   const autorise =
     user.role === ROLES.ADMIN ||
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
   if (!autorise) return apiErreur("Accès refusé", 403);
 
   if (commande.methodePaiement !== "virement") {
-    return apiErreur("Cette commande n'utilise pas le paiement par virement", 400);
+    return apiErreur("Diese Bestellung verwendet keine Banküberweisung als Zahlungsmethode", 400);
   }
 
   const stripe = new Stripe(cleSecrete);

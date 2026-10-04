@@ -21,25 +21,25 @@ export function SidebarDashboard({
   const base = estAdmin ? "/admin" : "/gerant";
 
   const liens: LienNav[] = [
-    { href: base, label: "Tableau de bord", icone: FaTableColumns, exact: true },
-    { href: `${base}/commandes`, label: "Commandes", icone: FaBox },
-    { href: `${base}/produits`, label: "Produits", icone: FaBagShopping },
+    { href: base, label: "Dashboard", icone: FaTableColumns, exact: true },
+    { href: `${base}/commandes`, label: "Bestellungen", icone: FaBox },
+    { href: `${base}/produits`, label: "Produkte", icone: FaBagShopping },
     ...(estAdmin
       ? ([
-        { href: `${base}/categories`, label: "Catégories", icone: FaFolderTree },
-        { href: `${base}/avis`, label: "Avis", icone: FaStar },
-        { href: `${base}/carousel`, label: "Carrousel", icone: FaImage },
+        { href: `${base}/categories`, label: "Kategorien", icone: FaFolderTree },
+        { href: `${base}/avis`, label: "Bewertungen", icone: FaStar },
+        { href: `${base}/carousel`, label: "Karussell", icone: FaImage },
         { href: `${base}/newsletter`, label: "Newsletter", icone: FaEnvelope },
-        { href: `${base}/coupons`, label: "Coupons", icone: FaTicket },
+        { href: `${base}/coupons`, label: "Gutscheine", icone: FaTicket },
         { href: `${base}/faq`, label: "FAQ", icone: FaCircleQuestion },
-        { href: `${base}/contacts`, label: "Contacts", icone: FaMessage },
-        { href: `${base}/parametres`, label: "Paramètres", icone: FaGear },
+        { href: `${base}/contacts`, label: "Kontakte", icone: FaMessage },
+        { href: `${base}/parametres`, label: "Einstellungen", icone: FaGear },
       ] satisfies LienNav[])
       : []),
   ];
 
   return (
-    <nav aria-label="Navigation du back-office" className="no-scrollbar flex gap-1 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:pb-0">
+    <nav aria-label="Back-Office-Navigation" className="no-scrollbar flex gap-1 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:pb-0">
       {liens.map(({ href, label, icone: Icone, exact }) => {
         const actif = exact
           ? chemin === href

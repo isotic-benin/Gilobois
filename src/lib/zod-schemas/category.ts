@@ -3,25 +3,25 @@ import { z } from "zod";
 export const slugSchema = z
   .string()
   .trim()
-  .min(2, "Le slug doit contenir au moins 2 caractères")
-  .max(60, "Le slug est trop long")
+  .min(2, "Der Slug muss mindestens 2 Zeichen enthalten")
+  .max(60, "Der Slug ist zu lang")
   .regex(
     /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-    "Format invalide (minuscules, chiffres et tirets uniquement)",
+    "Ungültiges Format (nur Kleinbuchstaben, Ziffern und Bindestriche)",
   );
 
 export const categorySchema = z.object({
   nom: z
     .string()
     .trim()
-    .min(2, "Le nom doit contenir au moins 2 caractères")
-    .max(60, "Le nom est trop long"),
+    .min(2, "Der Name muss mindestens 2 Zeichen enthalten")
+    .max(60, "Der Name ist zu lang"),
   slug: slugSchema,
   description: z.string().trim().max(500).default(""),
-  image: z.string().trim().url("URL invalide").or(z.literal("")).default(""),
+  image: z.string().trim().url("Ungültige URL").or(z.literal("")).default(""),
   parentId: z
     .string()
-    .regex(/^[0-9a-f]{24}$/, "Catégorie parente invalide")
+    .regex(/^[0-9a-f]{24}$/, "Ungültige übergeordnete Kategorie")
     .nullable()
     .default(null),
   ordre: z.coerce.number().int().min(0).default(0),

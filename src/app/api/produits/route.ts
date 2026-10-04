@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Paramètres invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Parameter",
       400,
     );
   }
@@ -26,18 +26,18 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN && user.role !== ROLES.GERANT) {
-    return apiErreur("Action réservée à l'équipe boutique", 403);
+    return apiErreur("Nur für das Shop-Team", 403);
   }
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = productSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       "code" in erreur &&
       erreur.code === 11000
     ) {
-      return apiErreur("Un produit avec ce slug ou ce SKU existe déjà", 409);
+      return apiErreur("Ein Produkt mit diesem Slug oder SKU existiert bereits", 409);
     }
     throw erreur;
   }

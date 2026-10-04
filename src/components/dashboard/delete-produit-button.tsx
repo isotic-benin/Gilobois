@@ -12,7 +12,7 @@ export function DeleteProduitButton({ produitId, nomProduit }: DeleteProduitButt
   const [enCours, setEnCours] = useState(false);
 
   const handleDelete = async () => {
-    if (!confirm(`Supprimer « ${nomProduit} » ?`)) return;
+    if (!confirm(`„${nomProduit}" löschen?`)) return;
     setEnCours(true);
     try {
       const res = await fetch(`/api/produits/${produitId}`, { method: "DELETE" });
@@ -21,7 +21,7 @@ export function DeleteProduitButton({ produitId, nomProduit }: DeleteProduitButt
         window.location.reload();
       }
     } catch {
-      alert("Erreur lors de la suppression");
+      alert("Fehler beim Löschen");
     } finally {
       setEnCours(false);
     }
@@ -36,10 +36,10 @@ export function DeleteProduitButton({ produitId, nomProduit }: DeleteProduitButt
     >
       {enCours ? (
         <>
-          <FaTrashCan className="size-3 animate-spin mr-1" /> Suppression…
+          <FaTrashCan className="size-3 animate-spin mr-1" /> Wird gelöscht…
         </>
       ) : (
-        "Supprimer"
+        "Löschen"
       )}
     </button>
   );

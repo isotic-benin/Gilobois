@@ -1,84 +1,81 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Formulaire de rétractation",
+  title: "Widerrufsformular",
 };
 
 export default function FormulaireRevocationPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-bold">Formulaire de rétractation</h1>
+      <h1 className="text-3xl font-bold">Widerrufsformular</h1>
       <div className="mt-6 space-y-6 text-sm leading-relaxed text-muted-foreground">
         <p>
-          En droit français, le consommateur dispose d un délai de rétractation
-          de 14 jours pour annuler un achat conclu à distance sans avoir à
-          justifier sa décision (articles L221-1 et suivants du code de la
-          consommation). Ce formulaire est un modèle type ; toute déclaration
-          claire et univoque envoyée dans le délai est également valable.
+          Verbraucher haben das Recht, innerhalb von 14 Tagen ohne Angabe von
+          Gründen von einem Fernabsatzvertrag zurückzutreten. Dieses Formular ist
+          ein Muster; jede eindeutige Erklärung, die innerhalb der Frist
+          abgegeben wird, ist ebenfalls gültig.
         </p>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Formulaire de rétractation (modèle type)
+            Widerrufsformular (Muster)
           </h2>
           <p>
-            Veuillez remplir et envoyer ce formulaire uniquement si vous
-            souhaitez résilier le contrat.
+            Bitte füllen Sie dieses Formular nur aus und senden Sie es zurück,
+            wenn Sie den Vertrag widerrufen möchten.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Destinataire
+            Empfänger
           </h2>
           <p>
-            <strong>PERRIER BOIS (SARL)</strong>
+            <strong>BRENNSTOFFE NAGLER (SARL)</strong>
             <br />
-            <strong>Siège social :</strong> 109 Zone des Varennes, 71340 Melay,
-            France
+            <strong>Sitz:</strong> Waldweg 12, 99423 Weimar, Deutschland
             <br />
-            <strong>SIREN :</strong> 503 747 180
+            <strong>SIREN:</strong> 503 747 180
             <br />
-            <strong>N° TVA intracommunautaire :</strong> FR79503747180
+            <strong>USt-IdNr.:</strong> FR79503747180
             <br />
-            <strong>E-mail :</strong> contact@perrierbois.fr
+            <strong>E-Mail:</strong> contact@brennstoffenagler.de
             <br />
-            <strong>Téléphone :</strong> +33 6 12 34 56 78
+            <strong>Telefon:</strong> +49 151 23456789
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Déclaration du consommateur
+            Erklärung des Verbrauchers
           </h2>
           <p>
-            Je vous informe par la présente de mon intention d exercer mon droit
-            de rétractation concernant le contrat d achat portant sur les
-            produits suivants :
+            Hiermit erkläre ich meinen Widerruf des Kaufvertrags über folgende
+            Produkte:
           </p>
           <div className="space-y-3 rounded-2xl border border-border bg-muted/50 p-4 text-muted-foreground">
             <p>
-              <strong>Produit ou produits :</strong>
+              <strong>Produkt(e):</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Montant :</strong>
+              <strong>Betrag:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Numéro de commande :</strong>
+              <strong>Bestellnummer:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Date de la commande :</strong>
+              <strong>Bestelldatum:</strong>
               <br />
               ____ / ____ / ________
             </p>
             <p>
-              <strong>Date de réception de la commande :</strong>
+              <strong>Eingangsdatum der Bestellung:</strong>
               <br />
               ____ / ____ / ________
             </p>
@@ -87,31 +84,31 @@ export default function FormulaireRevocationPage() {
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Coordonnées du consommateur
+            Angaben des Verbrauchers
           </h2>
           <div className="space-y-3 rounded-2xl border border-border bg-muted/50 p-4 text-muted-foreground">
             <p>
-              <strong>Nom et prénom :</strong>
+              <strong>Vor- und Nachname:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Rue :</strong>
+              <strong>Straße:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Code postal et ville :</strong>
+              <strong>Postleitzahl und Ort:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>E-mail :</strong>
+              <strong>E-Mail:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Téléphone :</strong>
+              <strong>Telefon:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
@@ -120,76 +117,74 @@ export default function FormulaireRevocationPage() {
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Enlèvement des produits
+            Abholung der Produkte
           </h2>
           <div className="space-y-3 rounded-2xl border border-border bg-muted/50 p-4 text-muted-foreground">
             <p>
               <strong>
-                Adresse d enlèvement, si elle diffère de l adresse
-                indiquée ci-dessus :
+                Abholadresse, falls abweichend von der oben angegebenen Adresse:
               </strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Remarques :</strong>
+              <strong>Anmerkungen:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              <strong>Date :</strong>
+              <strong>Datum:</strong>
               <br />
               ____ / ____ / ________
             </p>
             <p>
-              <strong>Signature du consommateur :</strong>
+              <strong>Unterschrift des Verbrauchers:</strong>
               <br />
               <span className="italic">________________________</span>
             </p>
             <p>
-              Une signature n est requise que si le formulaire est soumis sur
-              papier.
+              Eine Unterschrift ist nur erforderlich, wenn das Formular in
+              Papierform eingereicht wird.
             </p>
           </div>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Comment soumettre le formulaire
+            Wie das Formular einzureichen ist
           </h2>
-          <p>Le formulaire rempli peut être soumis via :</p>
+          <p>Das ausgefüllte Formular kann eingereicht werden per:</p>
           <p>
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
             <br />
-            WhatsApp : +33 6 12 34 56 78
+            WhatsApp: +49 151 23456789
             <br />
-            Courrier : Perrier Bois, 109 Zone des Varennes, 71340 Melay,
-            France
+            Post: Brennstoffe Nagler, Waldweg 12, 99423 Weimar, Deutschland
           </p>
           <p>
-            Pour que le délai soit respecté, la notification doit être envoyée
-            avant l expiration du délai de rétractation.
+            Um die Frist einzuhalten, muss die Benachrichtigung vor Ablauf der
+            Widerrufsfrist abgesendet werden.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Retour gratuit
+            Kostenlose Rücksendung
           </h2>
           <p>
-            À réception de la demande, Perrier Bois contacte le client pour
-            organiser l enlèvement gratuit des produits.
+            Nach Eingang des Antrags kontaktiert Brennstoffe Nagler den Kunden, um
+            die kostenlose Abholung der Produkte zu organisieren.
           </p>
           <p>
-            Le client ne doit pas retourner ou expédier les produits de sa propre
-            initiative sans avoir préalablement reçu les instructions de retour.
+            Der Kunde darf die Produkte nicht eigenständig zurücksenden, ohne
+            zuvor die Rücksendeanweisungen erhalten zu haben.
           </p>
           <p>
-            Les produits doivent être maintenus secs, à l abri de l humidité et
-            dans des conditions adaptées au transport.
+            Die Produkte müssen trocken, vor Feuchtigkeit geschützt und in
+            für den Transport geeignetem Zustand aufbewahrt werden.
           </p>
           <p>
-            <strong>Dernière mise à jour :</strong> 22 septembre 2026.
+            <strong>Letzte Aktualisierung:</strong> 22. September 2026.
           </p>
         </section>
       </div>

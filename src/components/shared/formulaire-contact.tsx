@@ -34,7 +34,7 @@ export function FormulaireContact() {
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur s'est produite.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
@@ -49,7 +49,7 @@ export function FormulaireContact() {
     <form onSubmit={enregistrer} className="space-y-3">
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Votre nom *</span>
+          <span className="mb-1 block text-sm font-medium">Ihr Name *</span>
           <input
             value={formulaire.nom}
             onChange={(e) =>
@@ -73,7 +73,7 @@ export function FormulaireContact() {
         </label>
       </div>
       <label className="block">
-        <span className="mb-1 block text-sm font-medium">Sujet *</span>
+        <span className="mb-1 block text-sm font-medium">Betreff *</span>
         <input
           value={formulaire.sujet}
           onChange={(e) =>
@@ -84,7 +84,7 @@ export function FormulaireContact() {
         />
       </label>
       <label className="block">
-        <span className="mb-1 block text-sm font-medium">Votre message *</span>
+        <span className="mb-1 block text-sm font-medium">Ihre Nachricht *</span>
         <textarea
           value={formulaire.message}
           onChange={(e) =>
@@ -114,7 +114,7 @@ export function FormulaireContact() {
         className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414] disabled:opacity-60"
       >
         {enCours ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-        <span>Envoyer le message</span>
+        <span>Nachricht absenden</span>
       </button>
     </form>
   );

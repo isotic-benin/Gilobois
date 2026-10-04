@@ -8,7 +8,7 @@ import { formaterPrix } from "./format";
 import { OPTIONS_LIVRAISON } from "./livraison";
 
 const FROM =
-  process.env.EMAIL_FROM ?? "Perrier Bois <contact@perrierbois.fr>";
+  process.env.EMAIL_FROM ?? "Brennstoffe Nagler <contact@brennstoffenagler.de>";
 
 const transporter = (() => {
   const host = process.env.SMTP_HOST;
@@ -44,11 +44,14 @@ export async function envoyerEmail({
   }
 
   try {
+    const langue = html.match(/<html lang="(de|fr)">/i)?.[1] ?? "de";
     await transporter.sendMail({
       from: FROM,
       to,
       subject: sujet,
       html,
+      text: texteDepuisHtml(html),
+      headers: { "Content-Language": langue },
       ...(replyTo ? { replyTo } : {}),
     });
     return { envoye: true };
@@ -58,37 +61,52 @@ export async function envoyerEmail({
   }
 }
 
-export function construireLayoutEmail(titre: string, contenu: string): string {
+export function construireLayoutEmail(
+  titre: string,
+  contenu: string,
+  langue: "de" | "fr" = "de",
+): string {
   const annee = new Date().getFullYear();
+  const emailContact = echapperHtml(
+    process.env.CONTACT_EMAIL ?? "contact@brennstoffenagler.de",
+  );
+  const texteContact =
+    langue === "fr"
+      ? "Une question concernant votre commande ? Écrivez-nous à"
+      : "Fragen zu Ihrer Bestellung? Schreiben Sie uns an";
+  const droits =
+    langue === "fr" ? "Tous droits réservés." : "Alle Rechte vorbehalten.";
   return `<!DOCTYPE html>
-<html lang="fr">
+<html lang="${langue}">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${echapperHtml(titre)}</title>
 </head>
-<body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background-color:#f3f4f6;color:#1f2937;-webkit-font-smoothing:antialiased;">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f3f4f6;width:100%;margin:0;padding:0;">
+<body style="margin:0;padding:0;background-color:#f2f1ec;color:#28352f;font-family:Georgia,'Times New Roman',serif;-webkit-text-size-adjust:100%;">
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f2f1ec" style="width:100%;background-color:#f2f1ec;">
     <tr>
-      <td align="center" style="padding:40px 10px;">
-        <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);width:100%;max-width:600px;margin:0 auto;">
+      <td align="center" style="padding:32px 12px;">
+        <table role="presentation" width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="width:100%;max-width:600px;background-color:#ffffff;border:1px solid #e4e2d9;">
           <tr>
-            <td align="center" style="background-color:#292524;padding:32px 24px;text-align:center;">
-              <h1 style="margin:0;color:#f9f6f0;font-size:26px;font-weight:700;letter-spacing:-0.5px;">PERRIER BOIS</h1>
+            <td align="center" bgcolor="#26382f" style="padding:29px 24px 25px;background-color:#26382f;text-align:center;">
+              <p style="margin:0;color:#fffdf7;font-family:Georgia,'Times New Roman',serif;font-size:21px;font-weight:bold;letter-spacing:2px;line-height:1.3;">BRENNSTOFFE NAGLER</p>
+              <p style="margin:8px 0 0;color:#d7b77b;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2px;line-height:1.4;">WÄRME, DIE ZUHAUSE SCHAFFT</p>
             </td>
           </tr>
           <tr>
-            <td style="padding:40px 32px;font-size:16px;line-height:1.6;color:#374151;">
+            <td style="padding:36px 34px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.7;color:#37433c;">
               ${contenu}
             </td>
           </tr>
           <tr>
-            <td style="background-color:#f9fafb;padding:24px 32px;border-top:1px solid #e5e7eb;text-align:center;font-size:13px;color:#6b7280;line-height:1.5;">
-              <p style="margin:0 0 8px 0;">
-                Vous recevez cet email car vous êtes inscrit(e) sur <strong>Perrier Bois</strong> ou avez effectué une commande.
+            <td align="center" bgcolor="#f8f7f3" style="padding:22px 28px;background-color:#f8f7f3;border-top:1px solid #e8e6de;text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#788078;">
+              <p style="margin:0 0 7px;">
+                ${texteContact}
+                <a href="mailto:${emailContact}" style="color:#395446;text-decoration:underline;">${emailContact}</a>.
               </p>
-              <p style="margin:0;">
-                &copy; ${annee} Perrier Bois. Tous droits réservés.
+              <p style="margin:0;color:#929990;">
+                &copy; ${annee} Brennstoffe Nagler · ${droits}
               </p>
             </td>
           </tr>
@@ -100,6 +118,53 @@ export function construireLayoutEmail(titre: string, contenu: string): string {
 </html>`;
 }
 
+export function texteDepuisHtml(html: string): string {
+  return html
+    .replace(/<head[\s\S]*?<\/head>/gi, "")
+    .replace(/<br\s*\/?>|<\/(?:p|div|tr|h[1-6]|td|th)>/gi, "\n")
+    .replace(/<[^>]*>/g, " ")
+    .replace(
+      /&(#x[0-9a-f]+|#\d+|amp|lt|gt|quot|apos|nbsp|copy|mdash|ndash);/gi,
+      (entity, code: string) => {
+        const entities: Record<string, string> = {
+          amp: "&",
+          lt: "<",
+          gt: ">",
+          quot: '"',
+          apos: "'",
+          nbsp: " ",
+          copy: "©",
+          mdash: "—",
+          ndash: "–",
+        };
+        if (code.toLowerCase().startsWith("#x")) {
+          const point = parseInt(code.slice(2), 16);
+          return point <= 0x10ffff ? String.fromCodePoint(point) : entity;
+        }
+        if (code.startsWith("#")) {
+          const point = Number(code.slice(1));
+          return point <= 0x10ffff ? String.fromCodePoint(point) : entity;
+        }
+        return entities[code.toLowerCase()] ?? entity;
+      },
+    )
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function titreEmail(titre: string): string {
+  return `<h1 style="margin:0 0 16px;color:#26382f;font-family:Georgia,'Times New Roman',serif;font-size:25px;font-weight:normal;line-height:1.3;">${echapperHtml(titre)}</h1>`;
+}
+
+function boutonEmail(lien: string, libelle: string): string {
+  return `<table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin:26px auto;">
+    <tr><td align="center" bgcolor="#395446" style="background-color:#395446;padding:13px 24px;">
+      <a href="${echapperHtml(lien)}" style="color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;text-decoration:none;">${echapperHtml(libelle)}</a>
+    </td></tr>
+  </table>`;
+}
+
 export async function envoyerMotDePasseOublie({
   email,
   lien,
@@ -109,22 +174,22 @@ export async function envoyerMotDePasseOublie({
 }): Promise<{ envoye: boolean }> {
   return envoyerEmail({
     to: email,
-    sujet: "Réinitialisation de votre mot de passe",
-    html: construireLayoutEmail(
-      "Réinitialisation du mot de passe",
-      `
-      <h2 style="margin:0 0 20px 0;font-size:20px;color:#111827;">Réinitialisation de mot de passe</h2>
-      <p style="margin:0 0 24px 0;">Vous avez demandé la réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour en définir un nouveau :</p>
-      <div style="text-align:center;margin:32px 0;">
-        <a href="${lien}" style="display:inline-block;background-color:#292524;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:600;font-size:15px;text-align:center;">
-          Définir un nouveau mot de passe
-        </a>
-      </div>
-      <p style="margin:0 0 8px 0;font-size:14px;color:#6b7280;">Ce lien est valable 1 heure.</p>
-      <p style="margin:0;font-size:14px;color:#6b7280;">Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email en toute sécurité.</p>
-      `
-    ),
+    sujet: "Zurücksetzen Ihres Passworts",
+    html: construireHtmlMotDePasseOublie(lien),
   });
+}
+
+export function construireHtmlMotDePasseOublie(lien: string): string {
+  return construireLayoutEmail(
+    "Passwort zurücksetzen",
+    `
+      ${titreEmail("Passwort zurücksetzen")}
+      <p style="margin:0 0 16px;">Sie haben das Zurücksetzen Ihres Passworts angefordert. Über den folgenden Button können Sie ein neues Passwort festlegen:</p>
+      ${boutonEmail(lien, "Neues Passwort festlegen")}
+      <p style="margin:0 0 8px;font-size:13px;color:#788078;">Dieser Link ist eine Stunde gültig.</p>
+      <p style="margin:0;font-size:13px;color:#788078;">Wenn Sie diese Anfrage nicht gestellt haben, können Sie diese E-Mail ignorieren.</p>
+    `,
+  );
 }
 
 export async function envoyerValidationCompte({
@@ -136,21 +201,21 @@ export async function envoyerValidationCompte({
 }): Promise<{ envoye: boolean }> {
   return envoyerEmail({
     to: email,
-    sujet: "Validation de votre compte",
-    html: construireLayoutEmail(
-      "Validation de votre compte",
-      `
-      <h2 style="margin:0 0 20px 0;font-size:20px;color:#111827;">Bienvenue chez Perrier Bois !</h2>
-      <p style="margin:0 0 24px 0;">Merci pour votre inscription. Avant de pouvoir vous connecter et profiter de nos services, nous devons vérifier votre adresse email.</p>
-      <div style="text-align:center;margin:32px 0;">
-        <a href="${lien}" style="display:inline-block;background-color:#292524;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:600;font-size:15px;text-align:center;">
-          Valider mon adresse email
-        </a>
-      </div>
-      <p style="margin:0;font-size:14px;color:#6b7280;">Ce lien de validation expirera dans 24 heures.</p>
-      `
-    ),
+    sujet: "Bestätigung Ihres Kontos",
+    html: construireHtmlValidationCompte(lien),
   });
+}
+
+export function construireHtmlValidationCompte(lien: string): string {
+  return construireLayoutEmail(
+    "Kontobestätigung",
+    `
+      ${titreEmail("Willkommen bei Brennstoffe Nagler")}
+      <p style="margin:0 0 16px;">Vielen Dank für Ihre Registrierung. Bitte bestätigen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.</p>
+      ${boutonEmail(lien, "E-Mail-Adresse bestätigen")}
+      <p style="margin:0;font-size:13px;color:#788078;">Dieser Bestätigungslink ist 24 Stunden gültig.</p>
+    `,
+  );
 }
 
 export async function envoyerConfirmationCommande({
@@ -166,20 +231,33 @@ export async function envoyerConfirmationCommande({
 }): Promise<{ envoye: boolean }> {
   return envoyerEmail({
     to: email,
-    sujet: `Confirmation de votre commande ${numeroCommande}`,
-    html: construireLayoutEmail(
-      `Confirmation de votre commande ${numeroCommande}`,
-      `
-    < h2 style = "margin:0 0 20px 0;font-size:20px;color:#111827;" > Merci ${echapperHtml(prenom)}! </h2>
-  < p style = "margin:0 0 16px 0;" > Votre commande<strong>${numeroCommande} < /strong> a bien été enregistrée et est en cours de traitement.</p >
-  <div style="background-color:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:20px;margin:24px 0;" >
-  <h3 style="margin:0 0 12px 0;font-size:16px;color:#374151;" > Récapitulatif </h3>
-  < p style = "margin:0;font-size:18px;font-weight:600;color:#111827;" > Montant total : ${formaterPrix(total)} </p>
-  </div>
-  < p style = "margin:0;color:#4b5563;" > Nous vous tiendrons informé(e) très prochainement de l'évolution du statut de votre commande.</p>
-    `
-    ),
+    sujet: `Bestätigung Ihrer Bestellung ${numeroCommande}`,
+    html: construireHtmlConfirmationCommande({ prenom, numeroCommande, total }),
   });
+}
+
+export function construireHtmlConfirmationCommande({
+  prenom,
+  numeroCommande,
+  total,
+}: {
+  prenom: string;
+  numeroCommande: string;
+  total: number;
+}): string {
+  return construireLayoutEmail(
+    `Bestätigung Ihrer Bestellung ${numeroCommande}`,
+    `
+      ${titreEmail(`Vielen Dank, ${prenom}!`)}
+      <p style="margin:0 0 18px;">Ihre Bestellung <strong>${echapperHtml(numeroCommande)}</strong> wurde erfolgreich bezahlt und wird nun bearbeitet.</p>
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:22px 0;border:1px solid #e8e6de;">
+        <tr><td style="padding:18px 20px;background-color:#f8f7f3;font-size:13px;color:#788078;">BESTELLNUMMER</td></tr>
+        <tr><td style="padding:0 20px 12px;background-color:#f8f7f3;color:#26382f;font-size:17px;font-weight:bold;">${echapperHtml(numeroCommande)}</td></tr>
+        <tr><td style="padding:8px 20px 18px;background-color:#f8f7f3;color:#26382f;font-size:21px;font-weight:bold;">${formaterPrix(total)}</td></tr>
+      </table>
+      <p style="margin:0;color:#59645d;">Wir informieren Sie, sobald sich der Status Ihrer Bestellung ändert.</p>
+    `,
+  );
 }
 
 export async function envoyerStatutCommande({
@@ -194,32 +272,54 @@ export async function envoyerStatutCommande({
   statut: string;
 }): Promise<{ envoye: boolean }> {
   const libelles: Record<string, string> = {
-    en_attente: "en attente de confirmation",
-    confirmee: "confirmée",
-    en_preparation: "en préparation",
-    expediee: "expédiée",
-    livree: "livrée",
-    annulee: "annulée",
+    en_attente: "ausstehend",
+    confirmee: "bestätigt",
+    en_preparation: "in Vorbereitung",
+    expediee: "versendet",
+    livree: "geliefert",
+    annulee: "storniert",
   };
   const statutLibelle = libelles[statut] ?? statut;
   return envoyerEmail({
     to: email,
-    sujet: `Votre commande ${numeroCommande} est ${statutLibelle}`,
-    html: construireLayoutEmail(
-      `Votre commande ${numeroCommande} est ${statutLibelle}`,
-      `
-  < h2 style = "margin:0 0 20px 0;font-size:20px;color:#111827;" > Bonjour ${echapperHtml(prenom)}, </h2>
-  < p style = "margin:0 0 24px 0;" > Le statut de votre commande<strong>${numeroCommande} < /strong> a changé.</p >
-  <div style="text-align:center;margin:32px 0;" >
-  <span style="display:inline-block;background-color:#f3f4f6;border:1px solid #e5e7eb;color:#111827;padding:12px 24px;border-radius:6px;font-weight:600;font-size:16px;letter-spacing:0.5px;text-transform:uppercase;" >
-    ${statutLibelle}
-    </span>
-    </div>
-  < p style = "margin:0;color:#4b5563;" > Une question ? N'hésitez pas à nous contacter.</p>
-  < p style = "margin:16px 0 0 0;color:#4b5563;" > Merci encore pour votre confiance.</p>
-    `
-    ),
+    sujet: `Ihre Bestellung ${numeroCommande} ist ${statutLibelle}`,
+    html: construireHtmlStatutCommande({
+      prenom,
+      numeroCommande,
+      statutLibelle,
+    }),
   });
+}
+
+export function construireHtmlStatutCommande({
+  prenom,
+  numeroCommande,
+  statutLibelle,
+}: {
+  prenom: string;
+  numeroCommande: string;
+  statutLibelle: string;
+}): string {
+  return construireLayoutEmail(
+    `Ihre Bestellung ${numeroCommande} ist ${statutLibelle}`,
+    `
+      ${titreEmail(`Guten Tag ${prenom}`)}
+      <p style="margin:0 0 18px;">Der Status Ihrer Bestellung <strong>${echapperHtml(numeroCommande)}</strong> hat sich geändert.</p>
+      <table role="presentation" cellspacing="0" cellpadding="0" style="margin:22px 0;border:1px solid #d9e1da;background-color:#f4f7f3;">
+        <tr><td style="padding:12px 20px;color:#395446;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">${echapperHtml(statutLibelle)}</td></tr>
+      </table>
+      <p style="margin:0 0 12px;">Vielen Dank für Ihr Vertrauen.</p>
+      <p style="margin:0;color:#59645d;">Haben Sie Fragen? Antworten Sie einfach auf diese E-Mail.</p>
+    `,
+  );
+}
+
+export interface RibPaiement {
+  titulaire: string;
+  banque: string;
+  iban: string;
+  bic: string;
+  siege: string;
 }
 
 export async function envoyerEmailPaiement({
@@ -231,69 +331,56 @@ export async function envoyerEmailPaiement({
   email: string;
   numeroCommande: string;
   total: number;
-  rib: {
-    titulaire: string;
-    banque: string;
-    iban: string;
-    bic: string;
-    siege: string;
-  } | null;
+  rib: RibPaiement | null;
 }): Promise<{ envoye: boolean }> {
+  return envoyerEmail({
+    to: email,
+    sujet: `Zahlung Ihrer Bestellung ${numeroCommande}`,
+    html: construireHtmlPaiement({ numeroCommande, total, rib }),
+  });
+}
+
+export function construireHtmlPaiement({
+  numeroCommande,
+  total,
+  rib,
+}: {
+  numeroCommande: string;
+  total: number;
+  rib: RibPaiement | null;
+}): string {
+  const identifiantCommande = echapperHtml(numeroCommande);
   const ribHtml = rib
     ? `
-  < div style = "background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;padding:24px;margin:24px 0;box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);" >
-  <h3 style="margin:0 0 16px 0;font-size:16px;font-weight:600;color:#111827;" > Coordonnées bancaires pour le virement </h3>
-  < table style = "width:100%;border-collapse:collapse;font-size:14px;" >
-  <tr>
-  <td style="padding:8px 0;color:#6b7280;width:140px;" > Titulaire du compte : </td>
-  < td style = "padding:8px 0;color:#111827;font-weight:500;" >${rib.titulaire} </td>
-  </tr>
-  < tr >
-  <td style="padding:8px 0;color:#6b7280;border-top:1px solid #f3f4f6;" > Banque : </td>
-  < td style = "padding:8px 0;color:#111827;font-weight:500;border-top:1px solid #f3f4f6;" >${rib.banque} </td>
-  </tr>
-  < tr >
-  <td style="padding:8px 0;color:#6b7280;border-top:1px solid #f3f4f6;" > IBAN : </td>
-  < td style = "padding:8px 0;color:#111827;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-weight:500;border-top:1px solid #f3f4f6;" >${rib.iban} </td>
-  </tr>
-  < tr >
-  <td style="padding:8px 0;color:#6b7280;border-top:1px solid #f3f4f6;" > BIC / SWIFT : </td>
-  < td style = "padding:8px 0;color:#111827;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-weight:500;border-top:1px solid #f3f4f6;" >${rib.bic} </td>
-  </tr>
-  < tr >
-  <td style="padding:8px 0;color:#6b7280;border-top:1px solid #f3f4f6;" > Siège : </td>
-  < td style = "padding:8px 0;color:#111827;font-weight:500;border-top:1px solid #f3f4f6;" >${rib.siege} </td>
-  </tr>
-  </table>
-  </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:22px 0;border:1px solid #d9e1da;border-collapse:collapse;">
+      <tr><td colspan="2" style="padding:15px 16px;background-color:#edf2ed;color:#26382f;font-size:15px;font-weight:bold;">Bankverbindung für Ihre Überweisung</td></tr>
+      <tr><td width="34%" style="padding:10px 14px;border-top:1px solid #e8e6de;color:#788078;font-size:13px;">Kontoinhaber</td><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#26382f;font-weight:bold;">${echapperHtml(rib.titulaire)}</td></tr>
+      <tr><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#788078;font-size:13px;">Bank</td><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#26382f;">${echapperHtml(rib.banque)}</td></tr>
+      <tr><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#788078;font-size:13px;">IBAN</td><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#26382f;font-family:'Courier New',monospace;font-weight:bold;word-break:break-all;">${echapperHtml(rib.iban)}</td></tr>
+      <tr><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#788078;font-size:13px;">BIC / SWIFT</td><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#26382f;font-family:'Courier New',monospace;">${echapperHtml(rib.bic)}</td></tr>
+      <tr><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#788078;font-size:13px;">Sitz</td><td style="padding:10px 14px;border-top:1px solid #e8e6de;color:#26382f;">${echapperHtml(rib.siege)}</td></tr>
+    </table>
     `
     : "";
 
-  return envoyerEmail({
-    to: email,
-    sujet: `Paiement de votre commande ${numeroCommande}`,
-    html: construireLayoutEmail(
-      `Paiement de votre commande ${numeroCommande}`,
-      `
-  < h2 style = "margin:0 0 20px 0;font-size:20px;color:#111827;" > Merci pour votre commande! </h2>
-  < p style = "margin:0 0 16px 0;" > Votre commande<strong>${numeroCommande} < /strong> a bien été enregistrée. Afin de la valider, nous attendons votre paiement.</p >
-
-  <div style="background-color:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:20px;margin:24px 0;" >
-  <h3 style="margin:0 0 12px 0;font-size:16px;color:#374151;" > Montant total à régler </h3>
-  < p style = "margin:0;font-size:24px;font-weight:700;color:#111827;" >${formaterPrix(total)} </p>
-  </div>
-
-    ${ribHtml}
-
-  < div style = "background-color:#fffbeb;border-left:4px solid #f59e0b;padding:16px;margin:24px 0;border-radius:0 8px 8px 0;" >
-  <h4 style="margin:0 0 8px 0;color:#92400e;font-size:15px;" > Information importante </h4>
-  < p style = "margin:0;color:#b45309;font-size:14px;line-height:1.5;" > Veuillez effectuer un virement bancaire du montant total en mentionnant obligatoirement votre numéro de commande<strong>${numeroCommande} < /strong> comme libellé ou référence.</p >
-  </div>
-
-  < p style = "margin:0;color:#4b5563;" > Dès réception de votre paiement, nous vous enverrons une confirmation et votre commande sera préparée pour l'expédition.</p>
+  return construireLayoutEmail(
+    `Zahlung Ihrer Bestellung ${numeroCommande}`,
     `
-    ),
-  });
+      ${titreEmail("Vielen Dank für Ihre Bestellung")}
+      <p style="margin:0 0 18px;">Ihre Bestellung <strong>${identifiantCommande}</strong> ist bei uns eingegangen. Bitte überweisen Sie den folgenden Betrag, damit wir Ihre Bestellung bearbeiten können.</p>
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:20px 0;border:1px solid #e8e6de;">
+        <tr><td style="padding:16px 20px;background-color:#f8f7f3;color:#788078;font-size:12px;letter-spacing:1px;">ZU ÜBERWEISENDER BETRAG</td></tr>
+        <tr><td style="padding:0 20px 18px;background-color:#f8f7f3;color:#26382f;font-size:26px;font-weight:bold;">${formaterPrix(total)}</td></tr>
+      </table>
+      ${ribHtml || `<p style="padding:14px 16px;background-color:#fff7e8;border-left:3px solid #c27a3a;color:#6c4b2e;">Die Bankverbindung ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns, bevor Sie die Überweisung ausführen.</p>`}
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:20px 0;border-left:3px solid #c27a3a;background-color:#fff7e8;">
+        <tr><td style="padding:14px 16px;color:#6c4b2e;font-size:14px;line-height:1.6;">
+          <strong>Wichtig:</strong> Bitte geben Sie <strong>${identifiantCommande}</strong> als Verwendungszweck an.
+        </td></tr>
+      </table>
+      <p style="margin:0;color:#59645d;">Sobald Ihre Zahlung eingegangen ist, bestätigen wir den Zahlungseingang und bereiten Ihre Bestellung vor.</p>
+    `,
+  );
 }
 
 export function echapperHtml(valeur: unknown): string {
@@ -325,27 +412,40 @@ export async function envoyerMessageContact({
   }
   return envoyerEmail({
     to: destinataire,
-    sujet: `Nouveau message de contact : ${sujet}`,
-    html: construireLayoutEmail(
-      `Nouveau message : ${sujet}`,
-      `
-  < h2 style = "margin:0 0 20px 0;font-size:20px;color:#111827;" > Nouveau message de contact </h2>
-  < div style = "background-color:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:20px;margin:24px 0;" >
-  <p style="margin:0 0 12px 0;" > <strong>Expéditeur : </strong> ${echapperHtml(nom)} (<a href="mailto:${echapperHtml(email)}" style="color:#2563eb;">${echapperHtml(email)}</a >) </p>
-    < p style = "margin:0 0 12px 0;" > <strong>Sujet : </strong> ${echapperHtml(sujet)}</p >
-      </div>
-      < h3 style = "margin:24px 0 12px 0;font-size:16px;color:#374151;" > Contenu du message: </h3>
-        < div style = "background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;padding:24px;line-height:1.6;color:#1f2937;" >
-          ${echapperHtml(message).replace(/n/g, "<br>")}
-  </div>
-    `
-    ),
+    sujet: `Neue Kontaktnachricht: ${sujet}`,
+    html: construireHtmlMessageContact({ nom, email, sujet, message }),
+    replyTo: email,
   });
 }
 
+export function construireHtmlMessageContact({
+  nom,
+  email,
+  sujet,
+  message,
+}: {
+  nom: string;
+  email: string;
+  sujet: string;
+  message: string;
+}): string {
+  return construireLayoutEmail(
+    `Neue Nachricht: ${sujet}`,
+    `
+      ${titreEmail("Neue Kontaktnachricht")}
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:18px 0;border:1px solid #e8e6de;border-collapse:collapse;">
+        <tr><td style="padding:11px 14px;border-bottom:1px solid #e8e6de;color:#788078;font-size:13px;">Absender</td><td style="padding:11px 14px;border-bottom:1px solid #e8e6de;color:#26382f;font-weight:bold;">${echapperHtml(nom)}</td></tr>
+        <tr><td style="padding:11px 14px;border-bottom:1px solid #e8e6de;color:#788078;font-size:13px;">E-Mail</td><td style="padding:11px 14px;border-bottom:1px solid #e8e6de;"><a href="mailto:${echapperHtml(email)}" style="color:#395446;">${echapperHtml(email)}</a></td></tr>
+        <tr><td style="padding:11px 14px;color:#788078;font-size:13px;">Betreff</td><td style="padding:11px 14px;color:#26382f;">${echapperHtml(sujet)}</td></tr>
+      </table>
+      <h2 style="margin:22px 0 10px;color:#26382f;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:normal;">Nachricht</h2>
+      <div style="padding:16px;border:1px solid #e8e6de;background-color:#f8f7f3;color:#37433c;line-height:1.7;white-space:pre-wrap;">${echapperHtml(message)}</div>
+    `,
+  );
+}
 /** Adresse de la boutique qui reçoit les notifications de commande. */
 export const DESTINATAIRE_COMMANDES =
-  process.env.CONTACT_EMAIL ?? "contact@perrierbois.fr";
+  process.env.CONTACT_EMAIL ?? "contact@brennstoffenagler.de";
 
 export interface ArticleNotificationCommande {
   nom: string;
@@ -387,15 +487,18 @@ const LIBELLES_PAIEMENT: Record<string, string> = {
 };
 
 function libelleModeLivraison(mode: string): string {
+  const libelles: Record<string, string> = {
+    standard: "Livraison standard",
+  };
   return (
-    OPTIONS_LIVRAISON.find((o) => o.id === mode)?.libelle ?? mode
+    libelles[mode] ?? OPTIONS_LIVRAISON.find((o) => o.id === mode)?.libelle ?? mode
   );
 }
 
 function formaterDateCommande(valeur?: Date | string): string {
-  if (!valeur) return "Non renseignée";
+  if (!valeur) return "Nicht angegeben";
   const date = valeur instanceof Date ? valeur : new Date(valeur);
-  if (Number.isNaN(date.getTime())) return "Non renseignée";
+  if (Number.isNaN(date.getTime())) return "Nicht angegeben";
   return new Intl.DateTimeFormat("fr-FR", {
     dateStyle: "long",
     timeStyle: "short",
@@ -404,10 +507,10 @@ function formaterDateCommande(valeur?: Date | string): string {
 
 function ligneInfo(label: string, valeur: string): string {
   return `
-    < tr >
-    <td style="padding:6px 12px 6px 0;font-weight:bold;color:#57534e;white-space:nowrap;vertical-align:top;" > ${label} </td>
-      < td style = "padding:6px 0;color:#292524;" > ${valeur} </td>
-        </tr>`;
+    <tr>
+      <td style="padding:6px 12px 6px 0;font-weight:bold;color:#57534e;white-space:nowrap;vertical-align:top;">${echapperHtml(label)}</td>
+      <td style="padding:6px 0;color:#292524;">${valeur}</td>
+    </tr>`;
 }
 
 function bloc(titre: string, contenu: string): string {
@@ -426,7 +529,7 @@ function adresseHtml(adresse: AdresseNotificationCommande): string {
     echapperHtml(adresse.pays),
   ];
   if (adresse.telephone) {
-    lignes.push(`Tél : ${echapperHtml(adresse.telephone)}`);
+    lignes.push(`Tel.: ${echapperHtml(adresse.telephone)}`);
   }
   return lignes
     .map((l) => `<span style="display:block;">${l}</span>`)
@@ -478,7 +581,7 @@ export function construireHtmlNotificationCommande(
       const ligneSousTotal =
         article.sousTotal ?? article.prixUnitaire * article.quantite;
       const variante = article.variante
-        ? `<br /><span style="color:#7c7469;font-size:12px;">Variante : ${echapperHtml(article.variante)}</span>`
+        ? `<br /><span style="color:#7c7469;font-size:12px;">Variante: ${echapperHtml(article.variante)}</span>`
         : "";
       return `
         <tr>
@@ -510,7 +613,7 @@ export function construireHtmlNotificationCommande(
   const ligneReduction = reduction > 0 ? ligneTotal("Remise", -reduction) : "";
   const ligneCoupon = couponApplique
     ? `<tr>
-        <td colspan="2" style="padding:0 0 6px 0;font-size:12px;color:#7c7469;">Code promo appliqué : ${echapperHtml(couponApplique)}</td>
+        <td colspan="2" style="padding:0 0 6px 0;font-size:12px;color:#7c7469;">Code promo : ${echapperHtml(couponApplique)}</td>
       </tr>`
     : "";
   const ligneLivraison =
@@ -561,7 +664,7 @@ export function construireHtmlNotificationCommande(
       "Email",
       `<a href="mailto:${echapperHtml(email)}" style="color:#292524;">${echapperHtml(email)}</a>`,
     )}
-          ${ligneInfo("Téléphone", echapperHtml(telephone || adresseLivraison.telephone || "Non renseigné"))}
+          ${ligneInfo("Telefon", echapperHtml(telephone || adresseLivraison.telephone || "Nicht angegeben"))}
         </table>`,
   )}
 
@@ -592,22 +695,22 @@ export function construireHtmlNotificationCommande(
       echapperHtml(libelleModeLivraison(modeLivraison)),
     )}
           ${ligneInfo(
-      "Méthode de paiement",
+      "Moyen de paiement",
       echapperHtml(LIBELLES_PAIEMENT[methodePaiement] ?? methodePaiement),
     )}
-          ${ligneInfo("Statut de la commande", "En attente de confirmation")}
+          ${ligneInfo("Statut de commande", "En attente")}
         </table>`,
   )}
 
       ${blocAdresses}
 
       <p style="margin:24px 0 0 0;">
-        <a href="${lienCommande}" style="display:inline-block;background:#292524;color:#f9f6f0;text-decoration:none;padding:12px 22px;border-radius:6px;font-weight:bold;">
-          Ouvrir la commande dans l'administration
+        <a href="${echapperHtml(lienCommande)}" style="display:inline-block;background:#292524;color:#f9f6f0;text-decoration:none;padding:12px 22px;border-radius:6px;font-weight:bold;">
+          Ouvrir la commande dans l’administration
         </a>
       </p>
       <p style="margin:16px 0 0 0;font-size:12px;color:#7c7469;">
-        Répondez directement à cet email pour contacter ${echapperHtml(clientNom || "ce client")}.
+        Antworten Sie direkt auf diese E-Mail, um ${echapperHtml(clientNom || "diesen Kunden zu kontaktieren")}.
       </p>
     </div>`;
 }
@@ -621,8 +724,12 @@ export async function envoyerNotificationCommande(
 ): Promise<{ envoye: boolean }> {
   return envoyerEmail({
     to: DESTINATAIRE_COMMANDES,
-    sujet: `Nouvelle commande ${donnees.numeroCommande} — ${formaterPrix(donnees.total)}`,
-    html: construireHtmlNotificationCommande(donnees),
+    sujet: `Neue Bestellung ${donnees.numeroCommande} — ${formaterPrix(donnees.total)}`,
+    html: construireLayoutEmail(
+      `Nouvelle commande ${donnees.numeroCommande}`,
+      construireHtmlNotificationCommande(donnees),
+      "fr",
+    ),
     replyTo: donnees.email,
   });
 }

@@ -1,415 +1,346 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politique d'expédition",
+  title: "Versandrichtlinie",
 };
 
 export default function PolitiqueExpeditionPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-bold">Politique d&apos;expédition</h1>
+      <h1 className="text-3xl font-bold">Versandrichtlinie</h1>
       <div className="mt-6 space-y-6 text-sm leading-relaxed text-muted-foreground">
         <p>
-          La présente Politique d expédition réglemente la livraison des
-          commandes passées via le site Perrier Bois.
+          Diese Versandrichtlinie regelt die Lieferung von Bestellungen,
+          die über die Website Brennstoffe Nagler aufgegeben werden.
         </p>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            1. Identification du vendeur
+            1. Identifikation des Verkäufers
           </h2>
           <p>
-            <strong>PERRIER BOIS (SARL)</strong>
+            <strong>BRENNSTOFFE NAGLER (SARL)</strong>
             <br />
-            <strong>Siège social :</strong> 109 Zone des Varennes, 71340 Melay,
-            France
+            <strong>Sitz:</strong> Waldweg 12, 99423 Weimar, Deutschland
             <br />
-            <strong>SIREN :</strong> 503 747 180
+            <strong>SIREN:</strong> 503 747 180
             <br />
-            <strong>SIRET (siège social) :</strong> 503 747 180 00027
+            <strong>SIRET (Hauptsitz):</strong> 503 747 180 00027
             <br />
-            <strong>N° TVA intracommunautaire :</strong> FR79503747180
+            <strong>USt-IdNr.:</strong> FR79503747180
             <br />
-            <strong>E-mail :</strong> contact@perrierbois.fr
+            <strong>E-Mail:</strong> contact@brennstoffenagler.de
             <br />
-            <strong>Téléphone :</strong> +33 6 12 34 56 78
+            <strong>Telefon:</strong> +49 151 23456789
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            2. Livraison gratuite
+            2. Kostenlose Lieferung
           </h2>
           <p>
-            La livraison des commandes acceptées par Perrier Bois est
-            gratuite.
+            Die Lieferung von von Brennstoffe Nagler angenommenen Bestellungen ist
+            kostenlos.
           </p>
           <p>
-            Aucun frais de port ou de livraison n est facturé au client lors
-            du processus d achat.
+            Dem Kunden werden beim Kaufprozess keine Versand- oder Lieferkosten
+            berechnet.
           </p>
           <p>
-            La livraison gratuite comprend le transport standard des produits
-            jusqu à l endroit le plus proche de l adresse indiquée par le
-            client, accessible et sécurisé.
+            Die kostenlose Lieferung umfasst den Standardtransport der Produkte
+            bis zur nächstgelegenen zugänglichen und sicheren Stelle der vom
+            Kunden angegebenen Adresse.
           </p>
           <p>
-            Les services supplémentaires tels que le déchargement avec un
-            équipement spécialisé, l utilisation d une grue, le transport à
-            l intérieur de la propriété, l empilage ou le stockage des
-            produits ne sont pas inclus, sauf confirmation expresse de Perrier
-            Bois.
+            Zusatzleistungen wie Entladung mit Spezialgeräten, Kraneinsatz,
+            Transport ins Innere der Immobilie, Stapeln oder Einlagern der
+            Produkte sind nur bei ausdrücklicher Bestätigung durch Brennstoffe Nagler
+            Bois inbegriffen.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            3. Zone de livraison
+            3. Liefergebiet
           </h2>
           <p>
-            Les livraisons sont effectuées aux adresses indiquées et acceptées
-            lors du processus de commande.
+            Lieferungen erfolgen an die bei der Bestellung angegebenen und
+            akzeptierten Adressen.
           </p>
           <p>
-            Perrier Bois peut vérifier à l avance si l adresse indiquée
-            remplit les conditions requises pour la livraison, notamment pour
-            les commandes lourdes ou encombrantes.
+            Brennstoffe Nagler kann vorab prüfen, ob die angegebene Adresse die
+            Lieferbedingungen erfüllt, insbesondere bei schweren oder
+            sperrigen Bestellungen.
           </p>
           <p>
-            Si la livraison est impossible en raison de la localisation, des
-            conditions d accès ou des restrictions de circulation, le client
-            est contacté pour trouver une solution adaptée.
+            Wenn eine Lieferung aufgrund der Lage, der Zugangsbedingungen oder
+            von Verkehrsbeschränkungen nicht möglich ist, wird der Kunde
+            kontaktiert, um eine geeignete Lösung zu finden.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            4. Préparation de la commande
+            4. Bestellvorbereitung
           </h2>
-          <p>Les commandes sont préparées après :</p>
+          <p>Bestellungen werden vorbereitet nach:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>réception de la commande ;</li>
-            <li>confirmation de la disponibilité du produit ;</li>
-            <li>confirmation de la réception du paiement par virement bancaire ;</li>
-            <li>validation de l adresse et des conditions de livraison.</li>
+            <li>Eingang der Bestellung;</li>
+            <li>Bestätigung der Produktverfügbarkeit;</li>
+            <li>Bestätigung des Zahlungseingangs per Banküberweisung;</li>
+            <li>Validierung der Adresse und Lieferbedingungen.</li>
           </ul>
           <p>
-            L envoi d un justificatif de virement peut faciliter
-            l identification du paiement, mais ne remplace pas la
-            confirmation de la réception effective des fonds sur le compte
-            bancaire de Perrier Bois.
+            Das Einreichen eines Überweisungsnachweises kann die
+            Zahlungsidentifizierung erleichtern, ersetzt jedoch nicht die
+            Bestätigung des tatsächlichen Geldeingangs auf dem Konto von
+            Brennstoffe Nagler.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            5. Délai de livraison
+            5. Lieferfrist
           </h2>
           <p>
-            Le délai de livraison estimé est communiqué au client après
-            confirmation du paiement et de la disponibilité du produit.
+            Die geschätzte Lieferfrist wird dem Kunden nach Bestätigung der
+            Zahlung und der Produktverfügbarkeit mitgeteilt.
           </p>
-          <p>La date peut varier en fonction de :</p>
+          <p>Das Datum kann abhängig sein von:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>la quantité commandée ;</li>
-            <li>la disponibilité du produit ;</li>
-            <li>la localisation de l adresse ;</li>
-            <li>les conditions d accès ;</li>
-            <li>la disponibilité du transporteur ;</li>
-            <li>les conditions météorologiques ;</li>
-            <li>les périodes de forte demande.</li>
+            <li>der bestellten Menge;</li>
+            <li>der Produktverfügbarkeit;</li>
+            <li>der Adresslage;</li>
+            <li>den Zugangsbedingungen;</li>
+            <li>der Verfügbarkeit des Spediteurs;</li>
+            <li>den Wetterbedingungen;</li>
+            <li>Hochsaisonzeiten.</li>
           </ul>
           <p>
-            Sauf accord contraire entre Perrier Bois et le client, la
-            commande est livrée sans retard excessif et dans le délai légal
-            maximal de 30 jours suivant la conclusion du contrat.
+            Sofern nichts anderes vereinbart ist, wird die Bestellung ohne
+            unangemessene Verzögerung und innerhalb der gesetzlichen
+            Höchstfrist von 30 Tagen nach Vertragsabschluss geliefert.
           </p>
           <p>
-            Si la livraison à une date déterminée est essentielle, le client
-            doit en informer Perrier Bois avant de finaliser sa commande.
+            Wenn eine Lieferung zu einem bestimmten Datum wesentlich ist, muss
+            der Kunde Brennstoffe Nagler vor Abschluss seiner Bestellung informieren.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            6. Planification de la livraison
+            6. Lieferplanung
           </h2>
           <p>
-            Si nécessaire, le client est contacté par téléphone, WhatsApp ou
-            e-mail pour confirmer la date ou le créneau de livraison prévu.
+            Falls erforderlich, wird der Kunde telefonisch, per WhatsApp oder
+            E-Mail kontaktiert, um das Lieferdatum oder den Lieferzeitrahmen zu
+            bestätigen.
           </p>
           <p>
-            Le client doit s assurer qu une personne est présente à l adresse
-            indiquée ou qu une personne autorisée à réceptionner les produits
-            est disponible.
-          </p>
-          <p>
-            Perrier Bois ne demande aucun mot de passe, code bancaire ou
-            autre information confidentielle pour l exécution des livraisons.
+            Der Kunde muss sicherstellen, dass eine Person an der angegebenen
+            Adresse anwesend ist oder eine zur Entgegennahme der Produkte
+            berechtigte Person verfügbar ist.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            7. Conditions d accès
+            7. Zugangsbedingungen
           </h2>
           <p>
-            Étant donné qu il s agit de granulés de bois, de bois de chauffage
-            et d autres produits pouvant être lourds ou encombrants, le client
-            doit s assurer que l adresse de livraison est facilement
-            accessible.
+            Da es sich um Holzpellets, Brennholz und andere möglicherweise
+            schwere oder sperrige Produkte handelt, muss der Kunde sicherstellen,
+            dass die Lieferadresse gut zugänglich ist.
           </p>
-          <p>Avant la livraison, le client doit signaler :</p>
+          <p>Vor der Lieferung muss der Kunde Folgendes melden:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>les rues étroites ou difficiles d accès ;</li>
-            <li>les restrictions de hauteur, de largeur ou de poids ;</li>
-            <li>les routes non revêtues ;</li>
-            <li>les points d accès en pente ou dangereux ;</li>
-            <li>les portes ou entrées aux dimensions réduites ;</li>
-            <li>les travaux, obstacles ou véhicules stationnés ;</li>
-            <li>les restrictions de circulation municipales ;</li>
-            <li>les autorisations nécessaires à l accès ;</li>
-            <li>
-              toute autre condition pouvant empêcher l approche du véhicule.
-            </li>
+            <li>Enge oder schwer zugängliche Straßen;</li>
+            <li>Höhen-, Breiten- oder Gewichtsbeschränkungen;</li>
+            <li>Unbefestigte Wege;</li>
+            <li>Steile oder gefährliche Zugangspunkte;</li>
+            <li>Tore oder Einfahrten mit kleinen Abmessungen;</li>
+            <li>Baustellen, Hindernisse oder parkende Fahrzeuge;</li>
+            <li>Kommunale Verkehrsbeschränkungen;</li>
+            <li>Erforderliche Zugangsberechtigungen;</li>
+            <li>Alle anderen Bedingungen, die die Zufahrt verhindern könnten.</li>
           </ul>
-          <p>
-            Perrier Bois peut demander des photos ou des informations
-            supplémentaires sur le lieu de livraison si nécessaire pour
-            garantir un déchargement sécurisé.
-          </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            8. Lieu de déchargement
+            8. Entladeort
           </h2>
           <p>
-            La livraison est effectuée à l endroit le plus proche de
-            l adresse indiquée par le client, accessible et sécurisé.
+            Die Lieferung erfolgt an der nächstgelegenen zugänglichen und
+            sicheren Stelle der vom Kunden angegebenen Adresse.
           </p>
           <p>
-            La livraison gratuite ne comprend pas, sauf accord expresse contraire :
+            Die kostenlose Lieferung umfasst, sofern nicht ausdrücklich
+            vereinbart, nicht:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>le transport des produits à l intérieur du logement ;</li>
-            <li>le port par les escaliers ;</li>
-            <li>l utilisation d ascenseurs ;</li>
-            <li>le transport vers les caves, garages ou dépendances ;</li>
-            <li>l empilage ou le rangement des produits ;</li>
-            <li>l enlèvement de l emballage ;</li>
-            <li>l utilisation de grues ou autres équipements spécialisés.</li>
+            <li>Transport der Produkte ins Innere der Wohnung;</li>
+            <li>Treppenaufgang;</li>
+            <li>Fahrstuhlnutzung;</li>
+            <li>Transport in Keller, Garagen oder Nebengebäude;</li>
+            <li>Stapeln oder Einräumen der Produkte;</li>
+            <li>Entfernen der Verpackung;</li>
+            <li>Einsatz von Kränen oder anderen Spezialgeräten.</li>
           </ul>
           <p>
-            La zone de déchargement doit être plane, sécurisée, accessible et
-            adaptée au poids et au volume de l envoi.
-          </p>
-          <p>
-            La décision finale quant à la possibilité d un accès et d un
-            déchargement sécurisés appartient au chauffeur ou à l équipe de
-            livraison.
+            Die Entladezone muss eben, sicher, zugänglich und für das Gewicht
+            und Volumen der Sendung geeignet sein.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            9. Absence du client
+            9. Abwesenheit des Kunden
           </h2>
           <p>
-            Si le client ou une personne autorisée n est pas disponible à
-            l heure convenue, la livraison ne peut pas être effectuée.
+            Wenn der Kunde oder eine autorisierte Person zum vereinbarten Zeitpunkt
+            nicht verfügbar ist, kann die Lieferung nicht durchgeführt werden.
           </p>
           <p>
-            Perrier Bois contacte le client pour reprogrammer la
-            livraison.
-          </p>
-          <p>
-            Si la livraison est impossible en raison de l absence du client,
-            d une adresse erronée ou de conditions d accès non communiquées,
-            tout mode de transport particulier nécessaire est communiqué à
-            l avance au client et mis en œuvre uniquement avec son
-            accord.
+            Brennstoffe Nagler kontaktiert den Kunden, um die Lieferung neu zu planen.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            10. Adresse erronée ou incomplète
+            10. Falsche oder unvollständige Adresse
           </h2>
           <p>
-            Il est de la responsabilité du client de fournir une adresse
-            complète, correcte et accessible.
+            Es liegt in der Verantwortung des Kunden, eine vollständige, korrekte
+            und zugängliche Adresse anzugeben.
           </p>
           <p>
-            Perrier Bois ne saurait être responsable des retards ou de
-            l impossibilité de livraison causés par :
+            Brennstoffe Nagler haftet nicht für Verzögerungen oder Lieferunmöglichkeit
+            aufgrund einer falschen oder unvollständigen Adresse.
           </p>
+          <p>
+            Fehler müssen so schnell wie möglich per E-Mail an
+            contact@brennstoffenagler.de oder telefonisch unter +49 151 23456789
+            gemeldet werden.
+          </p>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-semibold text-foreground">
+            11. Empfang und Überprüfung
+          </h2>
+          <p>Bei der Lieferung muss der Kunde prüfen:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>une adresse erronée ou incomplète ;</li>
-            <li>un code postal erroné ;</li>
-            <li>l absence du nom du destinataire ;</li>
-            <li>un numéro de téléphone erroné ;</li>
-            <li>l absence de réponse aux tentatives de contact ;</li>
-            <li>des restrictions d accès non communiquées.</li>
+            <li>Anzahl der Pakete oder Volumen;</li>
+            <li>Äußeren Zustand der Ware;</li>
+            <li>Beschädigte Verpackungen;</li>
+            <li>Feuchtigkeitsspuren;</li>
+            <li>Sichtbare Schäden;</li>
+            <li>Übereinstimmung der gelieferten Produkte mit der Bestellung.</li>
           </ul>
           <p>
-            Toute erreur doit être signalée dans les meilleurs délais par
-            e-mail à contact@perrierbois.fr ou par téléphone au +33 6 12 34
-            56 78.
+            Bei sichtbaren Unregelmäßigkeiten wird empfohlen, diese auf dem
+            Lieferschein zu vermerken und Fotos der Ware und Verpackung aufzunehmen.
           </p>
+          <p>Der Kunde muss Brennstoffe Nagler kontaktieren per:</p>
           <p>
-            Après l expédition du colis, un changement d adresse de livraison
-            n est plus forcément possible.
+            E-Mail: contact@brennstoffenagler.de
+            <br />
+            Telefon oder WhatsApp: +49 151 23456789
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            11. Réception et vérification
+            12. Gefahrenübergang
           </h2>
-          <p>À la livraison, le client doit vérifier :</p>
+          <p>
+            Die Haftung für die Bestellung verbleibt während des Transports bei
+            Brennstoffe Nagler. Das Risiko des Verlusts oder der Beschädigung geht auf
+            den Kunden über, wenn dieser oder ein vom Kunden benannter Dritter
+            (außer dem Spediteur) die physische Besitzergreifung der Produkte
+            vornimmt.
+          </p>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-semibold text-foreground">
+            13. Verzögerungen
+          </h2>
+          <p>
+            Bei einer Verzögerung informiert Brennstoffe Nagler den Kunden so schnell
+            wie möglich und teilt ein neues geschätztes Lieferdatum mit.
+          </p>
+          <p>Verzögerungen können durch äußere Umstände entstehen, insbesondere:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>le nombre de colis ou le volume ;</li>
-            <li>l état extérieur de la marchandise ;</li>
-            <li>la présence d emballages déchirés ;</li>
-            <li>toute trace d humidité ;</li>
-            <li>les dommages visibles ;</li>
-            <li>la conformité des produits livrés avec la commande.</li>
+            <li>Ungünstige Wetterbedingungen;</li>
+            <li>Unfälle oder Verkehrsstörungen;</li>
+            <li>Pannen;</li>
+            <li>Streiks;</li>
+            <li>Mobilitätsbeschränkungen;</li>
+            <li>Lieferengpässe;</li>
+            <li>Hochsaisonzeiten;</li>
+            <li>Höhere Gewalt.</li>
           </ul>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-semibold text-foreground">
+            14. Teillieferungen
+          </h2>
           <p>
-            En cas d irrégularité visible, il est recommandé au client de la
-            mentionner sur le bon de livraison et de prendre des photos de la
-            marchandise et de l emballage.
-          </p>
-          <p>Le client doit contacter Perrier Bois via :</p>
-          <p>
-            E-mail : contact@perrierbois.fr
-            <br />
-            Téléphone ou WhatsApp : +33 6 12 34 56 78
-          </p>
-          <p>
-            La notification doit contenir le numéro de commande, la
-            description du problème et, si possible, des photographies.
+            Wenn eine Bestellung mehrere Produkte oder große Mengen umfasst,
+            kann Brennstoffe Nagler die Lieferung in mehreren Sendungen durchführen.
           </p>
           <p>
-            L absence de constatation immédiate ne prive pas le consommateur
-            de ses droits légaux en ce qui concerne les dommages ou les
-            défauts de conformité non apparents au moment de la livraison.
+            Der Kunde wird immer informiert, wenn eine Teillieferung geplant ist.
+            Teillieferungen verursachen keine zusätzlichen Lieferkosten für den Kunden.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            12. Transfert des risques
+            15. Nichtverfügbarkeit
           </h2>
           <p>
-            La responsabilité de la commande reste à la charge de Perrier Bois pendant le transport.
+            Wenn ein Produkt nach einer Bestellung nicht mehr verfügbar ist,
+            informiert Brennstoffe Nagler den Kunden so schnell wie möglich.
           </p>
-          <p>
-            Le risque de perte ou de détéroration est transféré au client
-            lorsque celui-ci ou un tiers désigné par le client, autre que le
-            transporteur, prend possession physique des produits. Si le client
-            choisit un transporteur autre que celui proposé par Perrier Bois le risque est transféré au moment de la remise des produits
-            à ce transporteur.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-base font-semibold text-foreground">
-            13. Retards
-          </h2>
-          <p>
-            En cas de retard, Perrier Bois en informe le client dans les
-            meilleurs délais et lui communique une nouvelle date de livraison
-            estimée.
-          </p>
-          <p>
-            Les retards peuvent résulter de circonstances extérieures, notamment :
-          </p>
+          <p>Der Kunde kann wählen zwischen:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>des conditions météorologiques défavorables ;</li>
-            <li>des accidents ou des perturbations de la circulation ;</li>
-            <li>des pannes ;</li>
-            <li>des grèves ;</li>
-            <li>des restrictions de déplacement ;</li>
-            <li>des ruptures de stock ;</li>
-            <li>des périodes de forte demande ;</li>
-            <li>des événements de force majeure.</li>
+            <li>einer neuen Lieferfrist;</li>
+            <li>einem gleichwertigen Produkt;</li>
+            <li>der Stornierung der Bestellung und Erstattung der gezahlten Beträge.</li>
           </ul>
-          <p>
-            Si la livraison n a pas lieu dans le délai convenu ou dans le
-            délai légal applicable, le consommateur peut demander une
-            prorogation de ce délai. En cas de livraison répétément
-            non effectuée, le consommateur peut exercer les droits prévus par
-            la loi.
-          </p>
+          <p>Kein Ersatz wird ohne Zustimmung des Kunden vorgenommen.</p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            14. Livraisons partielles
+            16. Kontakt
           </h2>
           <p>
-            Lorsqu une commande comprend plusieurs produits ou des quantités
-            importantes, Perrier Bois peut effectuer la livraison en
-            plusieurs envois.
+            Für Informationen zur Bestellvorbereitung, zum Versand oder zur
+            Lieferung:
           </p>
           <p>
-            Le client est toujours informé lorsqu une livraison partielle est
-            prévue.
-          </p>
-          <p>
-            Les livraisons partielles n occasionnent pas de frais de livraison
-            supplémentaires pour le client.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-base font-semibold text-foreground">
-            15. Indisponibilité
-          </h2>
-          <p>
-            Si un produit devient indisponible après une commande, Perrier Bois en informe le client dans les meilleurs délais.
-          </p>
-          <p>Le client peut accepter :</p>
-          <ul className="list-disc space-y-1 pl-6">
-            <li>un nouveau délai de livraison ;</li>
-            <li>un produit équivalent ;</li>
-            <li>
-              l annulation de la commande et le remboursement des sommes
-              versées.
-            </li>
-          </ul>
-          <p>
-            Aucun remplacement n est effectué sans l accord du client.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-base font-semibold text-foreground">
-            16. Contacts
-          </h2>
-          <p>
-            Pour des informations sur la préparation, l expédition ou la
-            livraison d une commande :
-          </p>
-          <p>
-            Perrier Bois
+            Brennstoffe Nagler
             <br />
-            Forme juridique : SARL
+            Rechtsform: SARL
             <br />
-            Siège social : 109 Zone des Varennes, 71340 Melay, France
+            Sitz: Waldweg 12, 99423 Weimar, Deutschland
             <br />
-            SIREN : 503 747 180 — SIRET : 503 747 180 00027
+            SIREN: 503 747 180 — SIRET: 503 747 180 00027
             <br />
-            N° TVA intracommunautaire : FR79503747180
+            USt-IdNr.: FR79503747180
             <br />
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
             <br />
-            Téléphone : +33 6 12 34 56 78
+            Telefon: +49 151 23456789
           </p>
           <p>
-            <strong>Dernière mise à jour :</strong> 22 septembre 2026.
+            <strong>Letzte Aktualisierung:</strong> 22. September 2026.
           </p>
         </section>
       </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Finaliser la commande",
+  title: "Bestellung abschließen",
   robots: { index: false },
 };
 

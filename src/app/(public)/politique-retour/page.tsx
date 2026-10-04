@@ -1,454 +1,367 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politique de retour et de remboursement",
+  title: "Rückgabe- und Erstattungsrichtlinie",
 };
 
 export default function PolitiqueRetourPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <h1 className="text-3xl font-bold">
-        Politique de retour et de remboursement
+        Rückgabe- und Erstattungsrichtlinie
       </h1>
       <div className="mt-6 space-y-6 text-sm leading-relaxed text-muted-foreground">
         <p>
-          La présente Politique de retour et de remboursement s applique aux
-          achats effectués via le site Perrier Bois.
+          Diese Rückgabe- und Erstattungsrichtlinie gilt für Käufe, die über die
+          Website Brennstoffe Nagler getätigt werden.
         </p>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            1. Identification du vendeur
+            1. Identifikation des Verkäufers
           </h2>
           <p>
-            <strong>PERRIER BOIS (SARL)</strong>
+            <strong>BRENNSTOFFE NAGLER (SARL)</strong>
             <br />
-            <strong>Siège social :</strong> 109 Zone des Varennes, 71340 Melay,
-            France
+            <strong>Sitz:</strong> Waldweg 12, 99423 Weimar, Deutschland
             <br />
-            <strong>SIREN :</strong> 503 747 180
+            <strong>SIREN:</strong> 503 747 180
             <br />
-            <strong>SIRET (siège social) :</strong> 503 747 180 00027
+            <strong>SIRET (Hauptsitz):</strong> 503 747 180 00027
             <br />
-            <strong>N° TVA intracommunautaire :</strong> FR79503747180
+            <strong>USt-IdNr.:</strong> FR79503747180
             <br />
-            <strong>E-mail :</strong> contact@perrierbois.fr
+            <strong>E-Mail:</strong> contact@brennstoffenagler.de
             <br />
-            <strong>Téléphone :</strong> +33 6 12 34 56 78
+            <strong>Telefon:</strong> +49 151 23456789
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            2. Retour gratuit dans un délai de 14 jours.
+            2. Kostenlose Rückgabe innerhalb von 14 Tagen
           </h2>
           <p>
-            Les consommateurs peuvent retourner les produits achetés en ligne
-            dans un délai de 14 jours civils sans avoir à justifier leur
-            décision.
+            Verbraucher können online gekaufte Produkte innerhalb von 14
+            Kalendertagen ohne Angabe von Gründen zurückgeben.
           </p>
           <p>
-            Le délai commence à courir le jour où le consommateur ou un tiers
-            désigné par lui, autre que le transporteur, prend possession
-            physique de la commande. Ce droit est prévu dans le cadre
-            juridique français des contrats à distance (code de la
-            consommation).
+            Die Frist beginnt an dem Tag, an dem der Verbraucher oder ein von ihm
+            benannter Dritter (außer dem Spediteur) die physische Besitzergreifung
+            der Bestellung vornimmt.
           </p>
           <p>
-            Perrier Bois prend en charge les frais directs de retour ,
-            à la condition que :
+            Brennstoffe Nagler übernimmt die direkten Rücksendekosten, sofern:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>la demande soit notifiée dans un délai de 14 jours ;</li>
+            <li>die Anfrage innerhalb von 14 Tagen gemeldet wird;</li>
+            <li>die Abholung zuvor von Brennstoffe Nagler organisiert wird;</li>
+            <li>sich die Produkte an der ursprünglichen Lieferadresse befinden;</li>
+            <li>sichere und geeignete Abholbedingungen gegeben sind;</li>
             <li>
-              l enlèvement soit préalablement organisé par Perrier Bois ;
-            </li>
-            <li>
-              les produits se trouvent à l adresse de livraison initiale.
-            </li>
-            <li>des conditions d enlèvement sécurisées et adaptées soient réunies ;</li>
-            <li>
-              les produits ne présentent pas de dommages résultant d une
-              mauvaise utilisation ou d un stockage inadapté.
+              die Produkte keine Schäden durch unsachgemäße Nutzung oder
+              Lagerung aufweisen.
             </li>
           </ul>
           <p>
-            Le client ne doit pas expédier les produits de sa propre initiative
-            sans avoir préalablement reçu les instructions de Perrier Bois
+            Der Kunde darf die Produkte nicht eigenständig versenden, ohne
+            zuvor die Anweisungen von Brennstoffe Nagler erhalten zu haben.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            3. Comment demander un retour
+            3. Wie eine Rückgabe beantragt wird
           </h2>
           <p>
-            Pour exercer son droit de rétractation, le client doit notifier
-            clairement sa décision via l un des moyens de contact suivants :
+            Um das Widerrufsrecht auszuüben, muss der Kunde seine Entscheidung
+            klar über einen der folgenden Kontaktwege mitteilen:
           </p>
           <p>
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
             <br />
-            WhatsApp : +33 6 12 34 56 78
+            WhatsApp: +49 151 23456789
             <br />
-            Téléphone : +33 6 12 34 56 78
+            Telefon: +49 151 23456789
           </p>
-          <p>La notification doit contenir :</p>
+          <p>Die Mitteilung muss enthalten:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>le nom complet du client ;</li>
-            <li>le numéro de commande ;</li>
-            <li>la date de réception ;</li>
-            <li>l identification des produits à retourner ;</li>
-            <li>le montant à rembourser ;</li>
-            <li>l adresse où se trouvent les produits ;</li>
-            <li>le numéro de téléphone de contact ;</li>
-            <li>des photos des produits et de l emballage sur demande.</li>
+            <li>Vollständiger Name des Kunden;</li>
+            <li>Bestellnummer;</li>
+            <li>Eingangsdatum;</li>
+            <li>Bezeichnung der zurückzugebenden Produkte;</li>
+            <li>Zu erstattender Betrag;</li>
+            <li>Adresse, an der sich die Produkte befinden;</li>
+            <li>Kontakttelefonnummer;</li>
+            <li>Fotos der Produkte und Verpackung auf Anfrage.</li>
           </ul>
-          <p>
-            Le consommateur peut exercer gratuitement son droit de rétractation
-            par toute déclaration claire démontrant sa volonté d annuler
-            l achat.
-          </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            4. Formulaire de demande de retour
+            4. Muster-Rückgabeantragsformular
           </h2>
-          <p>Le client peut utiliser le modèle suivant :</p>
-          <p>À Perrier Bois,</p>
+          <p>Der Kunde kann folgendes Muster verwenden:</p>
+          <p>An Brennstoffe Nagler,</p>
           <p>
-            Je vous écris pour vous informer que je souhaite exercer mon droit
-            de rétractation concernant l achat des produits suivants : [liste
-            des produits].
+            Ich teile Ihnen hiermit mit, dass ich mein Widerrufsrecht für folgende
+            Produkte ausübe: [Produktliste].
           </p>
           <p>
-            Numéro de commande : [numéro]
+            Bestellnummer: [Nummer]
             <br />
-            Date de la commande : [date]
+            Bestelldatum: [Datum]
             <br />
-            Date de livraison : [date]
+            Lieferdatum: [Datum]
             <br />
-            Nom du client : [nom]
+            Name des Kunden: [Name]
             <br />
-            Adresse d enlèvement : [adresse]
+            Abholadresse: [Adresse]
             <br />
-            Numéro de téléphone : [numéro]
+            Telefonnummer: [Nummer]
           </p>
-          <p>Date de la commande : [date]</p>
-          <p>L utilisation de ce modèle n est pas obligatoire.</p>
+          <p>Die Verwendung dieses Musters ist nicht obligatorisch.</p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            5. Enlèvement gratuit des produits
+            5. Kostenlose Produktabholung
           </h2>
           <p>
-            À réception de la demande, Perrier Bois contacte le client pour
-            organiser l enlèvement gratuit des produits.
+            Nach Eingang des Antrags kontaktiert Brennstoffe Nagler den Kunden, um
+            die kostenlose Abholung der Produkte zu organisieren.
           </p>
-          <p>Le client doit :</p>
+          <p>Der Kunde muss:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>
-              s assurer de la présence d une personne à l endroit et à
-              l heure convenus ;
-            </li>
-            <li>stocker les produits dans un endroit sec et protégé ;</li>
-            <li>garantir un accès adapté au véhicule de collecte ;</li>
-            <li>préparer les produits pour un transport sécurisé ;</li>
-            <li>nous informer à l avance des restrictions d accès.</li>
+            <li>sicherstellen, dass zum vereinbarten Zeitpunkt eine Person anwesend ist;</li>
+            <li>die Produkte an einem trockenen, geschützten Ort aufbewahren;</li>
+            <li>einen geeigneten Zugang für das Abholfahrzeug gewährleisten;</li>
+            <li>die Produkte für einen sicheren Transport vorbereiten;</li>
+            <li>uns vorab über Zugangsbeschränkungen informieren.</li>
           </ul>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-semibold text-foreground">
+            6. Abwesenheit bei der Abholung
+          </h2>
           <p>
-            L enlèvement gratuit s effectue à l adresse de livraison
-            initiale, sauf accord contraire entre Perrier Bois et le
-            client.
+            Der Kunde muss sicherstellen, dass zum vereinbarten Datum eine Person
+            anwesend ist, um die Produkte zu übergeben.
           </p>
           <p>
-            Le retour gratuit ne comprend pas les services supplémentaires tels
-            que le transport depuis l intérieur du logement, le port par les
-            escaliers, l utilisation de grues, le démontage de structures ou
-            le déplacement de produits situés dans des endroits
-            inaccessibles.
+            Wenn die Abholung aufgrund der Abwesenheit des Kunden oder anderen
+            nicht kommunizierten Bedingungen nicht durchgeführt werden kann, muss
+            sie neu geplant werden.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            6. Absence au moment de l enlèvement
+            7. Zustand der zurückgegebenen Produkte
           </h2>
           <p>
-            Le client doit s assurer qu une personne est disponible à la date
-            convenue pour remettre les produits.
+            Produkte müssen im gleichen Zustand zurückgegeben werden, in dem sie
+            bei der Lieferung empfangen wurden, mit Originalverpackung, Etiketten
+            und Zubehör, falls zutreffend.
           </p>
-          <p>
-            Si l enlèvement ne peut être effectué en raison de l absence du
-            client, d une adresse erronée, d un accès inexistant ou d autres
-            conditions non communiquées, il doit être reprogrammé.
-          </p>
-          <p>
-            Tous les frais liés à une nouvelle tentative d enlèvement sont
-            communiqués au client à l avance et ne peuvent être facturés que
-            si la première tentative a échoué pour des raisons imputables au
-            client.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-base font-semibold text-foreground">
-            7. État des produits retournés
-          </h2>
-          <p>
-            Les produits doivent être retournés dans le même état que celui
-            constaté à la réception, avec l emballage d origine, les
-            étiquettes et les accessoires, le cas échéant.
-          </p>
-          <p>Les granulés et le bois de chauffage doivent être :</p>
+          <p>Pellets und Brennholz müssen:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>secs et à l abri de l humidité ;</li>
-            <li>sans signe d utilisation ou de combustion ;</li>
-            <li>non mélangés à d autres combustibles ou matériaux ;</li>
-            <li>sans contamination ;</li>
-            <li>de préférence dans leur emballage d origine ;</li>
-            <li>dans des conditions adaptées à l enlèvement et au transport.</li>
+            <li>trocken und vor Feuchtigkeit geschützt sein;</li>
+            <li>keine Nutzungs- oder Verbrennungsspuren aufweisen;</li>
+            <li>nicht mit anderen Brennstoffen oder Materialien vermischt sein;</li>
+            <li>frei von Verunreinigungen sein;</li>
+            <li>vorzugsweise in der Originalverpackung sein;</li>
+            <li>in einem für Abholung und Transport geeigneten Zustand sein.</li>
           </ul>
-          <p>
-            Le consommateur ne doit manipuler les produits que dans la mesure
-            nécessaire pour vérifier leur nature et leurs caractéristiques. Il
-            peut être tenu responsable de toute dépréciation résultant d une
-            manipulation excessive.
-          </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            8. Emballages ouverts ou produits utilisés
+            8. Geöffnete Verpackungen oder genutzte Produkte
           </h2>
           <p>
-            Le simple fait d ouvrir un colis pour vérifier le produit
-            n annule pas automatiquement le droit de retour.
+            Das bloße Öffnen eines Pakets zur Überprüfung des Produkts hebt das
+            Rückgaberecht nicht automatisch auf.
           </p>
           <p>
-            Le montant du remboursement peut toutefois être réduit si les
-            produits :
+            Der Erstattungsbetrag kann jedoch reduziert werden, wenn die Produkte:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>ont été utilisés ou brûlés ;</li>
-            <li>ont été partiellement consommés ;</li>
-            <li>ont été exposés à la pluie, à l eau ou à l humidité ;</li>
-            <li>ont été stockés de manière inadaptée ;</li>
-            <li>ont été mélangés à d autres produits ;</li>
-            <li>ont été endommagés après la livraison ;</li>
-            <li>
-              ont été retirés de l emballage en quantités supérieures à celles
-              nécessaires à la vérification.
-            </li>
+            <li>genutzt oder verbrannt wurden;</li>
+            <li>teilweise verbraucht wurden;</li>
+            <li>Regen, Wasser oder Feuchtigkeit ausgesetzt waren;</li>
+            <li>ungeeignet gelagert wurden;</li>
+            <li>mit anderen Produkten vermischt wurden;</li>
+            <li>nach der Lieferung beschädigt wurden;</li>
+            <li>in größeren Mengen als zur Überprüfung notwendig aus der Verpackung entnommen wurden.</li>
           </ul>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-semibold text-foreground">
+            9. Teilerstattung
+          </h2>
           <p>
-            Chaque réduction est déterminée proportionnellement à la perte de
-            valeur réelle du produit et communiquée au client.
+            Der Kunde kann nur eine Teilerstattung seiner Bestellung beantragen.
+            In diesem Fall müssen die zurückzugebenden Produkte und Mengen klar
+            angegeben werden.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            9. Remboursement partiel
+            10. Erstattung
           </h2>
           <p>
-            Le client peut uniquement demander le remboursement partiel de sa
-            commande.
+            Nach Validierung der Rückgabe erstattet Brennstoffe Nagler den für die
+            zurückgegebenen Produkte gezahlten Betrag.
           </p>
           <p>
-            Dans ce cas, les produits et les quantités à retourner doivent
-            être clairement identifiés.
+            Die Erstattung wird innerhalb der gesetzlichen Höchstfrist von 14
+            Tagen ab dem Datum bearbeitet, an dem Brennstoffe Nagler über die
+            Rückgabeentscheidung informiert wurde.
           </p>
           <p>
-            Le remboursement correspond exclusivement à la valeur des produits
-            effectivement retournés et acceptés.
+            Brennstoffe Nagler kann die Erstattung bis zum Eingang der zurückgegebenen
+            Produkte oder bis zum Nachweis ihrer Absendung zurückhalten, je
+            nachdem, was zuerst eintritt.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            10. Remboursement
+            11. Erstattungsmethode
           </h2>
           <p>
-            Après validation du retour, Perrier Bois rembourse le montant
-            payé pour les produits retournés.
+            Da Zahlungen ausschließlich per Banküberweisung erfolgen, werden
+            Erstattungen ebenfalls per Banküberweisung ohne zusätzliche Kosten
+            für den Kunden durchgeführt.
           </p>
-          <p>
-            Le remboursement est traité dans le délai légal maximal de 14 jours
-            à compter de la date à laquelle Perrier Bois est informé de la
-            décision de retour.
-          </p>
-          <p>
-            Perrier Bois peut retenir le remboursement jusqu à la
-            réception des produits retournés ou jusqu à la preuve de leur
-            envoi, selon l événement le plus précoce.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-base font-semibold text-foreground">
-            11. Mode de remboursement
-          </h2>
-          <p>
-            Étant donné que les paiements s effectuent exclusivement par
-            virement bancaire, les remboursements sont également effectués par
-            virement bancaire, sans frais supplémentaires pour le client.
-          </p>
-          <p>Le client devra éventuellement indiquer :</p>
+          <p>Der Kunde muss ggf. angeben:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>le nom du titulaire du compte ;</li>
-            <li>l IBAN ;</li>
-            <li>
-              un justificatif de propriété du compte, si cela est nécessaire
-              pour éviter les erreurs ou la fraude.
-            </li>
+            <li>den Namen des Kontoinhabers;</li>
+            <li>die IBAN;</li>
+            <li>einen Kontobesitznachweis, falls zur Vermeidung von Fehlern oder Betrug erforderlich.</li>
           </ul>
           <p>
-            L IBAN communiqué doit appartenir au client ayant passé la commande,
-            sauf justification et accord exprès contraire.
-          </p>
-          <p>
-            Perrier Bois ne vous demandera jamais vos mots de passe de
-            compte bancaire, codes d accès ou codes d authentification.
+            Brennstoffe Nagler wird Sie niemals nach Ihren Bankpasswörtern, Zugangscodes
+            oder Authentifizierungscodes fragen.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            12. Commandes non encore expédiées
+            12. Noch nicht versandte Bestellungen
           </h2>
           <p>
-            Le client peut demander l annulation d une commande non encore
-            expédiée.
+            Der Kunde kann die Stornierung einer noch nicht versandten Bestellung
+            beantragen.
           </p>
           <p>
-            Après réception du paiement, le montant est remboursé par virement
-            bancaire.
+            Nach Zahlungseingang wird der Betrag per Banküberweisung erstattet.
           </p>
-          <p>La demande doit être envoyée à :</p>
+          <p>Die Anfrage ist zu senden an:</p>
           <p>
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
             <br />
-            WhatsApp : +33 6 12 34 56 78
+            WhatsApp: +49 151 23456789
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            13. Produits endommagés, erronés ou non conformes
+            13. Beschädigte, falsche oder nicht konforme Produkte
           </h2>
           <p>
-            Le droit de retourner le produit dans un délai de 14 jours ne
-            remplace pas les droits légaux du consommateur lorsque le produit :
+            Das Recht auf Rückgabe innerhalb von 14 Tagen ersetzt nicht die
+            gesetzlichen Rechte des Verbrauchers, wenn das Produkt:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>arrive endommagé ;</li>
-            <li>présente des traces d humidité avant la livraison ;</li>
-            <li>ne correspond pas à la commande.</li>
-            <li>la quantité livrée est erronée ;</li>
-            <li>ne dispose pas des fonctions annoncées ;</li>
-            <li>présente un autre défaut de conformité.</li>
+            <li>beschädigt ankommt;</li>
+            <li>vor der Lieferung Feuchtigkeitsspuren aufweist;</li>
+            <li>nicht der Bestellung entspricht;</li>
+            <li>in falscher Menge geliefert wurde;</li>
+            <li>die beworbenen Funktionen nicht aufweist;</li>
+            <li>einen anderen Mangel aufweist.</li>
           </ul>
           <p>
-            Dans ces cas, le client doit contacter Perrier Bois dans les
-            meilleurs délais en indiquant le numéro de commande et en envoyant
-            des photos des produits, de l emballage et des étiquettes.
-          </p>
-          <p>
-            En cas de défaut de conformité, la solution est offerte
-            gratuitement au consommateur conformément à la législation
-            applicable et peut, selon le cas, inclure le remplacement, une
-            réduction du prix ou la résiliation du contrat.
-          </p>
-          <p>
-            L enlèvement des produits endommagés, erronés ou non conformes
-            est toujours gratuit.
+            In diesen Fällen muss der Kunde Brennstoffe Nagler so schnell wie möglich
+            unter Angabe der Bestellnummer und mit Fotos der Produkte, Verpackung
+            und Etiketten kontaktieren.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            14. Dommages visibles au moment de la livraison.
+            14. Sichtbare Schäden bei der Lieferung
           </h2>
-          <p>À la livraison, il est recommandé au client de vérifier :</p>
+          <p>Bei der Lieferung wird dem Kunden empfohlen zu prüfen:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>l état de l emballage ;</li>
-            <li>le nombre ou le volume ;</li>
-            <li>la présence de fissures ou de trous ;</li>
-            <li>d éventuelles traces d eau ou d humidité ;</li>
-            <li>les dommages visibles ;</li>
-            <li>la conformité avec la commande.</li>
+            <li>den Zustand der Verpackung;</li>
+            <li>die Anzahl oder das Volumen;</li>
+            <li>Risse oder Löcher;</li>
+            <li>Wasser- oder Feuchtigkeitsspuren;</li>
+            <li>sichtbare Schäden;</li>
+            <li>die Übereinstimmung mit der Bestellung.</li>
           </ul>
           <p>
-            Dans la mesure du possible, toute irrégularité doit être consignée
-            dans la documentation du transporteur et photographiée.
-          </p>
-          <p>
-            L absence de constatation immédiate ne prive pas le consommateur
-            de ses droits en ce qui concerne les problèmes non apparents au
-            moment de la livraison.
+            Nach Möglichkeit sollten Unregelmäßigkeiten in den
+            Spediteurdokumenten vermerkt und fotografiert werden.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            15. Produits personnalisés
+            15. Individuell angefertigte Produkte
           </h2>
           <p>
-            Le droit de rétractation peut ne pas s appliquer aux produits
-            spécialement fabriqués, découpés, emballés ou préparés selon les
-            instructions individuelles du client.
-          </p>
-          <p>
-            Si cette exception s applique, le client en est clairement informé
-            avant la finalisation de sa commande.
+            Das Widerrufsrecht gilt möglicherweise nicht für Produkte, die
+            speziell nach den individuellen Anweisungen des Kunden hergestellt,
+            zugeschnitten, verpackt oder vorbereitet wurden. Falls diese Ausnahme
+            gilt, wird der Kunde vor Abschluss der Bestellung klar darüber
+            informiert.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            16. Achats à usage professionnel
+            16. Gewerbliche Einkäufe
           </h2>
           <p>
-            Le droit de rétractation de 14 jours s applique aux
-            consommateurs qui achètent des produits à des fins non liées à
-            leur activité commerciale ou professionnelle.
+            Das 14-tägige Widerrufsrecht gilt für Verbraucher, die Produkte für
+            nicht gewerbliche oder berufliche Zwecke kaufen.
           </p>
           <p>
-            Pour les achats effectués par des entreprises, des
-            professionnels ou d autres organismes à des fins liées à leur
-            activité, les retours dépendent des conditions convenues avec
-            Perrier Bois.
+            Für Käufe von Unternehmen oder Fachleuten für gewerbliche Zwecke
+            hängen Rückgaben von den mit Brennstoffe Nagler vereinbarten Bedingungen ab.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            17. Contacts
+            17. Kontakt
           </h2>
           <p>
-            Pour les demandes de retour, le suivi d envoi ou les informations
-            relatives à un remboursement :
+            Für Rückgabeanträge, Versandverfolgung oder Erstattungsinformationen:
           </p>
           <p>
-            Perrier Bois
+            Brennstoffe Nagler
             <br />
-            Forme juridique : SARL
+            Rechtsform: SARL
             <br />
-            Siège social : 109 Zone des Varennes, 71340 Melay, France
+            Sitz: Waldweg 12, 99423 Weimar, Deutschland
             <br />
-            SIREN : 503 747 180 — SIRET : 503 747 180 00027
+            SIREN: 503 747 180 — SIRET: 503 747 180 00027
             <br />
-            N° TVA intracommunautaire : FR79503747180
+            USt-IdNr.: FR79503747180
             <br />
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
             <br />
-            Téléphone : +33 6 12 34 56 78
+            Telefon: +49 151 23456789
           </p>
           <p>
-            <strong>Dernière mise à jour :</strong> 22 septembre 2026.
+            <strong>Letzte Aktualisierung:</strong> 22. September 2026.
           </p>
         </section>
       </div>

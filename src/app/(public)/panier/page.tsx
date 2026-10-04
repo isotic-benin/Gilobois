@@ -19,15 +19,15 @@ export default function PanierPage() {
         <div className="mx-auto mb-6 flex size-20 items-center justify-center bg-muted">
           <FaCartShopping className="size-8 text-primary" />
         </div>
-        <h1 className="mb-2 text-3xl font-bold">Votre panier est vide</h1>
+        <h1 className="mb-2 text-3xl font-bold">Ihr Warenkorb ist leer</h1>
         <p className="mb-8 text-muted-foreground">
-          Parcourez notre catalogue et ajoutez vos produits préférés.
+          Durchsuchen Sie unseren Katalog und fügen Sie Ihre Lieblingsprodukte hinzu.
         </p>
         <Link
           href="/produits"
           className="inline-flex items-center gap-2 rounded-none bg-primary px-6 py-3 text-sm font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90"
         >
-          Découvrir les produits <FaArrowRight className="size-4" />
+          Produkte entdecken <FaArrowRight className="size-4" />
         </Link>
       </div>
     );
@@ -35,7 +35,7 @@ export default function PanierPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-      <h1 className="mb-6 text-[28px] font-bold uppercase tracking-tight sm:text-[36px]">Mon panier</h1>
+      <h1 className="mb-6 text-[28px] font-bold uppercase tracking-tight sm:text-[36px]">Mein Warenkorb</h1>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
         <ul className="space-y-3">
@@ -83,7 +83,7 @@ export default function PanierPage() {
                   <div className="flex items-center rounded-none border-2 border-border bg-background p-0.5">
                     <button
                       type="button"
-                      aria-label="Diminuer"
+                      aria-label="Verringern"
                       className="flex size-8 items-center justify-center rounded-none transition-colors hover:bg-accent disabled:opacity-40"
                       onClick={() =>
                         modifierQuantite(
@@ -101,7 +101,7 @@ export default function PanierPage() {
                     </span>
                     <button
                       type="button"
-                      aria-label="Augmenter"
+                      aria-label="Erhöhen"
                       className="flex size-8 items-center justify-center rounded-none transition-colors hover:bg-accent disabled:opacity-40"
                       onClick={() =>
                         modifierQuantite(
@@ -118,7 +118,7 @@ export default function PanierPage() {
 
                   <button
                     type="button"
-                    aria-label="Retirer du panier"
+                    aria-label="Aus dem Warenkorb entfernen"
                     className="flex size-9 items-center justify-center rounded-none text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                     onClick={() =>
                       retirer(article.produitId, article.variante)
@@ -133,37 +133,37 @@ export default function PanierPage() {
         </ul>
 
         <aside className="sticky top-[130px] h-fit rounded-none border-2 border-border bg-card p-6">
-          <h2 className="mb-4 text-lg font-bold uppercase tracking-widest">Récapitulatif</h2>
+          <h2 className="mb-4 text-lg font-bold uppercase tracking-widest">Zusammenfassung</h2>
           <dl className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <dt className="text-muted-foreground">Articles ({totalArticles})</dt>
+              <dt className="text-muted-foreground">Artikel ({totalArticles})</dt>
               <dd className="font-bold">{formaterPrix(sousTotal)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-muted-foreground">Livraison</dt>
-              <dd className="font-bold text-primary">Gratuit</dd>
+              <dt className="text-muted-foreground">Versand</dt>
+              <dd className="font-bold text-primary">Kostenlos</dd>
             </div>
             <div className="flex justify-between border-t-2 border-border pt-3 text-base font-black">
-              <dt>Total</dt>
+              <dt>Gesamt</dt>
               <dd>{formaterPrix(sousTotal)}</dd>
             </div>
           </dl>
 
           <p className="mt-4 rounded-none bg-muted px-3.5 py-2.5 text-xs font-bold text-muted-foreground">
-            Livraison offerte sur toute la France métropolitaine.
+            Kostenloser Versand innerhalb Deutschlands.
           </p>
 
           <Link
             href="/commande"
             className="mt-5 flex w-full items-center justify-center gap-2 rounded-none bg-primary px-5 py-3 text-sm font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Passer à la caisse <FaArrowRight className="size-4" />
+            Zur Kasse <FaArrowRight className="size-4" />
           </Link>
           <Link
             href="/produits"
             className="mt-3 block text-center text-sm font-bold text-muted-foreground transition-colors hover:text-foreground uppercase tracking-wider"
           >
-            Continuer mes achats
+            Weiter einkaufen
           </Link>
         </aside>
       </div>

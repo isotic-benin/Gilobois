@@ -53,7 +53,7 @@ export function GestionContacts() {
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur s'est produite.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       return;
     }
@@ -64,7 +64,7 @@ export function GestionContacts() {
   };
 
   if (chargement) {
-    return <p className="text-muted-foreground">Chargement des messages…</p>;
+    return <p className="text-muted-foreground">Nachrichten werden geladen…</p>;
   }
 
   const nonTraites = messages.filter((m) => m.statut === "nouveau").length;
@@ -72,18 +72,18 @@ export function GestionContacts() {
   return (
     <div>
       <div className="flex items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold">Messages de contact</h1>
+        <h1 className="text-2xl font-bold">Kontaktnachrichten</h1>
         <button
           type="button"
           onClick={() => void charger()}
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm transition-colors hover:bg-muted"
         >
           <FaArrowsRotate className="size-4" />
-          Actualiser
+          Aktualisieren
         </button>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">
-        {messages.length} message(s) au total · {nonTraites} non traité
+        {messages.length} Nachricht(en) insgesamt · {nonTraites} unbearbeitet
       </p>
 
       {message && (
@@ -100,7 +100,7 @@ export function GestionContacts() {
 
       {messages.length === 0 ? (
         <p className="mt-6 rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-          Aucun message.
+          Keine Nachrichten.
         </p>
       ) : (
         <ul className="mt-6 space-y-3">
@@ -121,7 +121,7 @@ export function GestionContacts() {
                         : "rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800"
                     }
                   >
-                    {m.statut === "nouveau" ? "Non traité" : "Traité"}
+                    {m.statut === "nouveau" ? "Unbearbeitet" : "Bearbeitet"}
                   </span>
                   {m.statut === "nouveau" && (
                     <button
@@ -130,14 +130,14 @@ export function GestionContacts() {
                       className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-xs transition-colors hover:bg-muted"
                     >
                       <FaCircleCheck className="size-3.5" />
-                      Marquer comme traité
+                      Als bearbeitet markieren
                     </button>
                   )}
                 </span>
               </div>
               <p className="mt-1 text-xs text-muted-foreground">
                 {m.nom} · {m.email} ·{" "}
-                {new Date(m.dateCreation).toLocaleDateString("fr-FR")}
+                {new Date(m.dateCreation).toLocaleDateString("de-DE")}
               </p>
               <p className="mt-2 whitespace-pre-line text-sm text-muted-foreground">
                 {m.message}

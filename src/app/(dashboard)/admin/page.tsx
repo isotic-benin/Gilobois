@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 };
 
 const LIBELLES_STATUTS: Record<string, string> = {
-  en_attente: "En attente",
-  confirmee: "Confirmée",
-  en_preparation: "En préparation",
-  expediee: "Expédiée",
-  livree: "Livrée",
-  annulee: "Annulée",
+  en_attente: "Ausstehend",
+  confirmee: "Bestätigt",
+  en_preparation: "In Vorbereitung",
+  expediee: "Versendet",
+  livree: "Geliefert",
+  annulee: "Storniert",
 };
 
 export default async function AdminPage() {
@@ -26,40 +26,40 @@ export default async function AdminPage() {
   if (!stats) {
     return (
       <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-        Base de données indisponible. Veuillez vérifier la configuration MongoDB.
+        Datenbank nicht verfügbar. Bitte überprüfen Sie die MongoDB-Konfiguration.
       </div>
     );
   }
 
   const cartes = [
     {
-      label: "Chiffre d'affaires",
+      label: "Umsatz",
       valeur: formaterPrix(stats.chiffreAffaires),
       icone: FaMoneyBill,
     },
     {
-      label: "Commandes",
+      label: "Bestellungen",
       valeur: String(stats.nombreCommandes),
-      detail: `${stats.commandesEnAttente} en attente`,
+      detail: `${stats.commandesEnAttente} ausstehend`,
       icone: FaCartShopping,
     },
     {
-      label: "Clients",
+      label: "Kunden",
       valeur: String(stats.nombreClients),
       icone: FaUserGroup,
     },
     {
-      label: "Produits",
+      label: "Produkte",
       valeur: String(stats.nombreProduits),
       icone: FaBox,
     },
     {
-      label: "Stock faible",
+      label: "Niedriger Bestand",
       valeur: String(stats.stockFaible),
       icone: FaTriangleExclamation,
     },
     {
-      label: "Avis en attente",
+      label: "Ausstehende Bewertungen",
       valeur: String(stats.avisEnAttente),
       icone: FaStar,
     },
@@ -73,8 +73,8 @@ export default async function AdminPage() {
   const maxRevenu = Math.max(1, ...stats.revenusParMois.map((m) => m.total));
 
   const NOMS_MOIS = [
-    "Jan", "Fév", "Mar", "Avr", "Mai", "Jun",
-    "Jul", "Aoû", "Sep", "Oct", "Nov", "Déc",
+    "Jan", "Feb", "Mär", "Apr", "Mai", "Jun",
+    "Jul", "Aug", "Sep", "Okt", "Nov", "Dez",
   ];
 
   const libelleMois = (mois: string) => {
@@ -97,9 +97,9 @@ export default async function AdminPage() {
   return (
     <div>
       <div className="flex items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold">Tableau de bord</h1>
+        <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-[13px] text-muted-foreground">
-          {new Date().toLocaleDateString("fr-FR", {
+          {new Date().toLocaleDateString("de-DE", {
             weekday: "long",
             day: "numeric",
             month: "long",
@@ -133,11 +133,11 @@ export default async function AdminPage() {
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         <section className="min-w-0 rounded-2xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(42,33,27,0.03)] lg:col-span-2">
           <h2 className="mb-4 font-semibold">
-            Chiffre d'affaires — 6 derniers mois
+            Umsatz — letzte 6 Monate
           </h2>
           {stats.revenusParMois.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              Aucune donnée pour cette période.
+              Keine Daten für diesen Zeitraum.
             </p>
           ) : (
             <div className="flex h-48 items-end gap-2 overflow-x-auto pb-2 px-1 -mx-1">
@@ -169,24 +169,24 @@ export default async function AdminPage() {
         </section>
 
         <section className="min-w-0 rounded-2xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(42,33,27,0.03)]">
-          <h2 className="mb-4 font-semibold">Indicateurs</h2>
+          <h2 className="mb-4 font-semibold">Kennzahlen</h2>
           <ul className="space-y-3 text-sm">
             <li className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 min-w-0">
-              <span className="text-muted-foreground truncate">Panier moyen</span>
+              <span className="text-muted-foreground truncate">Durchschnittlicher Warenkorb</span>
               <span className="font-bold whitespace-nowrap shrink-0">{formaterPrix(panierMoyen)}</span>
             </li>
             <li className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 min-w-0">
-              <span className="text-muted-foreground truncate">Commandes livrées</span>
+              <span className="text-muted-foreground truncate">Gelieferte Bestellungen</span>
               <span className="font-bold whitespace-nowrap shrink-0">
                 {livrees} / {nonAnnulees}
               </span>
             </li>
             <li className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 min-w-0">
-              <span className="text-muted-foreground truncate">Taux de livraison</span>
+              <span className="text-muted-foreground truncate">Lieferrate</span>
               <span className="font-bold whitespace-nowrap shrink-0">{tauxLivraison}%</span>
             </li>
             <li className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 min-w-0">
-              <span className="text-muted-foreground truncate">Avis en attente</span>
+              <span className="text-muted-foreground truncate">Ausstehende Bewertungen</span>
               <span className="font-bold whitespace-nowrap shrink-0">{stats.avisEnAttente}</span>
             </li>
           </ul>
@@ -195,10 +195,10 @@ export default async function AdminPage() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <section className="min-w-0 rounded-2xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(42,33,27,0.03)]">
-          <h2 className="mb-4 font-semibold">Commandes par statut</h2>
+          <h2 className="mb-4 font-semibold">Bestellungen nach Status</h2>
           {stats.commandesParStatut.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              Aucune commande pour le moment.
+              Noch keine Bestellungen.
             </p>
           ) : (
             <ul className="space-y-3">
@@ -225,9 +225,9 @@ export default async function AdminPage() {
         </section>
 
         <section className="min-w-0 rounded-2xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(42,33,27,0.03)]">
-          <h2 className="mb-4 font-semibold">Meilleures ventes</h2>
+          <h2 className="mb-4 font-semibold">Bestseller</h2>
           {stats.meilleuresVentes.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Aucun produit.</p>
+            <p className="text-sm text-muted-foreground">Keine Produkte.</p>
           ) : (
             <ol className="space-y-3">
               {stats.meilleuresVentes.map((p) => (
@@ -244,7 +244,7 @@ export default async function AdminPage() {
                   )}
                   <span className="min-w-0 flex-1 truncate">{p.nom}</span>
                   <span className="shrink-0 whitespace-nowrap text-muted-foreground">
-                    {p.nombreVentes} ventes
+                    {p.nombreVentes} Verkäufe
                   </span>
                 </li>
               ))}
@@ -255,12 +255,12 @@ export default async function AdminPage() {
 
       <section className="mt-6 rounded-2xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(42,33,27,0.03)]">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-semibold">Dernières commandes</h2>
+          <h2 className="font-semibold">Letzte Bestellungen</h2>
           <Link
             href="/admin/commandes"
             className="text-sm text-primary hover:underline"
           >
-            Tout voir
+            Alle anzeigen
           </Link>
         </div>
         <TableauCommandes

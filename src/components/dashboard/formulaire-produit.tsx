@@ -198,7 +198,7 @@ export function FormulaireProduit({
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur est survenue.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
@@ -218,7 +218,7 @@ export function FormulaireProduit({
           className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414] disabled:opacity-60"
         >
           {enCours ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-          <span>Enregistrer</span>
+          <span>Speichern</span>
         </button>
       </div>
 
@@ -235,10 +235,10 @@ export function FormulaireProduit({
       )}
 
       <section className="rounded-2xl border border-border bg-card p-4">
-        <h2 className="mb-3 font-semibold">Informations générales</h2>
+        <h2 className="mb-3 font-semibold">Allgemeine Informationen</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="block sm:col-span-2">
-            <span className="mb-1 block text-sm font-medium">Nom *</span>
+            <span className="mb-1 block text-sm font-medium">Name *</span>
             <input
               value={formulaire.nom}
               onChange={(e) => changerNom(e.target.value)}
@@ -267,14 +267,14 @@ export function FormulaireProduit({
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-sm font-medium">Catégorie *</span>
+            <span className="mb-1 block text-sm font-medium">Kategorie *</span>
             <select
               value={formulaire.categorieId}
               onChange={(e) => definir("categorieId", e.target.value)}
               required
               className={champClasse}
             >
-              <option value="">Sélectionner…</option>
+              <option value="">Auswählen…</option>
               {categories.map((c) => (
                 <option key={c._id} value={c._id}>
                   {"— ".repeat(c.profondeur)}
@@ -284,20 +284,20 @@ export function FormulaireProduit({
             </select>
           </label>
           <label className="block">
-            <span className="mb-1 block text-sm font-medium">Type de livraison</span>
+            <span className="mb-1 block text-sm font-medium">Lieferart</span>
             <select
               value={formulaire.typeLivraison}
               onChange={(e) => definir("typeLivraison", e.target.value as any)}
               className={champClasse}
             >
-              <option value="retrait">Retrait</option>
-              <option value="livraison_portail">Livraison au portail</option>
-              <option value="livraison_garage">Livraison en garage</option>
+              <option value="retrait">Abholung</option>
+              <option value="livraison_portail">Lieferung am Tor</option>
+              <option value="livraison_garage">Lieferung in der Garage</option>
             </select>
           </label>
           <label className="block sm:col-span-2">
             <span className="mb-1 block text-sm font-medium">
-              Description courte
+              Kurzbeschreibung
             </span>
             <textarea
               value={formulaire.descriptionCourte}
@@ -308,7 +308,7 @@ export function FormulaireProduit({
             />
           </label>
           <label className="block sm:col-span-2">
-            <span className="mb-1 block text-sm font-medium">Description</span>
+            <span className="mb-1 block text-sm font-medium">Beschreibung</span>
             <textarea
               value={formulaire.description}
               onChange={(e) => definir("description", e.target.value)}
@@ -318,7 +318,7 @@ export function FormulaireProduit({
           </label>
           <label className="block sm:col-span-2">
             <span className="mb-1 block text-sm font-medium">
-              Tags (séparés par des virgules)
+              Tags (durch Kommas getrennt)
             </span>
             <input
               value={formulaire.tags.join(", ")}
@@ -335,7 +335,7 @@ export function FormulaireProduit({
       </section>
 
       <section className="rounded-2xl border border-border bg-card p-4">
-        <h2 className="mb-3 font-semibold">Images</h2>
+        <h2 className="mb-3 font-semibold">Bilder</h2>
         <div className="flex flex-wrap items-start gap-3">
           {formulaire.images.map((image, i) => (
             <div key={i} className="relative">
@@ -347,7 +347,7 @@ export function FormulaireProduit({
               />
               <button
                 type="button"
-                aria-label="Supprimer l'image"
+                aria-label="Bild entfernen"
                 onClick={() =>
                   definir(
                     "images",
@@ -362,7 +362,7 @@ export function FormulaireProduit({
           ))}
           <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-3.5 py-2 text-sm transition-colors hover:bg-muted">
             <FaUpload className="size-4" />
-            Ajouter une image
+            Bild hinzufügen
             <input
               type="file"
               accept="image/*"
@@ -378,10 +378,10 @@ export function FormulaireProduit({
       </section>
 
       <section className="rounded-2xl border border-border bg-card p-4">
-        <h2 className="mb-3 font-semibold">Prix et stock</h2>
+        <h2 className="mb-3 font-semibold">Preis und Bestand</h2>
         <div className="grid gap-3 sm:grid-cols-3">
           <label className="block">
-            <span className="mb-1 block text-sm font-medium">Prix *</span>
+            <span className="mb-1 block text-sm font-medium">Preis *</span>
             <input
               type="number"
               min="0"
@@ -394,7 +394,7 @@ export function FormulaireProduit({
           </label>
           <label className="block">
             <span className="mb-1 block text-sm font-medium">
-              Prix promotionnel (optionnel)
+              Aktionspreis (optional)
             </span>
             <input
               type="number"
@@ -412,7 +412,7 @@ export function FormulaireProduit({
           </label>
           <label className="block">
             <span className="mb-1 block text-sm font-medium">
-              Réduction (%)
+              Rabatt (%)
             </span>
             <input
               type="number"
@@ -426,7 +426,7 @@ export function FormulaireProduit({
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-sm font-medium">Stock</span>
+            <span className="mb-1 block text-sm font-medium">Bestand</span>
             <input
               type="number"
               min="0"
@@ -437,7 +437,7 @@ export function FormulaireProduit({
           </label>
           <label className="block">
             <span className="mb-1 block text-sm font-medium">
-              Seuil d'alerte stock
+              Mindestbestand-Alarm
             </span>
             <input
               type="number"
@@ -450,7 +450,7 @@ export function FormulaireProduit({
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-sm font-medium">Poids (g)</span>
+            <span className="mb-1 block text-sm font-medium">Gewicht (g)</span>
             <input
               type="number"
               min="0"
@@ -468,7 +468,7 @@ export function FormulaireProduit({
               onChange={(e) => definir("enPromotion", e.target.checked)}
               disabled={formulaire.prixPromo == null}
             />
-            En promotion
+            Im Angebot
           </label>
           <label className="flex items-center gap-2">
             <input
@@ -476,7 +476,7 @@ export function FormulaireProduit({
               checked={formulaire.vedette}
               onChange={(e) => definir("vedette", e.target.checked)}
             />
-            Produit en vedette
+            Empfohlenes Produkt
           </label>
           <label className="flex items-center gap-2">
             <input
@@ -484,20 +484,20 @@ export function FormulaireProduit({
               checked={formulaire.actif}
               onChange={(e) => definir("actif", e.target.checked)}
             />
-            Actif
+            Aktiv
           </label>
         </div>
       </section>
 
       <section className="rounded-2xl border border-border bg-card p-4">
-        <h2 className="mb-3 font-semibold">Variantes</h2>
+        <h2 className="mb-3 font-semibold">Varianten</h2>
         {formulaire.variantes.map((variante, i) => (
           <div
             key={i}
             className="mb-2 grid grid-cols-2 gap-2 rounded-xl border border-border p-2 sm:grid-cols-5"
           >
             <input
-              placeholder="Type (Taille…)"
+              placeholder="Typ (Größe…)"
               value={variante.nom}
               onChange={(e) => {
                 const copie = [...formulaire.variantes];
@@ -507,7 +507,7 @@ export function FormulaireProduit({
               className={champClasse}
             />
             <input
-              placeholder="Valeur (M…)"
+              placeholder="Wert (M…)"
               value={variante.valeur}
               onChange={(e) => {
                 const copie = [...formulaire.variantes];
@@ -519,7 +519,7 @@ export function FormulaireProduit({
             <input
               type="number"
               min="0"
-              placeholder="Stock"
+              placeholder="Bestand"
               value={variante.stockVariante}
               onChange={(e) => {
                 const copie = [...formulaire.variantes];
@@ -534,7 +534,7 @@ export function FormulaireProduit({
             <input
               type="number"
               min="0"
-              placeholder="Supplément de prix"
+              placeholder="Preiszuschlag"
               value={variante.prixSupplement}
               onChange={(e) => {
                 const copie = [...formulaire.variantes];
@@ -559,7 +559,7 @@ export function FormulaireProduit({
               />
               <button
                 type="button"
-                aria-label="Supprimer la variante"
+                aria-label="Variante entfernen"
                 onClick={() =>
                   definir(
                     "variantes",
@@ -584,16 +584,16 @@ export function FormulaireProduit({
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm transition-colors hover:bg-muted"
         >
           <FaPlus className="size-4" />
-          Ajouter une variante
+          Variante hinzufügen
         </button>
       </section>
 
       <section className="rounded-2xl border border-border bg-card p-4">
-        <h2 className="mb-3 font-semibold">Propriétés</h2>
+        <h2 className="mb-3 font-semibold">Eigenschaften</h2>
         {formulaire.attributs.map((attribut, i) => (
           <div key={i} className="mb-2 flex gap-2">
             <input
-              placeholder="Clé (Couleur…)"
+              placeholder="Eigenschaft (Farbe…)"
               value={attribut.cle}
               onChange={(e) => {
                 const copie = [...formulaire.attributs];
@@ -603,7 +603,7 @@ export function FormulaireProduit({
               className={champClasse}
             />
             <input
-              placeholder="Valeur (Rouge…)"
+              placeholder="Wert (Rot…)"
               value={attribut.valeur}
               onChange={(e) => {
                 const copie = [...formulaire.attributs];
@@ -614,7 +614,7 @@ export function FormulaireProduit({
             />
             <button
               type="button"
-              aria-label="Supprimer la propriété"
+              aria-label="Eigenschaft entfernen"
               onClick={() =>
                 definir(
                   "attributs",
@@ -638,7 +638,7 @@ export function FormulaireProduit({
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm transition-colors hover:bg-muted"
         >
           <FaPlus className="size-4" />
-          Ajouter une propriété
+          Eigenschaft hinzufügen
         </button>
       </section>
 

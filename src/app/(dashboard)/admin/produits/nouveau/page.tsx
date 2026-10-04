@@ -3,5 +3,5 @@ import { FormulaireProduit } from "@/components/dashboard/formulaire-produit";
 
 export default async function NouveauProduitPage() {
   await requireAdmin();
-  return <FormulaireProduit titre="Nouveau produit" />;
+  return <FormulaireProduit titre="Neues Produkt" />;
 }

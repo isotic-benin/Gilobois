@@ -134,26 +134,26 @@ export function GestionBannieres() {
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur est survenue.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
     }
 
-    setMessage({ type: "succes", texte: "Bannière enregistrée." });
+    setMessage({ type: "succes", texte: "Banner gespeichert." });
     setEnCours(false);
     reinitialiser();
     void charger();
   };
 
   const supprimer = async (id: string) => {
-    if (!confirm("Supprimer cette bannière ?")) return;
+    if (!confirm("Diesen Banner löschen?")) return;
     const res = await fetch(`/api/banners/${id}`, { method: "DELETE" });
     const donnees = await res.json().catch(() => null);
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Suppression impossible.",
+        texte: donnees?.erreur ?? "Löschen nicht möglich.",
       });
       return;
     }
@@ -162,7 +162,7 @@ export function GestionBannieres() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Carrousel de la page d'accueil</h1>
+      <h1 className="text-2xl font-bold">Banner der Startseite</h1>
 
       {message && (
         <p
@@ -181,10 +181,10 @@ export function GestionBannieres() {
         className="mt-6 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-2"
       >
         <h2 className="font-semibold sm:col-span-2">
-          {edition ? "Modifier la bannière" : "Nouvelle bannière"}
+          {edition ? "Banner bearbeiten" : "Neuer Banner"}
         </h2>
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Titre</span>
+          <span className="mb-1 block text-sm font-medium">Titel</span>
           <input
             value={formulaire.titre}
             onChange={(e) =>
@@ -194,7 +194,7 @@ export function GestionBannieres() {
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Sous-titre</span>
+          <span className="mb-1 block text-sm font-medium">Untertitel</span>
           <input
             value={formulaire.sousTitre}
             onChange={(e) =>
@@ -204,19 +204,19 @@ export function GestionBannieres() {
           />
         </label>
         <label className="block sm:col-span-2">
-          <span className="mb-1 block text-sm font-medium">Lien du bouton</span>
+          <span className="mb-1 block text-sm font-medium">Button-Link</span>
           <input
             value={formulaire.lienBouton}
             onChange={(e) =>
               setFormulaire((f) => ({ ...f, lienBouton: e.target.value }))
             }
-            placeholder="/produits, /promotions…"
+            placeholder="/produkte, /aktionen…"
             className={champClasse}
           />
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">
-            Texte du bouton
+            Button-Text
           </span>
           <input
             value={formulaire.texteBouton}
@@ -227,7 +227,7 @@ export function GestionBannieres() {
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Ordre</span>
+          <span className="mb-1 block text-sm font-medium">Reihenfolge</span>
           <input
             type="number"
             min="0"
@@ -243,7 +243,7 @@ export function GestionBannieres() {
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">
-            Date de début (optionnel)
+            Startdatum (optional)
           </span>
           <input
             type="date"
@@ -256,7 +256,7 @@ export function GestionBannieres() {
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">
-            Date de fin (optionnel)
+            Enddatum (optional)
           </span>
           <input
             type="date"
@@ -268,7 +268,7 @@ export function GestionBannieres() {
           />
         </label>
         <label className="block sm:col-span-2">
-          <span className="mb-1 block text-sm font-medium">Image</span>
+          <span className="mb-1 block text-sm font-medium">Bild</span>
           <div className="flex flex-wrap items-center gap-3">
             {formulaire.image && (
               // eslint-disable-next-line @next/next/no-img-element
@@ -280,7 +280,7 @@ export function GestionBannieres() {
             )}
             <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-3.5 py-2 text-sm transition-colors hover:bg-muted">
               <FaUpload className="size-4" />
-              Importer
+              Hochladen
               <input
                 type="file"
                 accept="image/*"
@@ -302,7 +302,7 @@ export function GestionBannieres() {
               setFormulaire((f) => ({ ...f, actif: e.target.checked }))
             }
           />
-          Bannière active
+          Banner aktiv
         </label>
         <div className="flex gap-2 sm:col-span-2">
           <button
@@ -311,7 +311,7 @@ export function GestionBannieres() {
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414] disabled:opacity-60"
           >
             {enCours ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-            <span>{edition ? "Enregistrer" : "Créer"}</span>
+            <span>{edition ? "Speichern" : "Erstellen"}</span>
           </button>
           {edition && (
             <button
@@ -319,7 +319,7 @@ export function GestionBannieres() {
               onClick={reinitialiser}
               className="rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
-              Annuler
+              Abbrechen
             </button>
           )}
         </div>
@@ -344,18 +344,18 @@ export function GestionBannieres() {
               )}
               <span className="min-w-0">
                 <span className="block truncate font-medium">
-                  {banniere.titre || "Sans titre"}
+                  {banniere.titre || "Ohne Titel"}
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  Ordre {banniere.ordre}
-                  {!banniere.actif && " · Inactive"}
+                  Reihenfolge {banniere.ordre}
+                  {!banniere.actif && " · Inaktiv"}
                 </span>
               </span>
             </div>
             <span className="flex shrink-0 gap-1">
               <button
                 type="button"
-                aria-label="Modifier"
+                aria-label="Bearbeiten"
                 onClick={() => editer(banniere)}
                 className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
               >
@@ -363,7 +363,7 @@ export function GestionBannieres() {
               </button>
               <button
                 type="button"
-                aria-label="Supprimer"
+                aria-label="Löschen"
                 onClick={() => void supprimer(banniere._id)}
                 className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
               >

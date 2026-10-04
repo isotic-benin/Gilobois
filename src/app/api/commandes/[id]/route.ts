@@ -11,14 +11,14 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   await dbConnect();
   const commande = await Order.findById(id).lean();
-  if (!commande) return apiErreur("Commande introuvable", 404);
+  if (!commande) return apiErreur("Bestellung nicht gefunden", 404);
 
   const autorise =
     user.role === ROLES.ADMIN ||

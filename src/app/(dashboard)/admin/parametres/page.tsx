@@ -39,12 +39,12 @@ export default function ParametresPage() {
       });
       const json = await res.json();
       if (!json.succes) throw new Error(json.erreur);
-      setMessage({ type: "success", text: "Coordonnées bancaires enregistrées avec succès !" });
+      setMessage({ type: "success", text: "Bankdaten erfolgreich gespeichert!" });
       setTimeout(() => setMessage(null), 3000);
     } catch (err) {
       setMessage({
         type: "error",
-        text: err instanceof Error ? err.message : "Erreur lors de l'enregistrement.",
+        text: err instanceof Error ? err.message : "Fehler beim Speichern.",
       });
       setTimeout(() => setMessage(null), 3000);
     } finally {
@@ -53,18 +53,18 @@ export default function ParametresPage() {
   };
 
   const champs: { key: keyof RibData; label: string; placeholder: string }[] = [
-    { key: "titulaire", label: "Titulaire du compte", placeholder: "Nom complet du titulaire" },
-    { key: "banque", label: "Nom de la banque", placeholder: "Ex. : Crédit Agricole" },
-    { key: "iban", label: "IBAN", placeholder: "Ex. : FR76 3000 4000 7500 0012 3456 789" },
-    { key: "bic", label: "BIC / SWIFT", placeholder: "Ex. : AGRIFRPPXXX" },
-    { key: "siege", label: "Siège de la banque", placeholder: "Ex. : Paris, France" },
+    { key: "titulaire", label: "Kontoinhaber", placeholder: "Vollständiger Name des Inhabers" },
+    { key: "banque", label: "Name der Bank", placeholder: "z. B.: Sparkasse" },
+    { key: "iban", label: "IBAN", placeholder: "z. B.: DE89 3704 0044 0532 0130 00" },
+    { key: "bic", label: "BIC / SWIFT", placeholder: "z. B.: COBADEFFXXX" },
+    { key: "siege", label: "Sitz der Bank", placeholder: "z. B.: Berlin, Deutschland" },
   ];
 
   return (
     <div>
-      <h1 className="mb-2 text-2xl font-bold">Paramètres</h1>
+      <h1 className="mb-2 text-2xl font-bold">Einstellungen</h1>
       <p className="mb-6 text-sm text-muted-foreground">
-        Gérez les informations de la plateforme.
+        Plattforminformationen verwalten.
       </p>
 
       {message && (
@@ -80,14 +80,14 @@ export default function ParametresPage() {
       )}
 
       <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_1px_2px_rgba(42,33,27,0.03)]">
-        <h2 className="mb-1 text-lg font-semibold">Coordonnées bancaires (RIB)</h2>
+        <h2 className="mb-1 text-lg font-semibold">Bankverbindung (RIB)</h2>
         <p className="mb-4 text-sm text-muted-foreground">
-          Ces informations seront envoyées par e-mail aux clients pour qu'ils puissent régler leurs commandes.
+          Diese Informationen werden per E-Mail an die Kunden gesendet, damit sie ihre Bestellungen bezahlen können.
         </p>
 
         {chargement ? (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <FaSpinner className="size-4 animate-spin" /> Chargement...
+            <FaSpinner className="size-4 animate-spin" /> Laden...
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -114,11 +114,11 @@ export default function ParametresPage() {
               >
                 {enregistrement ? (
                   <>
-                    <FaSpinner className="size-4 animate-spin" /> Enregistrement…
+                    <FaSpinner className="size-4 animate-spin" /> Speichern…
                   </>
                 ) : (
                   <>
-                    <FaCheck className="size-4" /> Enregistrer
+                    <FaCheck className="size-4" /> Speichern
                   </>
                 )}
               </button>

@@ -34,12 +34,12 @@ export interface CommandeDetailData {
 }
 
 const LIBELLES_STATUTS: Record<string, string> = {
-  en_attente: "En attente",
-  confirmee: "Confirmée",
-  en_preparation: "En préparation",
-  expediee: "Expédiée",
-  livree: "Livrée",
-  annulee: "Annulée",
+  en_attente: "Ausstehend",
+  confirmee: "Bestätigt",
+  en_preparation: "In Vorbereitung",
+  expediee: "Versendet",
+  livree: "Geliefert",
+  annulee: "Storniert",
 };
 
 export function CommandeDetail({
@@ -65,15 +65,15 @@ export function CommandeDetail({
         </span>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">
-        {new Date(commande.dateCommande).toLocaleDateString("fr-FR", {
+        {new Date(commande.dateCommande).toLocaleDateString("de-DE", {
           dateStyle: "long",
         })}{" "}
-        · Paiement : {commande.statutPaiement} · {commande.methodePaiement}
+        · Zahlung: {commande.statutPaiement} · {commande.methodePaiement}
       </p>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <section className="rounded-2xl border border-border bg-card p-4">
-          <h2 className="mb-3 font-semibold">Articles</h2>
+          <h2 className="mb-3 font-semibold">Artikel</h2>
           <ul className="space-y-2 text-sm">
             {commande.articles.map((article) => (
               <li key={`${article.produitId}-${article.variante}`}>
@@ -95,25 +95,25 @@ export function CommandeDetail({
           </ul>
           <dl className="mt-3 space-y-1 border-t pt-3 text-sm">
             <div className="flex justify-between">
-              <dt>Sous-total</dt>
+              <dt>Zwischensumme</dt>
               <dd>{formaterPrix(commande.sousTotal)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt>Livraison</dt>
+              <dt>Versand</dt>
               <dd>
                 {commande.fraisLivraison === 0
-                  ? "Gratuit"
+                  ? "Kostenlos"
                   : formaterPrix(commande.fraisLivraison)}
               </dd>
             </div>
             {commande.reduction > 0 && (
               <div className="flex justify-between">
-                <dt>Réduction</dt>
+                <dt>Rabatt</dt>
                 <dd>-{formaterPrix(commande.reduction)}</dd>
               </div>
             )}
             <div className="flex justify-between font-bold">
-              <dt>Total</dt>
+              <dt>Gesamt</dt>
               <dd>{formaterPrix(commande.total)}</dd>
             </div>
           </dl>
@@ -121,11 +121,11 @@ export function CommandeDetail({
 
         <div className="space-y-4">
           <section className="rounded-2xl border border-border bg-card p-4 text-sm">
-            <h2 className="mb-2 font-semibold">Client</h2>
+            <h2 className="mb-2 font-semibold">Kunde</h2>
             <p>
               {commande.client
                 ? `${commande.client.prenom} ${commande.client.nom}`
-                : "Client"}{" "}
+                : "Kunde"}{" "}
               {commande.client?.email && (
                 <span className="text-muted-foreground">
                   ({commande.client.email})
@@ -141,11 +141,11 @@ export function CommandeDetail({
                 : ""}
               , {commande.adresseLivraison.pays}
               {commande.adresseLivraison.telephone &&
-                ` — Tél.: ${commande.adresseLivraison.telephone}`}
+                ` — Tel.: ${commande.adresseLivraison.telephone}`}
             </p>
             {commande.transporteur || commande.numeroSuivi ? (
               <p className="mt-2 text-muted-foreground">
-                Suivi de colis : {commande.transporteur || "—"} /{" "}
+                Sendungsverfolgung: {commande.transporteur || "—"} /{" "}
                 {commande.numeroSuivi || "—"}
               </p>
             ) : null}
@@ -158,14 +158,14 @@ export function CommandeDetail({
 
           {commande.historiqueStatuts.length > 0 && (
             <section className="rounded-2xl border border-border bg-card p-4 text-sm">
-              <h2 className="mb-2 font-semibold">Historique</h2>
+              <h2 className="mb-2 font-semibold">Verlauf</h2>
               <ol className="space-y-1">
                 {[...commande.historiqueStatuts]
                   .reverse()
                   .map((entree, i) => (
                     <li key={i} className="flex gap-3">
                       <span className="shrink-0 text-muted-foreground">
-                        {new Date(entree.date).toLocaleDateString("fr-FR")}
+                        {new Date(entree.date).toLocaleDateString("de-DE")}
                       </span>
                       <span>
                         <strong>

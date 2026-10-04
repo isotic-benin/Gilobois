@@ -15,30 +15,30 @@ export async function GestionProduits({ baseHref }: { baseHref: string }) {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold">Produits</h1>
+        <h1 className="text-2xl font-bold">Produkte</h1>
         <Link
           href={`${baseHref}/nouveau`}
           className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414]"
         >
           <FaPlus className="size-4" />
-          Nouveau produit
+          Neues Produkt
         </Link>
       </div>
 
       {produits.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-          Aucun produit. Créez-en un d'abord.
+          Keine Produkte. Erstellen Sie zuerst eines.
         </p>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-border bg-card">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border bg-muted/60 text-left text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                <th className="p-3 font-medium">Produit</th>
-                <th className="p-3 font-medium">Prix</th>
-                <th className="p-3 font-medium">Stock</th>
-                <th className="p-3 font-medium">Statut</th>
-                <th className="p-3 font-medium">Ventes</th>
+                <th className="p-3 font-medium">Produkt</th>
+                <th className="p-3 font-medium">Preis</th>
+                <th className="p-3 font-medium">Bestand</th>
+                <th className="p-3 font-medium">Status</th>
+                <th className="p-3 font-medium">Verkäufe</th>
                 <th className="p-3 font-medium" />
               </tr>
             </thead>
@@ -96,17 +96,17 @@ export async function GestionProduits({ baseHref }: { baseHref: string }) {
                     <div className="flex flex-wrap gap-1">
                       {!produit.actif && (
                         <span className="rounded-full bg-destructive/10 px-1.5 py-0.5 text-xs text-destructive">
-                          Inactif
+                          Inaktiv
                         </span>
                       )}
                       {produit.vedette && (
                         <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-xs text-amber-800">
-                          En vedette
+                          Empfohlen
                         </span>
                       )}
                       {produit.enPromotion && (
                         <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-xs text-emerald-800">
-                          Promotion
+                          Aktion
                         </span>
                       )}
                     </div>
@@ -118,7 +118,7 @@ export async function GestionProduits({ baseHref }: { baseHref: string }) {
                         href={`${baseHref}/${String(produit._id)}/modifier`}
                         className="text-primary hover:underline"
                       >
-                        Modifier
+                        Bearbeiten
                       </Link>
                       <DeleteProduitButton
                         produitId={String(produit._id)}

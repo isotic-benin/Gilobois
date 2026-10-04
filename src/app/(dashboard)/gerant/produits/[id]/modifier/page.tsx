@@ -57,5 +57,5 @@ export default async function GerantModifierProduitPage({
     metaDescription: produit.metaDescription ?? "",
   };
 
-  return <FormulaireProduit produit={donnees} titre="Modifier le produit" />;
+  return <FormulaireProduit produit={donnees} titre="Produkt bearbeiten" />;
 }

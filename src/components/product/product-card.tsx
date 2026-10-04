@@ -37,7 +37,7 @@ export function ProductCard({ produit }: { produit: ProduitVue }) {
         )}
         {produit.stock <= 0 && (
           <span className="absolute right-3 top-3 rounded-none bg-foreground px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-background">
-            Rupture
+            Vergriffen
           </span>
         )}
       </div>
@@ -47,10 +47,10 @@ export function ProductCard({ produit }: { produit: ProduitVue }) {
         {produit.typeLivraison && (
           <div className="inline-flex w-fit items-center gap-1 rounded-none border-2 border-muted bg-background px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground">
             {produit.typeLivraison === "retrait"
-              ? "📦 Retrait"
+              ? "📦 Abholung"
               : produit.typeLivraison === "livraison_portail"
-                ? "🚚 Livr. portail"
-                : "🏡 Livr. garage"}
+                ? "🚚 Torlieferung"
+                : "🏡 Garagenlieferung"}
           </div>
         )}
         <h3 className="line-clamp-2 text-[15px] font-bold leading-snug text-foreground transition-colors group-hover:text-primary">

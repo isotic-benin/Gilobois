@@ -3,8 +3,8 @@ import { FaTree } from "react-icons/fa6";
 import { DeconnexionButton } from "@/components/shared/deconnexion-button";
 
 const LIBELLES_ROLE: Record<string, string> = {
-  admin: "Administrateur",
-  gerant: "Gérant",
+  admin: "Administrator",
+  gerant: "Verwalter",
 };
 
 interface Props {
@@ -24,7 +24,7 @@ export function HeaderDashboard({ nom, email, role, base }: Props) {
           <FaTree className="size-4" />
         </span>
         <span className="font-heading text-lg font-bold leading-none tracking-tight text-foreground">
-          Perrier<span className="text-primary">Bois</span>
+          Brennstoffe<span className="text-primary">Nagler</span>
         </span>
       </Link>
 
@@ -33,7 +33,7 @@ export function HeaderDashboard({ nom, email, role, base }: Props) {
           href="/"
           className="hidden items-center gap-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:text-primary md:inline-flex"
         >
-          Vers la boutique
+          Zum Shop
         </Link>
 
         <div className="hidden flex-col items-end leading-tight sm:flex">

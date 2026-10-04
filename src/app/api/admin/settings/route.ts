@@ -16,11 +16,11 @@ export async function GET() {
 export async function PUT(request: NextRequest) {
   await requireAdmin();
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültige Anfrage", 400);
 
   const { titulaire, banque, iban, bic, siege } = corps;
   if (!titulaire || !banque || !iban || !bic || !siege) {
-    return apiErreur("Tous les champs du RIB sont requis", 400);
+    return apiErreur("Alle RIB-Felder sind Pflichtfelder", 400);
   }
 
   await dbConnect();
@@ -33,5 +33,5 @@ export async function PUT(request: NextRequest) {
     { upsert: true, new: true, setDefaultsOnInsert: true },
   );
 
-  return apiSuccess({ message: "RIB mis à jour avec succès" });
+  return apiSuccess({ message: "RIB erfolgreich aktualisiert" });
 }

@@ -1,7 +1,15 @@
 import { describe, it, expect } from "vitest";
 import {
+  construireHtmlConfirmationCommande,
+  construireHtmlMessageContact,
+  construireHtmlMotDePasseOublie,
+  construireHtmlPaiement,
+  construireHtmlStatutCommande,
+  construireHtmlValidationCompte,
+  construireLayoutEmail,
   construireHtmlNotificationCommande,
   echapperHtml,
+  texteDepuisHtml,
   type NotificationCommande,
 } from "../email";
 
@@ -11,7 +19,7 @@ const commande: NotificationCommande = {
   dateCommande: new Date("2026-03-15T10:30:00Z"),
   clientNom: "Jean Dupont",
   email: "jean.dupont@example.fr",
-  telephone: "+33 6 12 34 56 78",
+  telephone: "+49 151 23456789",
   articles: [
     { nom: "Planche chêne", variante: "2000x200", quantite: 2, prixUnitaire: 45, sousTotal: 90 },
     { nom: "Pied metal", variante: "", quantite: 1, prixUnitaire: 29.9, sousTotal: 29.9 },
@@ -21,14 +29,14 @@ const commande: NotificationCommande = {
     ville: "Melay",
     codePostal: "71340",
     pays: "France",
-    telephone: "+33 6 12 34 56 78",
+    telephone: "+49 151 23456789",
   },
   adresseFacturation: {
     rue: "12 rue des Lilas",
     ville: "Melay",
     codePostal: "71340",
     pays: "France",
-    telephone: "+33 6 12 34 56 78",
+    telephone: "+49 151 23456789",
   },
   sousTotal: 119.9,
   reduction: 10,
@@ -52,6 +60,112 @@ describe("echapperHtml", () => {
   });
 });
 
+describe("modèles d’e-mail", () => {
+  it("utilise un layout email avec encodage UTF-8 et une structure compatible", () => {
+    const html = construireLayoutEmail("Résumé de commande", "<p>Été & hiver</p>");
+
+    expect(html).toContain('<meta charset="utf-8">');
+    expect(html).toContain('<html lang="de">');
+    expect(html).toContain('role="presentation"');
+    expect(html).toContain("Résumé de commande");
+    expect(html).toContain("BRENNSTOFFE NAGLER");
+    expect(html).not.toMatch(/<\s+(?:h[1-6]|p|div|tr|td|table)\b|<\/\/|<th[^>]*>[^<]{0,2}<\/?\/th/i);
+  });
+
+  it("présente le RIB et la référence de paiement sans HTML invalide ni injection", () => {
+    const html = construireHtmlPaiement({
+      numeroCommande: 'CMD<&"42',
+      total: 123.45,
+      rib: {
+        titulaire: "<script>alert(1)</script>",
+        banque: "Banque & fils",
+        iban: "DE89 3704 0044 0532 0130 00",
+        bic: "COBADEFFXXX",
+        siege: "Köln",
+      },
+    });
+
+    expect(html).toContain("DE89 3704 0044 0532 0130 00");
+    expect(html).toContain("COBADEFFXXX");
+    expect(html).toContain("Banque &amp; fils");
+    expect(html).toContain("&lt;script&gt;alert(1)&lt;/script&gt;");
+    expect(html).toContain("CMD&lt;&amp;&quot;42");
+    expect(html).toContain("123,45");
+    expect(html).not.toContain("<script>");
+    expect(html).not.toMatch(/<\s+(?:h[1-6]|p|div|tr|td|table)\b|<\/\/|<th[^>]*>[^<]{0,2}<\/?\/th/i);
+  });
+
+  it("avertit clairement si les coordonnées bancaires sont indisponibles", () => {
+    const html = construireHtmlPaiement({
+      numeroCommande: "CMD-100",
+      total: 25,
+      rib: null,
+    });
+
+    expect(html).toContain("Bankverbindung ist derzeit nicht verfügbar");
+    expect(html).toContain("CMD-100");
+  });
+
+  it("échappe les liens et identités des e-mails de compte et de commande", () => {
+    const lien = 'https://example.com/confirm?a=1&b="x"';
+    const reset = construireHtmlMotDePasseOublie(lien);
+    const validation = construireHtmlValidationCompte(lien);
+    const confirmation = construireHtmlConfirmationCommande({
+      prenom: "<b>Anna</b>",
+      numeroCommande: "CMD-<&",
+      total: 15,
+    });
+    const statut = construireHtmlStatutCommande({
+      prenom: "<b>Anna</b>",
+      numeroCommande: "CMD-<&",
+      statutLibelle: "<script>bad</script>",
+    });
+
+    expect(reset).toContain('href="https://example.com/confirm?a=1&amp;b=&quot;x&quot;"');
+    expect(validation).toContain("E-Mail-Adresse bestätigen");
+    expect(confirmation).toContain("&lt;b&gt;Anna&lt;/b&gt;");
+    expect(confirmation).toContain("CMD-&lt;&amp;");
+    expect(statut).toContain("&lt;script&gt;bad&lt;/script&gt;");
+    for (const html of [reset, validation, confirmation, statut]) {
+      expect(html).not.toMatch(/<\s+(?:h[1-6]|p|div|tr|td|table)\b|<\/\/|<th[^>]*>[^<]{0,2}<\/?\/th/i);
+    }
+  });
+
+  it("préserve les retours à la ligne du message de contact tout en échappant le HTML", () => {
+    const html = construireHtmlMessageContact({
+      nom: "Élodie",
+      email: "client@example.com",
+      sujet: "Question",
+      message: "Première ligne\n<script>alert(1)</script>\nDernière ligne",
+    });
+
+    expect(html).toContain("Élodie");
+    expect(html).toContain("Première ligne\n&lt;script&gt;alert(1)&lt;/script&gt;\nDernière ligne");
+    expect(html).not.toContain("<script>");
+    expect(html).not.toContain("Première ligne<br>");
+  });
+
+  it("produit une version texte lisible pour les clients mail sans rendu HTML", () => {
+    const text = texteDepuisHtml(
+      construireHtmlPaiement({
+        numeroCommande: "CMD-2026-001",
+        total: 45,
+        rib: null,
+      }),
+    );
+
+    expect(text).toContain("Vielen Dank für Ihre Bestellung");
+    expect(text).toContain("CMD-2026-001");
+    expect(text).toContain("45,00");
+    expect(text).toContain("©");
+    expect(text).not.toMatch(/<[^>]+>/);
+  });
+
+  it("ne réinterprète pas les entités écrites littéralement dans le contenu", () => {
+    expect(texteDepuisHtml("<p>&amp;#999999999;</p>")).toBe("&#999999999;");
+  });
+});
+
 describe("construireHtmlNotificationCommande", () => {
   const html = construireHtmlNotificationCommande(commande);
 
@@ -59,7 +173,7 @@ describe("construireHtmlNotificationCommande", () => {
     expect(html).toContain("CMD-2026-000001");
     expect(html).toContain("Jean Dupont");
     expect(html).toContain("jean.dupont@example.fr");
-    expect(html).toContain("+33 6 12 34 56 78");
+    expect(html).toContain("+49 151 23456789");
   });
 
   it("détaille les produits, les quantités et les totaux", () => {
@@ -88,6 +202,7 @@ describe("construireHtmlNotificationCommande", () => {
   it("traduit les libellés de livraison et de paiement", () => {
     expect(html).toContain("Livraison standard");
     expect(html).toContain("Virement bancaire");
+    expect(html).not.toMatch(/<\s+(?:h[1-6]|p|div|tr|td|table)\b|<\/\/|<th[^>]*>[^<]{0,2}<\/?\/th/i);
   });
 
   it("propose un lien vers la commande dans l'administration", () => {

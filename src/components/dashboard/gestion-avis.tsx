@@ -16,9 +16,9 @@ interface AvisAdmin {
 }
 
 const LIBELLES_STATUTS: Record<string, string> = {
-  en_attente: "En attente",
-  approuve: "Publié",
-  rejete: "Rejeté",
+  en_attente: "Ausstehend",
+  approuve: "Veröffentlicht",
+  rejete: "Abgelehnt",
 };
 
 export function GestionAvis() {
@@ -62,7 +62,7 @@ export function GestionAvis() {
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur est survenue.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       return;
     }
@@ -73,16 +73,16 @@ export function GestionAvis() {
           : a,
       ),
     );
-    setMessage({ type: "succes", texte: "Avis mis à jour." });
+    setMessage({ type: "succes", texte: "Bewertung aktualisiert." });
   };
 
   if (chargement) {
-    return <p className="text-muted-foreground">Chargement des avis…</p>;
+    return <p className="text-muted-foreground">Bewertungen werden geladen…</p>;
   }
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold">Avis clients</h1>
+      <h1 className="mb-4 text-2xl font-bold">Kundenbewertungen</h1>
 
       {message && (
         <p
@@ -98,7 +98,7 @@ export function GestionAvis() {
 
       {avisListe.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-          Aucun avis.
+          Keine Bewertungen.
         </p>
       ) : (
         <ul className="space-y-3">
@@ -108,11 +108,11 @@ export function GestionAvis() {
                 <div>
                   <p className="font-medium">{avis.auteur}</p>
                   <p className="text-xs text-muted-foreground">
-                    {avis.produit?.nom ?? "Produit"} ·{" "}
-                    {new Date(avis.dateCreation).toLocaleDateString("fr-FR")}
+                    {avis.produit?.nom ?? "Produkt"} ·{" "}
+                    {new Date(avis.dateCreation).toLocaleDateString("de-DE")}
                     {avis.achatVerifie && (
                       <span className="ml-1 rounded-full bg-emerald-50 px-1 py-0.5 text-emerald-700">
-                        Achat vérifié
+                        Verifizierter Kauf
                       </span>
                     )}
                   </p>
@@ -142,7 +142,7 @@ export function GestionAvis() {
               {avis.statut === "approuve" && (
                 <div className="mt-3 border-t pt-3">
                   <textarea
-                    placeholder="Réponse publique de la boutique…"
+                    placeholder="Öffentliche Antwort des Shops…"
                     value={reponses[avis._id] ?? avis.reponseAdmin ?? ""}
                     onChange={(e) =>
                       setReponses((r) => ({ ...r, [avis._id]: e.target.value }))
@@ -161,7 +161,7 @@ export function GestionAvis() {
                     }
                     className="mt-2 rounded-full border border-border px-3 py-1.5 text-sm transition-colors hover:bg-muted"
                   >
-                    Enregistrer la réponse
+                    Antwort speichern
                   </button>
                 </div>
               )}
@@ -174,7 +174,7 @@ export function GestionAvis() {
                     className="inline-flex items-center gap-1 rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700"
                   >
                     <FaCheck className="size-4" />
-                    Approuver
+                    Genehmigen
                   </button>
                   <button
                     type="button"
@@ -182,7 +182,7 @@ export function GestionAvis() {
                     className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-sm transition-colors hover:bg-muted"
                   >
                     <FaXmark className="size-4" />
-                    Rejeter
+                    Ablehnen
                   </button>
                 </div>
               )}

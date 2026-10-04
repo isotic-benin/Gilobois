@@ -1,122 +1,120 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Modes de paiement",
+  title: "Zahlungsarten",
 };
 
 export default function ModeDePaiementPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-bold">Modes de paiement</h1>
+      <h1 className="text-3xl font-bold">Zahlungsarten</h1>
       <div className="mt-6 space-y-6 text-sm leading-relaxed text-muted-foreground">
         <p>
-          Perrier Bois accepte les paiements exclusivement par virement
-          bancaire.
+          Brennstoffe Nagler akzeptiert ausschließlich Zahlungen per Banküberweisung.
         </p>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Virement bancaire
+            Banküberweisung
           </h2>
           <p>
-            Après confirmation de la commande, le client reçoit les coordonnées
-            bancaires nécessaires au paiement, notamment :
+            Nach Auftragsbestätigung erhält der Kunde die für die Zahlung
+            erforderlichen Bankdaten, insbesondere:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>nom du bénéficiaire ;</li>
-            <li>IBAN ;</li>
-            <li>montant total de la commande ;</li>
-            <li>référence ou numéro de commande.</li>
+            <li>Name des Begünstigten;</li>
+            <li>IBAN;</li>
+            <li>Gesamtbetrag der Bestellung;</li>
+            <li>Referenz oder Bestellnummer.</li>
           </ul>
           <p>
-            Le client doit indiquer le numéro de commande dans l objet ou la
-            référence du virement, si cette option est disponible.
+            Der Kunde muss die Bestellnummer im Verwendungszweck oder in der
+            Referenz der Überweisung angeben, sofern diese Option verfügbar ist.
           </p>
           <p>
-            La commande n est préparée et expédiée qu après confirmation de la
-            réception du paiement sur le compte bancaire de Perrier Bois.
+            Die Bestellung wird erst nach Bestätigung des Zahlungseingangs auf
+            dem Bankkonto von Brennstoffe Nagler vorbereitet und versandt.
           </p>
           <p>
-            Les délais de traitement bancaire peuvent varier selon la banque,
-            le jour et l horaire du virement.
+            Die Bearbeitungszeiten der Bank können je nach Bank, Tag und Uhrzeit
+            der Überweisung variieren.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Transmission du justificatif de paiement
+            Übermittlung des Zahlungsnachweises
           </h2>
           <p>
-            Pour faciliter l identification et la validation du paiement, le
-            client peut envoyer un justificatif de virement via :
+            Zur Erleichterung der Identifizierung und Validierung der Zahlung
+            kann der Kunde einen Überweisungsnachweis übermitteln via:
           </p>
           <p>
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
             <br />
-            WhatsApp : +33 6 12 34 56 78
+            WhatsApp: +49 151 23456789
           </p>
           <p>
-            L envoi d un justificatif de paiement ne remplace pas la
-            confirmation effective de la réception des fonds sur le compte
-            bancaire.
+            Das Einreichen eines Zahlungsnachweises ersetzt nicht die
+            tatsächliche Bestätigung des Geldeingangs auf dem Bankkonto.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Montant du virement
+            Überweisungsbetrag
           </h2>
           <p>
-            Le client doit virer le montant total indiqué dans la confirmation
-            de commande, comprenant :
+            Der Kunde muss den in der Bestellbestätigung angegebenen
+            Gesamtbetrag überweisen, der Folgendes umfasst:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li>prix des produits ;</li>
-            <li>TVA applicable ;</li>
-            <li>frais de transport ;</li>
-            <li>autres frais préalablement communiqués, le cas échéant.</li>
+            <li>Produktpreise;</li>
+            <li>anfallende Mehrwertsteuer;</li>
+            <li>Versandkosten;</li>
+            <li>sonstige zuvor mitgeteilte Kosten, falls zutreffend.</li>
           </ul>
           <p>
-            Les frais bancaires liés au virement sont à la charge du client. Le
-            montant reçu par Perrier Bois doit correspondre à la valeur
-            totale de la commande.
+            Die Bankgebühren für die Überweisung trägt der Kunde. Der von
+            Brennstoffe Nagler empfangene Betrag muss dem Gesamtwert der Bestellung
+            entsprechen.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Défaut de paiement
+            Zahlungsverzug
           </h2>
           <p>
-            Si le paiement n est pas reçu dans le délai indiqué dans la
-            confirmation de commande, celle-ci peut être annulée.
+            Wenn die Zahlung nicht innerhalb der in der Bestellbestätigung
+            angegebenen Frist eingeht, kann die Bestellung storniert werden.
           </p>
           <p>
-            Si vous souhaitez maintenir votre commande ou avez besoin de plus de
-            temps pour effectuer le paiement, veuillez contacter préalablement
-            Perrier Bois.
+            Wenn Sie Ihre Bestellung aufrechterhalten möchten oder mehr Zeit
+            für die Zahlung benötigen, wenden Sie sich bitte vorab an
+            Brennstoffe Nagler.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Sécurité
+            Sicherheit
           </h2>
           <p>
-            Perrier Bois ne vous demandera jamais vos mots de passe de
-            compte bancaire, codes d accès, codes d authentification ou autres
-            informations confidentielles.
+            Brennstoffe Nagler wird Sie niemals nach Ihren Bankpasswörtern,
+            Zugangscodes, Authentifizierungscodes oder anderen vertraulichen
+            Informationen fragen.
           </p>
           <p>
-            En cas de doute sur les coordonnées bancaires reçues, veuillez les
-            vérifier via les canaux officiels :
+            Bei Zweifeln an den erhaltenen Bankdaten überprüfen Sie diese
+            bitte über die offiziellen Kanäle:
           </p>
           <p>
-            Téléphone : +33 6 12 34 56 78
+            Telefon: +49 151 23456789
             <br />
-            WhatsApp : +33 6 12 34 56 78
+            WhatsApp: +49 151 23456789
             <br />
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
           </p>
         </section>
       </div>

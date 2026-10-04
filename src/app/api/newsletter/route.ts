@@ -7,9 +7,9 @@ import { apiSuccess, apiErreur } from "@/lib/api-response";
 
 export async function GET() {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   await dbConnect();
@@ -27,12 +27,12 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const corps = await req.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = newsletterSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Adresse email invalide",
+      validation.error.issues[0]?.message ?? "Ungültige E-Mail-Adresse",
       400,
     );
   }
@@ -49,12 +49,12 @@ export async function POST(req: Request) {
         { $set: { actif: true } },
       );
     }
-    return apiSuccess({ message: "Vous êtes déjà inscrit à la newsletter." });
+    return apiSuccess({ message: "Sie sind bereits für den Newsletter angemeldet." });
   }
 
   await Newsletter.create({ email });
   return apiSuccess(
-    { message: "Merci ! Votre inscription est confirmée." },
+    { message: "Vielen Dank! Ihre Anmeldung wurde bestätigt." },
     { status: 201 },
   );
 }

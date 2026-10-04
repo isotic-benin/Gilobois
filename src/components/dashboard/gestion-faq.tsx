@@ -100,7 +100,7 @@ export function GestionFaq() {
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur s'est produite.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
@@ -113,13 +113,13 @@ export function GestionFaq() {
   };
 
   const supprimer = async (id: string) => {
-    if (!confirm("Supprimer cette question ?")) return;
+    if (!confirm("Diese Frage löschen?")) return;
     const res = await fetch(`/api/faq/${id}`, { method: "DELETE" });
     const donnees = await res.json().catch(() => null);
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Suppression impossible.",
+        texte: donnees?.erreur ?? "Löschen nicht möglich.",
       });
       return;
     }
@@ -173,7 +173,7 @@ export function GestionFaq() {
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Catégorie</span>
+          <span className="mb-1 block text-sm font-medium">Kategorie</span>
           <input
             value={formulaire.categorie}
             onChange={(e) =>
@@ -214,7 +214,7 @@ export function GestionFaq() {
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414] disabled:opacity-60"
           >
             {enCours ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-            <span>{edition ? "Enregistrer" : "Créer"}</span>
+            <span>{edition ? "Speichern" : "Erstellen"}</span>
           </button>
           {edition && (
             <button
@@ -222,7 +222,7 @@ export function GestionFaq() {
               onClick={reinitialiser}
               className="rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
-              Annuler
+              Abbrechen
             </button>
           )}
         </div>
@@ -244,7 +244,7 @@ export function GestionFaq() {
             <span className="flex shrink-0 gap-1">
               <button
                 type="button"
-                aria-label="Modifier"
+                aria-label="Bearbeiten"
                 onClick={() => editer(faq)}
                 className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
               >
@@ -252,7 +252,7 @@ export function GestionFaq() {
               </button>
               <button
                 type="button"
-                aria-label="Supprimer"
+                aria-label="Löschen"
                 onClick={() => void supprimer(faq._id)}
                 className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
               >

@@ -46,11 +46,11 @@ export function TemoignagesCarousel({ temoignages }: TemoignagesCarouselProps) {
   if (temoignages.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-[1400px] px-4 mt-14 mb-16 sm:px-6" aria-label="Clientsstimmen">
+    <section className="mx-auto max-w-[1400px] px-4 mt-14 mb-16 sm:px-6" aria-label="Kundenstimmen">
       <div className="text-center mb-10">
-        <h2 className="text-2xl font-bold text-foreground sm:text-3xl">Ils nous font confiance</h2>
+        <h2 className="text-2xl font-bold text-foreground sm:text-3xl">Das sagen unsere Kunden</h2>
         <p className="mx-auto mt-2 max-w-2xl text-[15px] text-muted-foreground">
-          Ce que nos clients disent de leur expérience avec nos produits et services
+          Was unsere Kunden über ihre Erfahrungen mit unseren Produkten und unserem Service sagen
         </p>
       </div>
 
@@ -119,14 +119,14 @@ export function TemoignagesCarousel({ temoignages }: TemoignagesCarouselProps) {
             <button
               onClick={() => emblaApi?.scrollPrev()}
               className="absolute left-0 top-1/2 z-20 flex size-12 -translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-lg transition-all hover:bg-muted sm:-translate-x-8"
-              aria-label="Avis précédent"
+              aria-label="Vorherige Bewertung"
             >
               <FaChevronLeft size={22} />
             </button>
             <button
               onClick={() => emblaApi?.scrollNext()}
               className="absolute right-0 top-1/2 z-20 flex size-12 translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-lg transition-all hover:bg-muted sm:translate-x-8"
-              aria-label="Avis suivant"
+              aria-label="Nächste Bewertung"
             >
               <FaChevronRight size={22} />
             </button>
@@ -143,7 +143,7 @@ export function TemoignagesCarousel({ temoignages }: TemoignagesCarouselProps) {
                         ? "w-6 bg-primary"
                         : "bg-input hover:bg-[#d6cbbb]"
                     }`}
-                    aria-label={`Zur Clientsstimme ${i + 1} gehen`}
+                    aria-label={`Zur Kundenstimme ${i + 1} gehen`}
                     aria-current={i === selectedIndex ? "true" : "false"}
                   />
                 ))}

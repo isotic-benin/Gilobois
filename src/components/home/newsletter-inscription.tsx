@@ -26,7 +26,7 @@ export function NewsletterInscription() {
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur s'est produite.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
@@ -45,9 +45,9 @@ export function NewsletterInscription() {
             <FaEnvelope className="size-6 text-white" />
           </div>
           <div className="text-white">
-            <h2 className="text-[22px] font-extrabold">Restez informé</h2>
+            <h2 className="text-[22px] font-extrabold">Bleiben Sie informiert</h2>
             <p className="text-[14px] text-white/70 mt-0.5">
-              Recevez nos nouveautés, offres exclusives et conseils
+              Neuheiten, exklusive Angebote und Tipps erhalten
             </p>
           </div>
         </div>
@@ -61,7 +61,7 @@ export function NewsletterInscription() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Votre adresse e-mail"
+            placeholder="Ihre E-Mail-Adresse"
             className="h-[46px] flex-1 md:w-[300px] rounded-l-[6px] border-0 bg-white px-4 text-[14px] text-[#292524] placeholder:text-[#a69c8e] focus:outline-none focus:ring-2 focus:ring-white/50"
           />
           <button
@@ -69,8 +69,8 @@ export function NewsletterInscription() {
             disabled={enCours}
             className="h-[46px] px-6 rounded-r-[6px] bg-[#2a211b] text-white text-[13px] font-bold uppercase tracking-wider hover:bg-[#1c1917] disabled:opacity-60 transition-colors flex items-center gap-2 whitespace-nowrap"
           >
-            {enCours ? "Envoi en cours…" : (
-              <>S'abonner <FaArrowRight className="size-4" /></>
+            {enCours ? "Wird gesendet…" : (
+              <>Abonnieren <FaArrowRight className="size-4" /></>
             )}
           </button>
         </form>

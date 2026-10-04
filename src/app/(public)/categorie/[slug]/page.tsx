@@ -21,7 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const categorie = await getCategorieParSlug(slug);
-  if (!categorie) return { title: "Catégorie introuvable" };
+  if (!categorie) return { title: "Kategorie nicht gefunden" };
   const description =
     categorie.metaDescription || categorie.description?.slice(0, 160);
   return {
@@ -87,11 +87,11 @@ export default async function CategoriePage({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Accueil", item: "/" },
+              { "@type": "ListItem", position: 1, name: "Startseite", item: "/" },
               {
                 "@type": "ListItem",
                 position: 2,
-                name: "Produits",
+                name: "Produkte",
                 item: "/produits",
               },
               {
@@ -104,7 +104,7 @@ export default async function CategoriePage({
         }}
       />
       <FilAriane
-        items={[{ libelle: "Produits", href: "/produits" }, { libelle: categorie.nom }]}
+        items={[{ libelle: "Produkte", href: "/produits" }, { libelle: categorie.nom }]}
       />
 
       {/* ═══ CATEGORY HERO BANNER ═══ */}
@@ -154,7 +154,7 @@ export default async function CategoriePage({
           {/* Sort Bar */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-none border border-border bg-card px-5 py-3.5">
             <p className="text-[13px] font-bold uppercase tracking-wider text-muted-foreground">
-              <span className="text-foreground text-lg">{resultat.total}</span> produit{resultat.total > 1 ? "s" : ""} trouvé{resultat.total > 1 ? "s" : ""}
+              <span className="text-foreground text-lg">{resultat.total}</span> Produkt{resultat.total !== 1 ? "e" : ""} gefunden
             </p>
             <TriSelect chemin={chemin} params={entrees} />
           </div>

@@ -11,9 +11,9 @@ interface Props {
 }
 
 const labelsLivraison: Record<string, string> = {
-  retrait: "Retrait",
-  livraison_portail: "Livraison au portail",
-  livraison_garage: "Livraison au garage"
+  retrait: "Abholung",
+  livraison_portail: "Torlieferung",
+  livraison_garage: "Garagenlieferung"
 };
 
 export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: Props) {
@@ -38,14 +38,14 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
           href={chemin}
           className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-destructive transition-colors hover:text-[#8f2620]"
         >
-          <FaXmark className="size-4" /> Réinitialiser les filtres
+          <FaXmark className="size-4" /> Filter zurücksetzen
         </Link>
       )}
 
       {/* ═══ CATEGORIES TREE ═══ */}
       <div>
         <h2 className="mb-3 border-b border-border pb-2 text-[13px] font-bold uppercase tracking-[0.1em] text-foreground">
-          Catégories
+          Kategorien
         </h2>
         <ul className="space-y-1.5 mt-4">
           <li className="mb-2">
@@ -53,7 +53,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
               href="/produits"
               className={`text-[14px] transition-colors ${chemin === "/produits" ? "font-bold text-[#b26b1e]" : "text-[#1c1917] hover:text-[#b26b1e] font-medium"}`}
             >
-              Tous les produits
+              Alle Produkte
             </Link>
           </li>
           {categories.map((cat) => {
@@ -97,7 +97,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
       {typesLivraison.length > 0 && (
         <div>
           <h2 className="mb-3 border-b border-border pb-2 text-[13px] font-bold uppercase tracking-[0.1em] text-foreground">
-            Mode de livraison
+            Liefermethode
           </h2>
           <ul className="space-y-2 mt-4 text-[14px]">
             {typesLivraison.map(({ typeLivraison }) => (
@@ -127,7 +127,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
       {/* ═══ PRIX ═══ */}
       <div>
         <h2 className="mb-3 border-b border-border pb-2 text-[13px] font-bold uppercase tracking-[0.1em] text-foreground">
-          Prix
+          Preis
         </h2>
         <form
           action={chemin}
@@ -141,7 +141,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
             defaultValue={params.prixMin ?? ""}
             placeholder="Min€"
             className="h-10 w-full rounded-lg border border-input bg-background px-3 text-[14px] outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
-            aria-label="Prix minimum"
+            aria-label="Mindestpreis"
           />
           <span className="text-muted-foreground">-</span>
           <input
@@ -151,7 +151,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
             defaultValue={params.prixMax ?? ""}
             placeholder="Max€"
             className="h-10 w-full rounded-lg border border-input bg-background px-3 text-[14px] outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
-            aria-label="Prix maximum"
+            aria-label="Höchstpreis"
           />
           <button
             type="submit"
@@ -165,7 +165,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
       {/* ═══ DISPONIBILITÉ ═══ */}
       <div>
         <h2 className="mb-3 border-b border-border pb-2 text-[13px] font-bold uppercase tracking-[0.1em] text-foreground">
-          Disponibilité
+          Verfügbarkeit
         </h2>
         <ul className="space-y-2 mt-4 text-[14px]">
           <li>
@@ -183,7 +183,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
               <div className={`size-4 rounded-md border ${params.enStock === 'true' ? 'border-primary bg-primary' : 'border-input'} flex items-center justify-center`}>
                 {params.enStock === 'true' && <FaXmark className="size-2.5 text-white" />}
               </div>
-              En stock
+              Auf Lager
             </Link>
           </li>
           <li>
@@ -201,7 +201,7 @@ export function ProduitsFiltres({ chemin, params, categories, typesLivraison }: 
               <div className={`size-4 rounded-md border ${params.enPromotion === 'true' ? 'border-primary bg-primary' : 'border-input'} flex items-center justify-center`}>
                 {params.enPromotion === 'true' && <FaXmark className="size-2.5 text-white" />}
               </div>
-              En promotion
+              Im Angebot
             </Link>
           </li>
         </ul>

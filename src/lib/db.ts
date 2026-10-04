@@ -4,7 +4,7 @@ const MONGODB_URI: string = process.env.MONGODB_URI ?? "";
 
 if (!MONGODB_URI) {
   throw new Error(
-    "Veuillez definir MONGODB_URI dans le fichier .env.local (ex: mongodb+srv://...)",
+    "Bitte MONGODB_URI in der .env.local-Datei definieren (z. B.: mongodb+srv://...)",
   );
 }
 

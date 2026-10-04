@@ -4,7 +4,7 @@ import { getLignesCommandes } from "@/lib/stats";
 import { TableauCommandes } from "@/components/dashboard/tableau-commandes";
 
 export const metadata: Metadata = {
-  title: "Commandes",
+  title: "Bestellungen",
 };
 
 export default async function AdminCommandesPage() {
@@ -14,7 +14,7 @@ export default async function AdminCommandesPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold">Commandes</h1>
+      <h1 className="mb-4 text-2xl font-bold">Bestellungen</h1>
       <TableauCommandes commandes={lignes} baseHref="/admin/commandes" />
     </div>
   );

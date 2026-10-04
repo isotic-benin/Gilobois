@@ -10,7 +10,7 @@ import {
 } from "@/components/dashboard/commande-detail";
 
 export const metadata: Metadata = {
-  title: "Détails de la commande",
+  title: "Bestelldetails",
 };
 
 export default async function AdminDetailCommandePage({
@@ -78,7 +78,7 @@ export default async function AdminDetailCommandePage({
     <CommandeDetail
       commande={donnees}
       baseHref="/admin/commandes"
-      retourLabel="Retour aux commandes"
+      retourLabel="Zurück zu den Bestellungen"
     />
   );
 }

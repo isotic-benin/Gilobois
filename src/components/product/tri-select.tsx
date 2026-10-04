@@ -4,11 +4,11 @@ import { useState } from "react";
 
 
 const OPTIONS = [
-  { valeur: "pertinence", libelle: "Pertinence" },
-  { valeur: "nouveaute", libelle: "Nouveautés" },
-  { valeur: "prix_desc", libelle: "Prix : décroissant" },
-  { valeur: "prix_asc", libelle: "Prix : croissant" },
-  { valeur: "popularite", libelle: "Name (A-Z)" }, // Adapted to mock alphabetical
+  { valeur: "pertinence", libelle: "Relevanz" },
+  { valeur: "nouveaute", libelle: "Neuheiten" },
+  { valeur: "prix_desc", libelle: "Preis: absteigend" },
+  { valeur: "prix_asc", libelle: "Preis: aufsteigend" },
+  { valeur: "popularite", libelle: "Name (A-Z)" },
 ];
 
 export function TriSelect({
@@ -38,12 +38,12 @@ export function TriSelect({
       <select
         value={tri}
         onChange={(e) => changer(e.target.value)}
-        aria-label="Trier par"
+        aria-label="Sortieren nach"
         className="h-10 cursor-pointer appearance-none rounded-full border border-border bg-card pl-4 pr-10 text-[13px] font-medium text-foreground outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/15"
       >
         {OPTIONS.map((option) => (
           <option key={option.valeur} value={option.valeur}>
-            Trier par: {option.libelle}
+            Sortieren: {option.libelle}
           </option>
         ))}
       </select>

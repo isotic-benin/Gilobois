@@ -14,26 +14,30 @@
  * été fournie. Les URL d’images pointent vers les fichiers publics des boutiques
  * sources ; vérifiez les droits d’utilisation avant toute exploitation commerciale.
  *
- * Les opérations sont des upserts, mais ne sont exécutées que si les collections
- * products, categories et users sont toutes vides.
+ * Les opérations sont des upserts : relancer le seed met à jour les 50 produits,
+ * les catégories créées par ce seed et le compte admin ciblé, sans vider les
+ * autres collections.
  */
 
-import './env';
-import bcrypt from 'bcryptjs';
-import mongoose from 'mongoose';
-
-function getMongoUri(): string {
-  const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
-  if (!uri) {
-    throw new Error('MONGODB_URI (ou MONGO_URI) doit pointer vers votre base MongoDB.');
+const mongoose = require('mongoose');
+let bcrypt;
+try {
+  bcrypt = require('bcryptjs');
+} catch (_) {
+  try {
+    bcrypt = require('bcrypt');
+  } catch (error) {
+    throw new Error('Installez bcryptjs ou bcrypt : npm install bcryptjs');
   }
-  return uri;
 }
 
-const MONGODB_URI = getMongoUri();
+const MONGODB_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
 const SEED_ADMIN_EMAIL = (process.env.SEED_ADMIN_EMAIL || 'contact@brennstoffenagler.de').trim().toLowerCase();
 const SEED_ADMIN_PASSWORD = process.env.SEED_ADMIN_PASSWORD || 'ChangezMoi123!';
 
+if (!MONGODB_URI) {
+  throw new Error('MONGODB_URI (ou MONGO_URI) doit pointer vers votre base MongoDB.');
+}
 if (SEED_ADMIN_PASSWORD.length < 10) {
   throw new Error('SEED_ADMIN_PASSWORD doit contenir au moins 10 caractères.');
 }
@@ -121,31 +125,7 @@ const User = mongoose.models.User || mongoose.model('User', userSchema);
 const Category = mongoose.models.Category || mongoose.model('Category', categorySchema);
 const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 
-interface SeedCategory {
-  slug: string;
-  nom: string;
-  description: string;
-  ordre: number;
-  parentSlug?: string;
-}
-
-interface SeedProduct {
-  nom: string;
-  sku: string;
-  image: string;
-  slug: string;
-  cat: string;
-  prix: number;
-  prixPromo?: number | null;
-  format: string;
-  longueur?: string;
-  poids: number;
-  source: string;
-  url: string;
-  tags: string[];
-}
-
-const categories: SeedCategory[] = [
+const categories = [
   { slug: 'bois-de-chauffage', nom: "Brennholz", description: "Scheitholz in unterschiedlichen Längen und Verpackungsgrößen.", ordre: 1 },
   { slug: 'bois-25-cm', nom: "Scheite 25 cm", description: "Brennholz mit 25 cm Scheitlänge.", parentSlug: 'bois-de-chauffage', ordre: 11 },
   { slug: 'bois-30-cm', nom: "Scheite 30 cm", description: "Brennholz mit 30 cm Scheitlänge.", parentSlug: 'bois-de-chauffage', ordre: 12 },
@@ -175,7 +155,7 @@ const SIMPLY = 'https://www.simplyfeu.com/shop/';
 
 // Chaque ligne contient des données produits factuelles et le lien vers la fiche source.
 // Les descriptions générées plus bas sont originales et volontairement succinctes.
-const products: SeedProduct[] = [
+const products = [
   // 9 références affichées sur Bois Sec France (prix courant / ancien prix barré).
   { nom: "Hartholz-Mix – 45 cm – Palette mit 2,6 Raummetern", sku: 'BSF-MBD-45-26', image: "https://bois-sec-fr.com/products/melange-de-bois-durs-45cm-palette-de-26-steres-1.jpg", slug: "hartholz-mix-45-cm-palette-mit-26-raummetern", cat: 'bois-45-cm', prix: 149, prixPromo: 99, format: "Palette, 2,6 Raummeter", longueur: '45 cm', poids: 0, source: SOURCE_BOISSEC, url: 'https://bois-sec-fr.com/produits/melange-de-bois-durs-45cm-palette-de-26-steres', tags: ['bois-sec-fr', 'bois-buches', 'feuillus'] },
   { nom: "Hartholz-Mix – 1 m – Palette mit 2 Raummetern", sku: 'BSF-MBD-100-20', image: "https://bois-sec-fr.com/products/melange-de-bois-durs-1m-palette-de-2-steres-1.jpg", slug: "hartholz-mix-1-m-palette-mit-2-raummetern", cat: 'bois-1-metre', prix: 140, prixPromo: 109, format: "Palette, 2 Raummeter", longueur: '1 m', poids: 0, source: SOURCE_BOISSEC, url: 'https://bois-sec-fr.com/produits/melange-de-bois-durs-1m-palette-de-2-steres', tags: ['bois-sec-fr', 'bois-buches', 'feuillus'] },
@@ -237,7 +217,7 @@ const products: SeedProduct[] = [
   { nom: "Anzündwürfel – Schachtel mit 100 Stück", sku: 'CBF-AF-CUBES-100', image: "https://chaleurbois-france.com/images/produits/allume-feu-cubes.webp", slug: "anzuendwuerfel-schachtel-mit-100-stueck", cat: 'allume-feux-cubes', prix: 14.90, format: "Schachtel mit 100 Würfeln", poids: 0, source: SOURCE_CHALEUR_ALLUME, url: 'https://chaleurbois-france.com/produits/cubes-allume-feux-ecologiques-100', tags: ['chaleur-bois-france', 'allume-feux'] },
 ];
 
-function productDescription(p: SeedProduct) {
+function productDescription(p) {
   const family = p.cat.startsWith('pellets')
     ? 'Holzpellets für geeignete Pelletöfen und Heizkessel.'
     : p.cat.startsWith('densifie')
@@ -252,8 +232,8 @@ function productDescription(p: SeedProduct) {
   };
 }
 
-function tagsDeutsch(tags: string[]) {
-  const uebersetzung: Record<string, string> = {
+function tagsDeutsch(tags) {
+  const uebersetzung = {
     'bois-buches': 'brennholz', feuillus: 'laubholz', hetre: 'buche', resineux: 'nadelholz',
     granules: 'holzpellets', 'buches-densifiees': 'holzbriketts', nuit: 'nachtbetrieb',
     'allume-feux': 'anzuender', vrac: 'lose', 'prix-a-partir': 'ab-preis',
@@ -266,18 +246,7 @@ async function seed() {
   await mongoose.connect(MONGODB_URI);
   console.log('Connecté à MongoDB.');
 
-  const existingData = await Promise.all([
-    Product.exists({}),
-    Category.exists({}),
-    User.exists({}),
-  ]);
-  if (existingData.some(Boolean)) {
-    console.log('Seed ignoré : les collections products, categories ou users contiennent déjà des données.');
-    await mongoose.disconnect();
-    return;
-  }
-
-  const categoryIds = new Map<string, mongoose.Types.ObjectId>();
+  const categoryIds = new Map();
   // Les parents sont déclarés avant les enfants.
   for (const c of categories) {
     const parentId = c.parentSlug ? categoryIds.get(c.parentSlug) : null;
@@ -298,7 +267,7 @@ async function seed() {
     if (!categoryId) throw new Error(`Catégorie produit introuvable : ${p.cat} (${p.sku})`);
     const desc = productDescription(p);
     const promo = p.prixPromo != null;
-    const remise = p.prixPromo != null ? Math.round((1 - p.prixPromo / p.prix) * 100) : 0;
+    const remise = promo ? Math.round((1 - p.prixPromo / p.prix) * 100) : 0;
     const attributs = [
       { cle: 'Verpackung', valeur: p.format },
       ...(p.longueur ? [{ cle: 'Scheitlänge', valeur: p.longueur }] : []),
@@ -356,12 +325,8 @@ if (products.length !== 50) {
   throw new Error(`Le seed doit contenir exactement 50 produits (actuellement ${products.length}).`);
 }
 
-seed().catch(async (error: unknown) => {
+seed().catch(async (error) => {
   console.error('Échec du seed :', error);
-  try {
-    await mongoose.disconnect();
-  } catch (disconnectError) {
-    console.error('Échec de la déconnexion MongoDB après erreur :', disconnectError);
-  }
+  try { await mongoose.disconnect(); } catch (_) { }
   process.exitCode = 1;
 });

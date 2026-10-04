@@ -12,9 +12,9 @@ export async function GET(request: Request) {
 
   if (tous) {
     const user = await getCurrentUser();
-    if (!user) return apiErreur("Non authentifié", 401);
+    if (!user) return apiErreur("Nicht authentifiziert", 401);
     if (user.role !== ROLES.ADMIN) {
-      return apiErreur("Action réservée à l'administrateur", 403);
+      return apiErreur("Nur für Administratoren", 403);
     }
 
     await dbConnect();
@@ -57,18 +57,18 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN && user.role !== ROLES.GERANT) {
-    return apiErreur("Action réservée à l'équipe boutique", 403);
+    return apiErreur("Nur für das Shop-Team", 403);
   }
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = faqSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }

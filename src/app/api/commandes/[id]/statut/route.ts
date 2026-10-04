@@ -16,21 +16,21 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN && user.role !== ROLES.GERANT) {
-    return apiErreur("Action réservée à l'équipe boutique", 403);
+    return apiErreur("Nur für das Shop-Team", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = changerStatutSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Statut invalide",
+      validation.error.issues[0]?.message ?? "Ungültiger Status",
       400,
     );
   }
@@ -38,7 +38,7 @@ export async function PATCH(
   await dbConnect();
 
   const commande = await Order.findById(id);
-  if (!commande) return apiErreur("Commande introuvable", 404);
+  if (!commande) return apiErreur("Bestellung nicht gefunden", 404);
 
   const ancienStatut = commande.statutCommande;
   const nouveauStatut = validation.data.statut;

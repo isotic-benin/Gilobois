@@ -14,21 +14,21 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Zugriff verweigert – nur für Administratoren", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültige Anfrage", 400);
 
   const validation = modererAvisSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }
@@ -36,7 +36,7 @@ export async function PATCH(
   await dbConnect();
 
   const avis = await Review.findById(id);
-  if (!avis) return apiErreur("Avis introuvable", 404);
+  if (!avis) return apiErreur("Bewertung nicht gefunden", 404);
 
   avis.statut = validation.data.statut;
   if (validation.data.reponseAdmin) {

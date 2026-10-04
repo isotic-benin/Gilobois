@@ -15,17 +15,17 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = categorySchema.safeParse(corps);
   if (!validation.success) {
-    return apiErreur(validation.error.issues[0]?.message ?? "Données invalides", 400);
+    return apiErreur(validation.error.issues[0]?.message ?? "Ungültige Daten", 400);
   }
 
   await dbConnect();
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     return apiSuccess(categorie, { status: 201 });
   } catch (erreur) {
     if (erreur && typeof erreur === "object" && "code" in erreur && erreur.code === 11000) {
-      return apiErreur("Un élément avec ce slug existe déjà", 409);
+      return apiErreur("Ein Eintrag mit diesem Slug existiert bereits", 409);
     }
     throw erreur;
   }

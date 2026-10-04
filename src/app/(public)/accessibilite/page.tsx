@@ -1,179 +1,161 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Accessibilité",
+  title: "Barrierefreiheit",
 };
 
 export default function AccessibilitePage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-bold">Accessibilité</h1>
+      <h1 className="text-3xl font-bold">Barrierefreiheit</h1>
       <div className="mt-6 space-y-6 text-sm leading-relaxed text-muted-foreground">
         <p>
-          Perrier Bois s engage à offrir une expérience de navigation
-          simple, claire et accessible au plus grand nombre, y compris aux
-          personnes présentant des handicaps visuels, auditifs, moteurs ou
-          cognitifs.
+          Brennstoffe Nagler ist bestrebt, allen Nutzern — einschließlich Menschen mit
+          visuellen, auditiven, motorischen oder kognitiven Einschränkungen — ein
+          einfaches, klares und zugängliches Surferlebnis zu bieten.
         </p>
         <p>
-          Nous travaillons en permanence à l amélioration de l accessibilité de
-          notre site et nous efforçons de suivre les directives relatives au
-          contenu web accessible (WCAG 2.1), qui établissent des recommandations
-          pour faciliter l accès au contenu numérique.
+          Wir arbeiten kontinuierlich daran, die Barrierefreiheit unserer Website
+          zu verbessern, und bemühen uns, die WCAG 2.1-Richtlinien einzuhalten,
+          die Empfehlungen für den Zugang zu digitalen Inhalten festlegen.
         </p>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Mesures d accessibilité
+            Barrierefreiheitsmaßnahmen
           </h2>
           <p>
-            Nous nous efforçons de mettre en œuvre progressivement les mesures
-            suivantes :
+            Wir bemühen uns, folgende Maßnahmen schrittweise umzusetzen:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li> organisation claire des titres, des textes et des pages ;</li>
-            <li> possibilité de navigation au clavier ;</li>
-            <li> texte lisible avec un contraste adéquat ;</li>
-            <li> descriptions alternatives pour les images concernées ;</li>
-            <li> boutons et liens facilement identifiables ;</li>
-            <li> formulaires avec étiquettes et instructions claires ;</li>
-            <li> messages d erreur compréhensibles ;</li>
-            <li> possibilité d agrandir le contenu ;</li>
-            <li>
-              adaptation du site aux ordinateurs, tablettes et téléphones
-              mobiles ;
-            </li>
-            <li>
-              compatibilité avec les lecteurs d écran et autres technologies
-              d assistance ;
-            </li>
-            <li> utilisation d un langage simple et objectif.</li>
+            <li>Klare Gliederung von Überschriften, Texten und Seiten;</li>
+            <li>Möglichkeit der Tastaturnavigation;</li>
+            <li>Gut lesbarer Text mit ausreichendem Kontrast;</li>
+            <li>Alternativtexte für relevante Bilder;</li>
+            <li>Leicht erkennbare Schaltflächen und Links;</li>
+            <li>Formulare mit klaren Beschriftungen und Anweisungen;</li>
+            <li>Verständliche Fehlermeldungen;</li>
+            <li>Möglichkeit zur Vergrößerung der Inhalte;</li>
+            <li>Anpassung der Website an Computer, Tablets und Mobiltelefone;</li>
+            <li>Kompatibilität mit Screenreadern und anderen Hilfstechnologien;</li>
+            <li>Verwendung einer einfachen und sachlichen Sprache.</li>
           </ul>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            État d accessibilité
+            Barrierefreiheitsstatus
           </h2>
           <p>
-            Le site de Perrier Bois fait l objet d un processus continu
-            d évaluation, de maintenance et d amélioration.
+            Die Website von Brennstoffe Nagler wird kontinuierlich bewertet, gewartet
+            und verbessert.
           </p>
           <p>
-            Bien que des efforts soient déployés pour garantir une navigation
-            accessible, certaines pages, images, documents ou fonctionnalités
-            fournis par des tiers peuvent présenter des limitations.
+            Obwohl wir uns um eine barrierefreie Navigation bemühen, können
+            bestimmte Seiten, Bilder, Dokumente oder von Dritten bereitgestellte
+            Funktionen Einschränkungen aufweisen.
           </p>
           <p>
-            La présente déclaration ne constitue ni une certification de
-            conformité totale, ni le résultat d un audit technique indépendant.
+            Diese Erklärung stellt weder eine vollständige Konformitätszertifizierung
+            noch das Ergebnis einer unabhängigen technischen Prüfung dar.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Contenus de tiers
+            Inhalte von Drittanbietern
           </h2>
           <p>
-            Certaines fonctionnalités du site peuvent dépendre de services
-            externes, tels que des outils de paiement, des cartes, des réseaux
-            sociaux, des systèmes de messagerie ou d autres composants
-            techniques.
+            Einige Funktionen der Website können von externen Diensten abhängen,
+            wie Zahlungstools, Karten, sozialen Netzwerken, Messaging-Systemen
+            oder anderen technischen Komponenten.
           </p>
           <p>
-            Perrier Bois n a pas nécessairement un contrôle total sur
-            l accessibilité de ces services, mais s efforce, dans la mesure du
-            possible, de proposer une alternative.
+            Brennstoffe Nagler hat nicht unbedingt die vollständige Kontrolle über die
+            Barrierefreiheit dieser Dienste, bemüht sich jedoch nach Möglichkeit
+            eine Alternative anzubieten.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Assistance aux utilisateurs
+            Nutzerhilfe
           </h2>
           <p>
-            Si vous rencontrez des difficultés pour accéder à une page, obtenir
-            des informations sur un produit ou passer une commande, vous pouvez
-            contacter directement Perrier Bois.
+            Wenn Sie Schwierigkeiten beim Zugriff auf eine Seite, beim Abrufen
+            von Produktinformationen oder beim Aufgeben einer Bestellung haben,
+            können Sie Brennstoffe Nagler direkt kontaktieren.
           </p>
-          <p>Nous pouvons vous aider pour :</p>
+          <p>Wir können Ihnen helfen bei:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li> informations sur les granulés et le bois de chauffage ;</li>
-            <li> prix et disponibilité ;</li>
-            <li> exécution des commandes ;</li>
-            <li> paiement par virement bancaire ;</li>
-            <li> livraisons gratuites ;</li>
-            <li> retours et remboursements ;</li>
-            <li> réclamations ;</li>
-            <li>
-              mise à disposition d informations dans un format alternatif,
-              chaque fois que possible.
-            </li>
+            <li>Informationen zu Pellets und Brennholz;</li>
+            <li>Preisen und Verfügbarkeit;</li>
+            <li>Bestellabwicklung;</li>
+            <li>Zahlung per Banküberweisung;</li>
+            <li>Kostenloser Lieferung;</li>
+            <li>Rücksendungen und Erstattungen;</li>
+            <li>Beschwerden;</li>
+            <li>Bereitstellung von Informationen in einem alternativen Format, wenn möglich.</li>
           </ul>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Signaler un problème d accessibilité.
+            Ein Barrierefreiheitsproblem melden
           </h2>
           <p>
-            Pour signaler un problème ou suggérer une amélioration, veuillez
-            nous contacter par l un des moyens suivants :
+            Um ein Problem zu melden oder eine Verbesserung vorzuschlagen,
+            kontaktieren Sie uns bitte über einen der folgenden Wege:
           </p>
           <p>
-            <strong>PERRIER BOIS (SARL)</strong>
+            <strong>BRENNSTOFFE NAGLER (SARL)</strong>
             <br />
-            <strong>Siège social :</strong> 109 Zone des Varennes, 71340 Melay,
-            France
+            <strong>Sitz:</strong> Waldweg 12, 99423 Weimar, Deutschland
             <br />
-            <strong>SIREN :</strong> 503 747 180
+            <strong>SIREN:</strong> 503 747 180
             <br />
-            <strong>N° TVA intracommunautaire :</strong> FR79503747180
+            <strong>USt-IdNr.:</strong> FR79503747180
             <br />
-            <strong>E-mail :</strong> contact@perrierbois.fr
+            <strong>E-Mail:</strong> contact@brennstoffenagler.de
             <br />
-            <strong>Téléphone :</strong> +33 6 12 34 56 78
+            <strong>Telefon:</strong> +49 151 23456789
           </p>
           <p>
-            Veuillez indiquer dans votre message, dans la mesure du possible,
-            les éléments suivants :
+            Bitte geben Sie in Ihrer Nachricht nach Möglichkeit folgende Informationen an:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li> la page sur laquelle le problème est survenu ;</li>
-            <li> une brève description de la difficulté ;</li>
-            <li> l appareil et le navigateur utilisés ;</li>
-            <li>
-              la technologie d assistance utilisée, le cas échéant ;
-            </li>
-            <li> le format alternatif souhaité.</li>
+            <li>Die Seite, auf der das Problem aufgetreten ist;</li>
+            <li>Eine kurze Beschreibung der Schwierigkeit;</li>
+            <li>Das verwendete Gerät und den Browser;</li>
+            <li>Die verwendete Hilfstechnologie, falls zutreffend;</li>
+            <li>Das gewünschte alternative Format.</li>
           </ul>
           <p>
-            Ces informations nous aident à analyser et à résoudre le problème.
+            Diese Informationen helfen uns, das Problem zu analysieren und zu lösen.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            Engagement en faveur de l amélioration continue
+            Verpflichtung zur kontinuierlichen Verbesserung
           </h2>
           <p>
-            Perrier Bois s engage à revoir et à améliorer progressivement
-            le contenu, la structure, la navigation et les fonctionnalités du
-            site.
+            Brennstoffe Nagler verpflichtet sich, den Inhalt, die Struktur, die
+            Navigation und die Funktionen der Website schrittweise zu überprüfen
+            und zu verbessern.
           </p>
           <p>
-            L accessibilité est prise en compte lors de chaque mise à jour, de
-            chaque ajout de nouvelle page ou de mise en place de nouvelles
-            fonctionnalités.
+            Barrierefreiheit wird bei jeder Aktualisierung, jedem Hinzufügen
+            einer neuen Seite oder der Einführung neuer Funktionen berücksichtigt.
           </p>
           <p>
-            Les normes européennes d accessibilité couvrent certains services,
-            y compris les services de commerce électronique, et s appliquent aux
-            services concernés à partir du 28 juin 2025, sous réserve des
-            exceptions prévues pour certaines micro-entreprises.
+            Die europäischen Barrierefreiheitsnormen decken bestimmte Dienste ab,
+            einschließlich E-Commerce-Dienste, und gelten für betroffene Dienste ab
+            dem 28. Juni 2025, vorbehaltlich der für bestimmte Kleinstunternehmen
+            vorgesehenen Ausnahmen.
           </p>
           <p>
-            <strong>Dernière mise à jour :</strong> 22 septembre 2026.
+            <strong>Letzte Aktualisierung:</strong> 22. September 2026.
           </p>
         </section>
       </div>

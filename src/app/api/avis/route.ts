@@ -14,9 +14,9 @@ export async function GET(request: NextRequest) {
 
   if (tous) {
     const user = await getCurrentUser();
-    if (!user) return apiErreur("Non authentifié", 401);
+    if (!user) return apiErreur("Nicht authentifiziert", 401);
     if (user.role !== ROLES.ADMIN) {
-      return apiErreur("Action réservée à l'administrateur", 403);
+      return apiErreur("Nur für Administratoren", 403);
     }
 
     await dbConnect();
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
 
   const produitId = request.nextUrl.searchParams.get("produitId");
   if (!produitId || !estObjectId(produitId)) {
-    return apiErreur("Produit invalide", 400);
+    return apiErreur("Ungültiges Produkt", 400);
   }
 
   await dbConnect();
@@ -83,15 +83,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Connectez-vous pour laisser un avis", 401);
+  if (!user) return apiErreur("Bitte anmelden, um eine Bewertung zu hinterlassen", 401);
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = avisSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
   await dbConnect();
 
   const produit = await Product.exists({ _id: validation.data.produitId });
-  if (!produit) return apiErreur("Produit introuvable", 404);
+  if (!produit) return apiErreur("Produkt nicht gefunden", 404);
 
   const existant = await Review.exists({
     produitId: validation.data.produitId,
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
   });
   if (existant) {
     return apiErreur(
-      "Vous avez déjà laissé un avis sur ce produit. Vous pouvez le modifier depuis votre espace client.",
+      "Sie haben dieses Produkt bereits bewertet. Sie können es in Ihrem Kundenkonto bearbeiten.",
       409,
     );
   }

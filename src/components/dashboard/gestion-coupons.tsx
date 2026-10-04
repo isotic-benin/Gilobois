@@ -121,7 +121,7 @@ export function GestionCoupons({ lectureSeule = false }: { lectureSeule?: boolea
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur s'est produite.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
@@ -134,13 +134,13 @@ export function GestionCoupons({ lectureSeule = false }: { lectureSeule?: boolea
   };
 
   const supprimer = async (id: string) => {
-    if (!confirm("Supprimer ce coupon ?")) return;
+    if (!confirm("Diesen Gutschein löschen?")) return;
     const res = await fetch(`/api/coupons/${id}`, { method: "DELETE" });
     const donnees = await res.json().catch(() => null);
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Suppression impossible.",
+        texte: donnees?.erreur ?? "Löschen nicht möglich.",
       });
       return;
     }
@@ -149,7 +149,7 @@ export function GestionCoupons({ lectureSeule = false }: { lectureSeule?: boolea
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Coupons</h1>
+      <h1 className="text-2xl font-bold">Gutscheine</h1>
 
       {message && (
         <p
@@ -293,7 +293,7 @@ export function GestionCoupons({ lectureSeule = false }: { lectureSeule?: boolea
               className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414] disabled:opacity-60"
             >
               {enCours ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-              <span>{edition ? "Enregistrer" : "Créer"}</span>
+              <span>{edition ? "Speichern" : "Erstellen"}</span>
             </button>
             {edition && (
               <button
@@ -301,7 +301,7 @@ export function GestionCoupons({ lectureSeule = false }: { lectureSeule?: boolea
                 onClick={reinitialiser}
                 className="rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
               >
-                Annuler
+                Abbrechen
               </button>
             )}
           </div>
@@ -334,7 +334,7 @@ export function GestionCoupons({ lectureSeule = false }: { lectureSeule?: boolea
               <span className="flex shrink-0 gap-1">
                 <button
                   type="button"
-                  aria-label="Modifier"
+                  aria-label="Bearbeiten"
                   onClick={() => editer(coupon)}
                   className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
                 >
@@ -342,7 +342,7 @@ export function GestionCoupons({ lectureSeule = false }: { lectureSeule?: boolea
                 </button>
                 <button
                   type="button"
-                  aria-label="Supprimer"
+                  aria-label="Löschen"
                   onClick={() => void supprimer(coupon._id)}
                   className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
                 >

@@ -13,28 +13,28 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN && user.role !== ROLES.GERANT) {
-    return apiErreur("Action réservée à l'équipe boutique", 403);
+    return apiErreur("Nur für das Shop-Team", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = faqSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }
 
   await dbConnect();
   const faq = await Faq.findByIdAndUpdate(id, validation.data, { new: true });
-  if (!faq) return apiErreur("Question introuvable", 404);
+  if (!faq) return apiErreur("Frage nicht gefunden", 404);
 
   await journaliser(user.id, "faq.modifier", id, { question: faq.question });
 
@@ -46,17 +46,17 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Suppression réservée à l'administrateur", 403);
+    return apiErreur("Nur Administratoren können löschen", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   await dbConnect();
   const resultat = await Faq.findByIdAndDelete(id);
-  if (!resultat) return apiErreur("Question introuvable", 404);
+  if (!resultat) return apiErreur("Frage nicht gefunden", 404);
 
   await journaliser(user.id, "faq.supprimer", id, { question: resultat.question });
 

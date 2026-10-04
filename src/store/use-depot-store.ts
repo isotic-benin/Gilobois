@@ -21,7 +21,7 @@ export const useDepotStore = create<DepotStore>()(
             clearDepot: () => set({ selectedDepot: null }),
         }),
         {
-            name: "perrier-bois-depot-storage",
+            name: "brennstoffenagler-depot-storage",
         }
     )
 );

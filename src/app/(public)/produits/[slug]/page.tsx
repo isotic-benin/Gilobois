@@ -20,7 +20,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const produit = await getProduitParSlug(slug);
-  if (!produit) return { title: "Produit introuvable" };
+  if (!produit) return { title: "Produkt nicht gefunden" };
   const description =
     produit.metaDescription ||
     produit.descriptionCourte?.slice(0, 160) ||
@@ -124,8 +124,8 @@ export default async function FicheProduitPage({
         <div>
           {produit.typeLivraison && (
             <div className="mb-4 inline-flex items-center gap-2 w-fit border-2 border-primary bg-background px-3 py-1 text-[12px] font-bold uppercase tracking-widest text-foreground">
-              {produit.typeLivraison === "retrait" ? "📦 Retrait" :
-                produit.typeLivraison === "livraison_portail" ? "🚚 Livraison au portail" : "🏡 Livraison en garage"}
+              {produit.typeLivraison === "retrait" ? "📦 Abholung" :
+                produit.typeLivraison === "livraison_portail" ? "🚚 Torlieferung" : "🏡 Garagenlieferung"}
             </div>
           )}
           <h1 className="mt-1 text-2xl font-bold sm:text-3xl">{produit.nom}</h1>
@@ -133,7 +133,7 @@ export default async function FicheProduitPage({
           {produit.noteMoyenne > 0 && (
             <p className="mt-2 flex items-center gap-1 text-sm text-muted-foreground">
               <FaStar className="size-4 fill-amber-400 text-amber-400" />
-              {produit.noteMoyenne.toFixed(1)} · {produit.nombreAvis} avis
+              {produit.noteMoyenne.toFixed(1)} · {produit.nombreAvis} Bewertungen
             </p>
           )}
 
@@ -162,10 +162,10 @@ export default async function FicheProduitPage({
           <div className="mt-4 text-sm">
             {produit.stock > 0 ? (
               <p className="font-medium text-emerald-600">
-                En stock ({produit.stock} disponible{produit.stock > 1 ? "s" : ""})
+                Auf Lager ({produit.stock} verfügbar)
               </p>
             ) : (
-              <p className="font-medium text-destructive">Rupture de stock</p>
+              <p className="font-medium text-destructive">Nicht auf Lager</p>
             )}
           </div>
 
@@ -183,7 +183,7 @@ export default async function FicheProduitPage({
           {(produit.variantes?.length ?? 0) > 0 && (
             <div className="mt-6">
               <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide">
-                Voir les variantes
+                Varianten ansehen
               </h2>
               <ul className="space-y-1 text-sm">
                 {produit.variantes.map((variante) => (
@@ -198,7 +198,7 @@ export default async function FicheProduitPage({
                       {variante.prixSupplement > 0
                         ? `+${formaterPrix(variante.prixSupplement)}`
                         : ""}{" "}
-                      · {variante.stockVariante > 0 ? "en stock" : "en rupture"}
+                      · {variante.stockVariante > 0 ? "auf Lager" : "vergriffen"}
                     </span>
                   </li>
                 ))}
@@ -209,7 +209,7 @@ export default async function FicheProduitPage({
           {(produit.attributs?.length ?? 0) > 0 && (
             <div className="mt-6">
               <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide">
-                Caractéristiques
+                Eigenschaften
               </h2>
               <dl className="divide-y overflow-hidden rounded-none border-2 border-border bg-card text-sm">
                 {produit.attributs.map((attribut) => (
@@ -229,7 +229,7 @@ export default async function FicheProduitPage({
 
       {produit.description && (
         <div className="mt-10">
-          <h2 className="mb-2 text-lg font-semibold">Description</h2>
+          <h2 className="mb-2 text-lg font-semibold">Beschreibung</h2>
           <p className="max-w-3xl whitespace-pre-line text-muted-foreground">
             {produit.description}
           </p>
@@ -238,12 +238,12 @@ export default async function FicheProduitPage({
 
       <section className="mt-10 max-w-3xl">
         <h2 className="mb-4 text-lg font-semibold">
-          Avis clients ({avis.length})
+          Kundenbewertungen ({avis.length})
         </h2>
 
         {avis.length === 0 ? (
           <p className="text-muted-foreground">
-            Aucun avis pour le moment.
+            Noch keine Bewertungen.
           </p>
         ) : (
           <ul className="space-y-3">
@@ -253,10 +253,10 @@ export default async function FicheProduitPage({
                   <p className="font-bold text-[15px]">
                     {a.clientId && typeof a.clientId === "object"
                       ? `${a.clientId.prenom} ${a.clientId.nom}`.trim()
-                      : "Client"}{" "}
+                      : "Kunde"}{" "}
                     {a.achatVerifie && (
                       <span className="ml-2 rounded-none bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-primary-foreground">
-                        Achat vérifié
+                        Verifizierter Kauf
                       </span>
                     )}
                   </p>
@@ -277,11 +277,11 @@ export default async function FicheProduitPage({
                   {a.commentaire}
                 </p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {new Date(a.dateCreation).toLocaleDateString("fr-FR")}
+                  {new Date(a.dateCreation).toLocaleDateString("de-DE")}
                 </p>
                 {a.reponseAdmin && (
                   <p className="mt-2 rounded-md bg-muted px-3 py-2 text-sm">
-                    <strong>Réponse du magasin :</strong> {a.reponseAdmin}
+                    <strong>Antwort des Shops:</strong> {a.reponseAdmin}
                   </p>
                 )}
               </li>
@@ -293,7 +293,7 @@ export default async function FicheProduitPage({
       {similaires.length > 0 && (
         <div className="mt-10">
           <h2 className="mb-4 text-lg font-semibold">
-            Produits similaires
+            Ähnliche Produkte
           </h2>
           <ProductGrid produits={similaires.map(produireProduitVue)} />
         </div>

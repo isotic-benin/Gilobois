@@ -24,7 +24,7 @@ export default function AdminLoginPage() {
             href="/"
             className="inline-flex items-center gap-2 text-2xl font-extrabold tracking-tight text-white hover:text-primary transition-colors"
           >
-            <FaTree className="size-8 text-primary" /> Perrier Bois
+            <FaTree className="size-8 text-primary" /> Brennstoffe Nagler
           </Link>
         </div>
 
@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
             Administration
           </div>
           <h1 className="text-4xl font-extrabold leading-tight mb-5 text-white drop-shadow-md">
-            Back-office Perrier Bois.
+            Back-office Brennstoffe Nagler.
           </h1>
           <p className="text-lg text-white/80 font-medium">
             Gérez la boutique, les commandes et les produits.
@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
             href="/"
             className="inline-flex items-center gap-2 text-xl font-extrabold tracking-tight text-[#1c1917]"
           >
-            <FaTree className="size-6 text-primary" /> Perrier Bois
+            <FaTree className="size-6 text-primary" /> Brennstoffe Nagler
           </Link>
         </div>
 

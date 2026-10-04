@@ -13,7 +13,7 @@ import { FilAriane } from "@/components/shared/fil-ariane";
 import { estObjectId } from "@/lib/slugify";
 
 export const metadata: Metadata = {
-  title: "Tous les produits",
+  title: "Alle Produkte",
 };
 
 export default async function ProduitsPage({
@@ -46,15 +46,15 @@ export default async function ProduitsPage({
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6">
-      <FilAriane items={[{ libelle: "Produits" }]} />
+      <FilAriane items={[{ libelle: "Produkte" }]} />
 
       {/* ═══ PAGE HEADER ═══ */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
-          Tous les produits
+          Alle Produkte
         </h1>
         <p className="mt-1 text-[14px] text-muted-foreground">
-          Découvrez notre gamme complète de bois de chauffage de qualité premium
+          Entdecken Sie unser vollständiges Sortiment an hochwertigen Brennstoffen
         </p>
       </div>
 
@@ -77,7 +77,7 @@ export default async function ProduitsPage({
           {/* Sort Bar */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-none border border-border bg-card px-5 py-3.5">
             <p className="text-[13px] text-muted-foreground font-bold uppercase tracking-wider">
-              <span className="text-foreground text-lg">{resultat.total}</span> produit{resultat.total > 1 ? "s" : ""} trouvé{resultat.total > 1 ? "s" : ""}
+              <span className="text-foreground text-lg">{resultat.total}</span> Produkt{resultat.total > 1 ? "e" : ""} gefunden
             </p>
             <TriSelect chemin="/produits" params={entrees} />
           </div>

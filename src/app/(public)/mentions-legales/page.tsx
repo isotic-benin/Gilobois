@@ -1,315 +1,311 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentions légales",
+  title: "Impressum",
 };
 
 export default function MentionsLegalesPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-bold">Mentions légales</h1>
+      <h1 className="text-3xl font-bold">Impressum</h1>
       <div className="mt-6 space-y-6 text-sm leading-relaxed text-muted-foreground">
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            1. Responsable du site
+            1. Verantwortlicher für die Website
           </h2>
           <p>
-            Ce site est la propriété et est exploité par :
+            Diese Website ist Eigentum von und wird betrieben durch:
             <br />
             <br />
-            <strong>Raison sociale :</strong> PERRIER BOIS
+            <strong>Firmenname:</strong> BRENNSTOFFE NAGLER
             <br />
-            <strong>Forme juridique :</strong> Société à responsabilité limitée
+            <strong>Rechtsform:</strong> Gesellschaft mit beschränkter Haftung
             (SARL)
             <br />
-            <strong>Siège social :</strong> 109 Zone des Varennes, 71340 Melay,
-            France
+            <strong>Eingetragener Sitz:</strong> Waldweg 12, 99423 Weimar,
+            Frankreich
             <br />
-            <strong>SIREN :</strong> 503 747 180
+            <strong>SIREN:</strong> 503 747 180
             <br />
-            <strong>SIRET (siège social) :</strong> 503 747 180 00027
+            <strong>SIRET (Hauptsitz):</strong> 503 747 180 00027
             <br />
-            <strong>N° TVA intracommunautaire :</strong> FR79503747180
+            <strong>USt-IdNr.:</strong> FR79503747180
             <br />
-            <strong>Activité (code NAF/APE) :</strong> 02.20Z — Exploitation
-            forestière
+            <strong>Tätigkeit (NAF/APE-Code):</strong> 02.20Z — Forstwirtschaft
             <br />
-            <strong>Date de création :</strong> 18 avril 2008
+            <strong>Gründungsdatum:</strong> 18. April 2008
             <br />
-            <strong>Dirigeant :</strong> Laurent PERRIER
+            <strong>Geschäftsführer:</strong> Markus NAGLER
             <br />
-            <strong>E-mail :</strong> contact@perrierbois.fr
+            <strong>E-Mail:</strong> contact@brennstoffenagler.de
             <br />
-            <strong>Téléphone :</strong> +33 6 12 34 56 78
+            <strong>Telefon:</strong> +49 151 23456789
           </p>
           <p>
-            Le coût de l appel téléphonique dépend du forfait souscrit par
-            l utilisateur auprès de son opérateur de télécommunications.
+            Die Kosten des Telefonanrufs richten sich nach dem Tarif,
+            den der Nutzer bei seinem Telekommunikationsanbieter abgeschlossen hat.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            2. Objet du site
+            2. Zweck der Website
           </h2>
           <p>
-            Le site Perrier Bois a pour objet la présentation, la
-            promotion et la vente en ligne de granulés de bois, de bois de
-            chauffage et d autres produits liés au chauffage au bois pour
-            usage domestique.
+            Die Website Brennstoffe Nagler dient der Präsentation, Bewerbung
+            und dem Online-Verkauf von Holzpellets, Brennholz und anderen
+            Produkten rund um das Heizen mit Holz für den Hausgebrauch.
           </p>
           <p>
-            L utilisation de ce site implique l acceptation des présentes
-            mentions légales ainsi que de toutes les autres conditions,
-            politiques et informations disponibles sur le site.
+            Die Nutzung dieser Website setzt die Akzeptanz dieses Impressums
+            sowie aller anderen auf der Website verfügbaren Bedingungen,
+            Richtlinien und Informationen voraus.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            3. Informations sur les produits
+            3. Produktinformationen
           </h2>
           <p>
-            Perrier Bois s efforce de fournir des informations claires,
-            précises et actualisées sur les produits qu elle vend.
+            Brennstoffe Nagler bemüht sich, klare, genaue und aktuelle
+            Informationen über die verkauften Produkte bereitzustellen.
           </p>
           <p>
-            Les photographies et images présentées sur le site sont fournies à
-            titre informatif uniquement. En raison de l origine naturelle du
-            bois, de légères différences de teinte, de texture, de taille, de
-            poids, de forme ou d aspect peuvent exister entre les images
-            affichées et les produits livrés.
+            Die auf der Website gezeigten Fotos und Abbildungen dienen
+            ausschließlich zu Informationszwecken. Aufgrund des natürlichen
+            Ursprungs des Holzes können geringfügige Unterschiede in Farbton,
+            Textur, Größe, Gewicht, Form oder Aussehen zwischen den
+            angezeigten Bildern und den gelieferten Produkten bestehen.
           </p>
           <p>
-            Ces écarts naturels ne constituent pas nécessairement un défaut et
-            n altèrent ni la qualité ni l usage du produit.
+            Diese natürlichen Abweichungen stellen nicht zwingend einen
+            Mangel dar und beeinträchtigen weder die Qualität noch die
+            Verwendbarkeit des Produkts.
           </p>
           <p>
-            Le client devrait examiner attentivement la description, la
-            quantité, le poids, le type de bois, l emballage, les conditions
-            d utilisation et les recommandations de stockage sur chaque page
-            de produit.
+            Der Kunde sollte die Beschreibung, Menge, Gewicht, Holzart,
+            Verpackung, Verwendungsbedingungen und Lagerempfehlungen
+            auf jeder Produktseite sorgfältig prüfen.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            4. Utilisation et stockage
+            4. Verwendung und Lagerung
           </h2>
           <p>
-            Les granulés et le bois de chauffage doivent être stockés dans un
-            endroit sec et bien ventilé, à l abri de la pluie, de
-            l humidité et du contact direct avec l eau.
+            Pellets und Brennholz müssen an einem trockenen und gut
+            belüfteten Ort gelagert werden, geschützt vor Regen,
+            Feuchtigkeit und direktem Kontakt mit Wasser.
           </p>
           <p>
-            Il est de la responsabilité du client de vérifier que le produit
-            acheté est compatible avec son appareil de récupération de chaleur,
-            son poêle à bois, sa chaudière, sa cuisinière ou tout autre
-            équipement de chauffage.
+            Es liegt in der Verantwortung des Kunden, sicherzustellen, dass
+            das gekaufte Produkt mit seinem Wärmerückgewinnungsgerät,
+            seinem Holzofen, seinem Kessel, seinem Herd oder sonstigen
+            Heizgeräten kompatibel ist.
           </p>
           <p>
-            L utilisation de ces produits doit être conforme aux instructions
-            et recommandations du fabricant de l équipement.
+            Die Verwendung dieser Produkte muss den Anweisungen und
+            Empfehlungen des Geräteherstellers entsprechen.
           </p>
           <p>
-            Perrier Bois ne saurait être responsable des dommages
-            résultant d un stockage inadapté, d une exposition à l humidité,
-            d une mauvaise utilisation, de l utilisation avec un équipement
-            incompatible ou d un entretien insuffisant de l équipement de
-            chauffage.
+            Brennstoffe Nagler haftet nicht für Schäden, die auf ungeeignete
+            Lagerung, Feuchtigkeitsexposition, unsachgemäße Verwendung,
+            die Verwendung mit inkompatiblen Geräten oder unzureichende
+            Wartung der Heizanlage zurückzuführen sind.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            5. Prix, commandes et livraisons
+            5. Preise, Bestellungen und Lieferungen
           </h2>
           <p>
-            Les prix des produits sont ceux affichés sur le site au moment de
-            la commande.
+            Die Preise der Produkte sind die zum Zeitpunkt der Bestellung
+            auf der Website angezeigten.
           </p>
           <p>
-            Les frais de livraison, les taxes applicables, les modes de
-            paiement, les zones de livraison, les délais de livraison
-            estimés et autres conditions d achat sont communiqués au client
-            avant la confirmation de la commande.
+            Lieferkosten, anfallende Steuern, Zahlungsarten, Liefergebiete,
+            voraussichtliche Lieferzeiten und sonstige Kaufbedingungen werden
+            dem Kunden vor der Bestellbestätigung mitgeteilt.
           </p>
           <p>
-            Avant de finaliser l achat, le client doit vérifier attentivement
-            les produits sélectionnés, les quantités, le prix total, les frais
-            de livraison, les coordonnées et l adresse de livraison.
+            Vor dem Abschluss des Kaufs sollte der Kunde die ausgewählten
+            Produkte, Mengen, Gesamtpreis, Lieferkosten, Kontaktdaten
+            und Lieferadresse sorgfältig prüfen.
           </p>
           <p>
-            Les règles relatives aux commandes, paiements, livraisons,
-            annulations, retours et remboursements sont décrites dans les
-            Conditions générales de vente disponibles sur le site.
+            Die Regeln für Bestellungen, Zahlungen, Lieferungen,
+            Stornierungen, Rücksendungen und Rückerstattungen sind in
+            den Allgemeinen Geschäftsbedingungen der Website beschrieben.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            6. Disponibilité
+            6. Verfügbarkeit
           </h2>
           <p>
-            Tous les produits présentés sur le site sont proposés sous réserve
-            de disponibilité.
+            Alle auf der Website angebotenen Produkte werden vorbehaltlich
+            der Verfügbarkeit angeboten.
           </p>
           <p>
-            La présence d un produit sur le site ne garantit pas sa
-            disponibilité permanente.
+            Das Vorhandensein eines Produkts auf der Website garantiert
+            nicht seine dauerhafte Verfügbarkeit.
           </p>
           <p>
-            Si un produit n est plus disponible après une commande, Perrier Bois contactera le client via les coordonnées communiquées lors
-            de l achat afin de proposer une solution adaptée.
+            Ist ein Produkt nach einer Bestellung nicht mehr verfügbar,
+            kontaktiert Brennstoffe Nagler den Kunden über die beim Kauf
+            angegebenen Kontaktdaten, um eine geeignete Lösung vorzuschlagen.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            7. Accès au site
+            7. Zugang zur Website
           </h2>
           <p>
-            Perrier Bois s efforce de maintenir le site accessible et
-            sécurisé en permanence.
+            Brennstoffe Nagler bemüht sich, die Website jederzeit zugänglich
+            und sicher zu halten.
           </p>
           <p>
-            L accès peut toutefois être temporairement interrompu ou limité en
-            raison de travaux de maintenance, de mises à jour, de
-            perturbations techniques, de problèmes d hébergement, de pannes
-            réseau, de raisons de sécurité ou de circonstances échappant au
-            contrôle de Perrier Bois.
+            Der Zugang kann jedoch aufgrund von Wartungsarbeiten,
+            Aktualisierungen, technischen Störungen, Hosting-Problemen,
+            Netzwerkausfällen, Sicherheitsgründen oder Umständen außerhalb
+            der Kontrolle von Brennstoffe Nagler vorübergehend unterbrochen
+            oder eingeschränkt werden.
           </p>
           <p>
-            Perrier Bois ne garantit pas que le site est permanently
-            accessible ou totalement exempt d erreurs, d interruptions ou de
-            composants nuisibles.
+            Brennstoffe Nagler garantiert nicht, dass die Website dauerhaft
+            zugänglich oder vollständig frei von Fehlern, Unterbrechungen
+            oder schädlichen Komponenten ist.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            8. Comportement de l utilisateur
+            8. Nutzerverhalten
           </h2>
           <p>
-            L utilisateur s engage à utiliser le site de manière responsable,
-            légale et respectueuse des droits de Perrier Bois et des
-            tiers.
+            Der Nutzer verpflichtet sich, die Website verantwortungsbewusst,
+            rechtmäßig und unter Achtung der Rechte von Brennstoffe Nagler
+            und Dritten zu nutzen.
           </p>
-          <p>Toute utilisation du site aux fins suivantes est interdite :</p>
+          <p>Jede Nutzung der Website zu folgenden Zwecken ist verboten:</p>
           <ul className="list-disc space-y-1 pl-6">
-            <li> commettre des actes de fraude ou des activités illégales ;</li>
-            <li> introduire des virus ou autres éléments informatiques nuisibles ;</li>
+            <li> Betrug oder illegale Aktivitäten begehen;</li>
+            <li> Viren oder andere schädliche IT-Elemente einschleusen;</li>
             <li>
-              obtenir un accès non autorisé au site ou à ses systèmes ;
+              unbefugten Zugang zur Website oder ihren Systemen verschaffen;
             </li>
-            <li> entraver le fonctionnement normal de la plateforme ;</li>
+            <li> den normalen Betrieb der Plattform stören;</li>
             <li>
-              copier ou utiliser le contenu sans autorisation à des fins
-              commerciales ;
+              Inhalte ohne Genehmigung für kommerzielle Zwecke kopieren oder nutzen;
             </li>
             <li>
-              fournir de fausses informations lors du processus d achat.
+              falsche Angaben im Kaufvorgang machen.
             </li>
           </ul>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            9. Propriété intellectuelle
+            9. Geistiges Eigentum
           </h2>
           <p>
-            Le contenu du site, y compris les textes, images, photographies,
-            logos, éléments graphiques, vidéos, documents, design, structure et
-            organisation, appartient à Perrier Bois ou est utilisé avec
-            l autorisation des titulaires respectifs.
+            Die Inhalte der Website, einschließlich Texte, Bilder, Fotos,
+            Logos, grafische Elemente, Videos, Dokumente, Design, Struktur
+            und Organisation, gehören Brennstoffe Nagler oder werden mit
+            Genehmigung der jeweiligen Rechteinhaber genutzt.
           </p>
           <p>
-            La reproduction, la diffusion, la modification, la publication, la
-            commercialisation, la transmission ou la réutilisation du contenu
-            est interdite sans autorisation préalable écrite.
+            Die Vervielfältigung, Verbreitung, Veränderung, Veröffentlichung,
+            Vermarktung, Übertragung oder Weiterverwendung von Inhalten
+            ist ohne vorherige schriftliche Genehmigung verboten.
           </p>
           <p>
-            Les utilisateurs peuvent uniquement consulter et imprimer les pages
-            du site à des fins personnelles et non commerciales.
+            Nutzer dürfen die Seiten der Website ausschließlich für den
+            persönlichen, nicht kommerziellen Gebrauch einsehen und ausdrucken.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            10. Limitation de responsabilité
+            10. Haftungsbeschränkung
           </h2>
           <p>
-            Perrier Bois s efforce de garantir l exactitude et
-            l actualité des informations publiées, mais ne garantit pas
-            l absence totale d erreurs ou d omissions.
+            Brennstoffe Nagler bemüht sich, die Richtigkeit und Aktualität
+            der veröffentlichten Informationen zu gewährleisten, übernimmt
+            jedoch keine Garantie für die vollständige Fehler- oder
+            Auslassungsfreiheit.
           </p>
           <p>
-            Dans les limites autorisées par la loi, Perrier Bois ne saurait
-            être responsable des dommages pouvant résulter :
+            Im gesetzlich zulässigen Umfang haftet Brennstoffe Nagler nicht
+            für Schäden, die entstehen können durch:
           </p>
           <ul className="list-disc space-y-1 pl-6">
-            <li> d une utilisation abusive du site ;</li>
-            <li> de perturbations ou interruptions techniques ;</li>
+            <li> missbräuchliche Nutzung der Website;</li>
+            <li> technische Störungen oder Unterbrechungen;</li>
             <li>
-              de problèmes de connexion Internet de l utilisateur ;
+              Internetverbindungsprobleme des Nutzers;
             </li>
-            <li> du recours à des informations obsolètes ou incomplètes ;</li>
+            <li> Verwendung veralteter oder unvollständiger Informationen;</li>
             <li>
-              du non-respect des instructions d utilisation et de stockage ;
+              Nichtbeachtung der Verwendungs- und Lagerungsanweisungen;
             </li>
             <li>
-              de la force majeure ou de circonstances échappant à son
-              contrôle.
+              höhere Gewalt oder Umstände außerhalb seiner Kontrolle.
             </li>
           </ul>
           <p>
-            Rien dans les présentes mentions légales ne limite les droits
-            obligatoires des consommateurs reconnus par la loi.
+            Nichts in diesem Impressum schränkt die gesetzlich anerkannten
+            zwingenden Verbraucherrechte ein.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            11. Liens vers des sites externes
+            11. Links zu externen Websites
           </h2>
           <p>
-            Le site peut contenir des liens vers des pages ou des services
-            exploités par des tiers.
+            Die Website kann Links zu Seiten oder Diensten enthalten,
+            die von Dritten betrieben werden.
           </p>
           <p>
-            Perrier Bois n exerce aucun contrôle sur ces sites et
-            décline toute responsabilité concernant leur disponibilité,
-            sécurité, contenu, produits, services ou politiques de
-            confidentialité.
+            Brennstoffe Nagler hat keine Kontrolle über diese Websites und
+            übernimmt keine Verantwortung für deren Verfügbarkeit, Sicherheit,
+            Inhalte, Produkte, Dienste oder Datenschutzrichtlinien.
           </p>
           <p>
-            L accès aux sites externes se fait sous la responsabilité de
-            l utilisateur.
+            Der Zugang zu externen Websites erfolgt auf eigene Verantwortung
+            des Nutzers.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            12. Protection des données à caractère personnel
+            12. Schutz personenbezogener Daten
           </h2>
           <p>
-            Perrier Bois peut collecter et traiter les données à caractère
-            personnel nécessaires pour répondre aux demandes de contact,
-            traiter les commandes, encaisser les paiements, organiser les
-            livraisons, établir les documents commerciaux, assurer le support
-            client et remplir les obligations légales.
+            Brennstoffe Nagler kann personenbezogene Daten erheben und
+            verarbeiten, die zur Beantwortung von Kontaktanfragen,
+            zur Bestellungsabwicklung, zur Zahlungsabwicklung, zur
+            Lieferorganisation, zur Erstellung von Handelsdokumenten,
+            zur Kundenbetreuung und zur Erfüllung gesetzlicher Pflichten
+            erforderlich sind.
           </p>
           <p>
-            Les conditions de traitement des données à caractère personnel, les
-            finalités du traitement, les durées de conservation et les droits
-            des personnes concernées sont décrits dans la Politique de
-            confidentialité du site.
+            Die Bedingungen für die Verarbeitung personenbezogener Daten,
+            die Verarbeitungszwecke, die Speicherfristen und die Rechte
+            der betroffenen Personen sind in der Datenschutzerklärung
+            der Website beschrieben.
           </p>
           <p>
-            Pour toute question relative aux données à caractère personnel,
-            l utilisateur peut contacter :
+            Bei Fragen zu personenbezogenen Daten kann sich der Nutzer an
+            folgende Adresse wenden:
             <br />
-            E-mail : contact@perrierbois.fr
+            E-Mail: contact@brennstoffenagler.de
           </p>
         </section>
 
@@ -318,53 +314,53 @@ export default function MentionsLegalesPage() {
             13. Cookies
           </h2>
           <p>
-            Le site peut utiliser des cookies nécessaires à son bon
-            fonctionnement.
+            Die Website kann Cookies verwenden, die für ihren ordnungsgemäßen
+            Betrieb erforderlich sind.
           </p>
           <p>
-            Avec le consentement de l utilisateur, des cookies analytiques,
-            de performance, publicitaires ou de tiers peuvent également être
-            utilisés.
+            Mit Einwilligung des Nutzers können auch analytische,
+            leistungsbezogene, Werbe- oder Drittanbieter-Cookies
+            verwendet werden.
           </p>
           <p>
-            Les informations sur les cookies utilisés et la manière de gérer
-            vos préférences sont disponibles dans la politique de cookies du
-            site.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-base font-semibold text-foreground">
-            14. Droit applicable
-          </h2>
-          <p>
-            Ce site et les achats effectués via celui-ci sont soumis au droit
-            français, sans préjudice des dispositions d ordre public
-            applicables en matière de protection des consommateurs.
-          </p>
-          <p>
-            En cas de conflit, les parties s efforcent de trouver une solution
-            amiable avant de recourir à des procédures de règlement alternatif
-            des litiges ou aux juridictions compétentes.
+            Informationen über die verwendeten Cookies und die Möglichkeit,
+            Ihre Präferenzen zu verwalten, finden sich in der
+            Cookie-Richtlinie der Website.
           </p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-base font-semibold text-foreground">
-            15. Modification des mentions légales
+            14. Anwendbares Recht
           </h2>
           <p>
-            Perrier Bois se réserve le droit de modifier les présentes
-            mentions légales chaque fois que cela est nécessaire pour refléter
-            des modifications légales, techniques, commerciales ou
-            opérationnelles du site.
+            Diese Website und die darüber getätigten Käufe unterliegen
+            dem französischen Recht, unbeschadet der anwendbaren
+            zwingenden Verbraucherschutzvorschriften.
           </p>
           <p>
-            La version en vigueur est la version publiée sur le site au moment
-            de votre demande.
+            Bei einem Streit bemühen sich die Parteien um eine gütliche
+            Lösung, bevor sie auf alternative Streitbeilegungsverfahren
+            oder zuständige Gerichte zurückgreifen.
+          </p>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-semibold text-foreground">
+            15. Änderung des Impressums
+          </h2>
+          <p>
+            Brennstoffe Nagler behält sich das Recht vor, dieses Impressum
+            zu ändern, wenn dies erforderlich ist, um gesetzliche, technische,
+            kaufmännische oder betriebliche Änderungen der Website
+            widerzuspiegeln.
           </p>
           <p>
-            <strong>Dernière mise à jour :</strong> 22 septembre 2026.
+            Die geltende Fassung ist die zum Zeitpunkt Ihrer Anfrage
+            auf der Website veröffentlichte Version.
+          </p>
+          <p>
+            <strong>Letzte Aktualisierung:</strong> 22. September 2026.
           </p>
         </section>
       </div>

@@ -14,15 +14,15 @@ export default async function DepotsPage() {
             _id: String(d._id)
         }));
     } catch (error) {
-        console.error("Erreur chargement des dépôts:", error);
+        console.error("Fehler beim Laden der Abholpunkte:", error);
         erreur = true;
     }
 
     if (erreur) {
         return (
             <div className="mx-auto max-w-4xl px-4 py-20 text-center">
-                <h1 className="text-2xl font-bold text-destructive">Erreur</h1>
-                <p className="mt-4 text-muted-foreground">La liste des points de retrait n'a pas pu être chargée.</p>
+                <h1 className="text-2xl font-bold text-destructive">Fehler</h1>
+                <p className="mt-4 text-muted-foreground">Die Liste der Abholpunkte konnte nicht geladen werden.</p>
             </div>
         );
     }

@@ -9,9 +9,9 @@ import { journaliser } from "@/lib/activity";
 
 export async function GET() {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   await dbConnect();
@@ -35,18 +35,18 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = bannerSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }

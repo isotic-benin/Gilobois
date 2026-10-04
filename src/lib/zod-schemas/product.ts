@@ -2,37 +2,37 @@ import { z } from "zod";
 import { slugSchema } from "./category";
 
 export const varianteSchema = z.object({
-  nom: z.string().trim().min(1, "Nom de variante requis"),
-  valeur: z.string().trim().min(1, "Valeur de variante requise"),
+  nom: z.string().trim().min(1, "Variantenname erforderlich"),
+  valeur: z.string().trim().min(1, "Variantenwert erforderlich"),
   stockVariante: z.coerce.number().int().min(0).default(0),
   prixSupplement: z.coerce.number().min(0).default(0),
   sku: z.string().trim().default(""),
 });
 
 export const attributSchema = z.object({
-  cle: z.string().trim().min(1, "Clé d'attribut requise"),
-  valeur: z.string().trim().min(1, "Valeur d'attribut requise"),
+  cle: z.string().trim().min(1, "Eigenschaftsname erforderlich"),
+  valeur: z.string().trim().min(1, "Eigenschaftswert erforderlich"),
 });
 
 const imageUrlSchema = z.string().trim().refine(
   (val) => val.startsWith("/") || val.startsWith("http"),
-  "URL d'image invalide (doit commencer par / ou http)"
+  "Ungültige Bild-URL (muss mit / oder http beginnen)"
 );
 
 export const productSchema = z.object({
   nom: z
     .string()
     .trim()
-    .min(2, "Le nom doit contenir au moins 2 caractères")
-    .max(120, "Le nom est trop long"),
+    .min(2, "Der Name muss mindestens 2 Zeichen enthalten")
+    .max(120, "Der Name ist zu lang"),
   slug: slugSchema,
   description: z.string().trim().default(""),
   descriptionCourte: z.string().trim().max(300).default(""),
-  categorieId: z.string().regex(/^[0-9a-f]{24}$/, "Catégorie invalide"),
+  categorieId: z.string().regex(/^[0-9a-f]{24}$/, "Ungültige Kategorie"),
   typeLivraison: z.enum(["retrait", "livraison_portail", "livraison_garage"]).default("retrait"),
-  sku: z.string().trim().min(1, "Le SKU est requis").max(60),
+  sku: z.string().trim().min(1, "SKU ist erforderlich").max(60),
   images: z.array(imageUrlSchema).default([]),
-  prix: z.coerce.number().min(0, "Prix invalide"),
+  prix: z.coerce.number().min(0, "Ungültiger Preis"),
   prixPromo: z.coerce.number().min(0).nullable().default(null),
   enPromotion: z.boolean().default(false),
   pourcentageRemise: z.coerce.number().min(0).max(100).default(0),

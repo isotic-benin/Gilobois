@@ -9,7 +9,7 @@ import { TriSelect } from "@/components/product/tri-select";
 import { FilAriane } from "@/components/shared/fil-ariane";
 
 export const metadata: Metadata = {
-  title: "Promotions",
+  title: "Aktionen",
 };
 
 export default async function PromotionsPage({
@@ -40,19 +40,19 @@ export default async function PromotionsPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
-      <FilAriane items={[{ libelle: "Promotions" }]} />
+      <FilAriane items={[{ libelle: "Aktionen" }]} />
 
       <div className="bg-[#ef4444] text-white p-8 md:p-10 mb-8">
-        <h1 className="text-[36px] font-bold tracking-tight">Promotions</h1>
+        <h1 className="text-[36px] font-bold tracking-tight">Aktionen</h1>
         <p className="mt-2 text-[16px] opacity-90">
-          {resultat.total} produit{resultat.total > 1 ? "s" : ""} en promotion
+          {resultat.total} Produkt{resultat.total > 1 ? "e" : ""} im Angebot
         </p>
       </div>
 
       {typesLivraison.length > 0 && (
         <div className="mb-6 flex flex-wrap gap-2">
           {typesLivraison.map(({ typeLivraison }) => {
-            const labelsLivraison: Record<string, string> = { retrait: "Retrait", livraison_portail: "Livraison au portail", livraison_garage: "Livraison en garage" };
+            const labelsLivraison: Record<string, string> = { retrait: "Abholung", livraison_portail: "Tor-Lieferung", livraison_garage: "Garagen-Lieferung" };
             return (
               <Link
                 key={typeLivraison}
@@ -74,7 +74,7 @@ export default async function PromotionsPage({
         <TriSelect chemin={chemin} params={entrees} />
       </div>
 
-      <ProductGrid produits={produits} videMessage="Aucune promotion en cours." />
+      <ProductGrid produits={produits} videMessage="Derzeit keine Aktionen." />
       <Pagination
         chemin={chemin}
         params={entrees}

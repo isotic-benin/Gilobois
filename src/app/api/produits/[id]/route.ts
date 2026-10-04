@@ -14,11 +14,11 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   await dbConnect();
   const produit = await Product.findOne({ _id: id, actif: true }).lean();
-  if (!produit) return apiErreur("Produit introuvable", 404);
+  if (!produit) return apiErreur("Produkt nicht gefunden", 404);
 
   return apiSuccess(produit);
 }
@@ -28,21 +28,21 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN && user.role !== ROLES.GERANT) {
-    return apiErreur("Action réservée à l'équipe boutique", 403);
+    return apiErreur("Nur für das Shop-Team", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = productSchema.partial().safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }
@@ -50,7 +50,7 @@ export async function PUT(
   await dbConnect();
 
   const produit = await Product.findById(id);
-  if (!produit) return apiErreur("Produit introuvable", 404);
+  if (!produit) return apiErreur("Produkt nicht gefunden", 404);
 
   const donnees = { ...validation.data };
   if (donnees.slug) {
@@ -79,17 +79,17 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Suppression réservée à l'administrateur", 403);
+    return apiErreur("Nur Administratoren können löschen", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   await dbConnect();
   const produit = await Product.findByIdAndDelete(id);
-  if (!produit) return apiErreur("Produit introuvable", 404);
+  if (!produit) return apiErreur("Produkt nicht gefunden", 404);
 
   await journaliser(user.id, "produit.supprimer", id, {
     nom: produit.nom,

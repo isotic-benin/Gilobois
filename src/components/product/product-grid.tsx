@@ -3,7 +3,7 @@ import type { ProduitVue } from "@/lib/produit-vue";
 
 export function ProductGrid({
   produits,
-  videMessage = "Aucun produit trouvé.",
+  videMessage = "Keine Produkte gefunden.",
 }: {
   produits: ProduitVue[];
   videMessage?: string;

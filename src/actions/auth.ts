@@ -25,19 +25,19 @@ export async function connexion(
   await dbConnect();
   const utilisateur = await User.findOne({ email: validation.data.email });
   if (!utilisateur) {
-    return { message: "Email ou mot de passe incorrect." };
+    return { message: "E-Mail oder Passwort falsch." };
   }
 
   if (utilisateur.role !== ROLES.ADMIN && utilisateur.role !== ROLES.GERANT) {
     return {
-      message: "Accès réservé à l'administration.",
+      message: "Zugang nur für Administratoren.",
     };
   }
 
   if (!utilisateur.emailVerifie) {
     return {
       message:
-        "Compte non validé. Les accès d'administration nécessitent un compte validé.",
+        "Konto nicht bestätigt. Der Administrationszugang erfordert ein verifiziertes Konto.",
     };
   }
 
@@ -49,7 +49,7 @@ export async function connexion(
     });
 
     if (!url) {
-      return { message: "Email ou mot de passe incorrect." };
+      return { message: "E-Mail oder Passwort falsch." };
     }
 
     const session = await auth();
@@ -66,9 +66,9 @@ export async function connexion(
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { message: "Email ou mot de passe incorrect." };
+          return { message: "E-Mail oder Passwort falsch." };
         default:
-          return { message: "Une erreur est survenue lors de la connexion." };
+          return { message: "Ein Fehler ist bei der Anmeldung aufgetreten." };
       }
     }
     throw error;

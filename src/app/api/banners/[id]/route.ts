@@ -13,21 +13,21 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = bannerSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }
@@ -38,7 +38,7 @@ export async function PUT(
     preparerDates(validation.data),
     { new: true },
   );
-  if (!banniere) return apiErreur("Bannière introuvable", 404);
+  if (!banniere) return apiErreur("Banner nicht gefunden", 404);
 
   await journaliser(user.id, "banniere.modifier", id, {
     titre: banniere.titre,
@@ -52,17 +52,17 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   await dbConnect();
   const resultat = await Banner.findByIdAndDelete(id);
-  if (!resultat) return apiErreur("Bannière introuvable", 404);
+  if (!resultat) return apiErreur("Banner nicht gefunden", 404);
 
   await journaliser(user.id, "banniere.supprimer", id, {
     titre: resultat.titre,

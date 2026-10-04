@@ -19,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug, sousSlug } = await params;
   const resultat = await getSousCategorieParSlugs(slug, sousSlug);
-  if (!resultat) return { title: "Catégorie introuvable" };
+  if (!resultat) return { title: "Kategorie nicht gefunden" };
   const { sousCategorie } = resultat;
   return {
     title: sousCategorie.metaTitle || sousCategorie.nom,
@@ -70,7 +70,7 @@ export default async function SousCategoriePage({
     <div className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6">
       <FilAriane
         items={[
-          { libelle: "Produits", href: "/produits" },
+          { libelle: "Produkte", href: "/produits" },
           { libelle: parent.nom, href: `/categorie/${parent.slug}` },
           { libelle: sousCategorie.nom },
         ]}
@@ -80,7 +80,7 @@ export default async function SousCategoriePage({
       <div className="mb-8 rounded-none bg-primary p-8 md:p-10 text-primary-foreground">
         <div className="flex flex-col gap-2 mb-2">
           <Link href={`/categorie/${parent.slug}`} className="text-[12px] font-bold uppercase tracking-widest opacity-80 hover:underline underline-offset-4 w-fit">
-            ← Retour à {parent.nom}
+            ← Zurück zu {parent.nom}
           </Link>
           <h1 className="text-[36px] font-bold tracking-tight sm:text-[46px]">
             {sousCategorie.nom}
@@ -113,7 +113,7 @@ export default async function SousCategoriePage({
           {/* Sort Bar */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-none border border-border bg-card px-5 py-3.5">
             <p className="text-[13px] font-bold uppercase tracking-wider text-muted-foreground">
-              <span className="text-foreground text-lg">{resultatProduits.total}</span> produit{resultatProduits.total > 1 ? "s" : ""} trouvé{resultatProduits.total > 1 ? "s" : ""}
+              <span className="text-foreground text-lg">{resultatProduits.total}</span> Produkt{resultatProduits.total > 1 ? "e" : ""} gefunden
             </p>
             <TriSelect chemin={chemin} params={entrees} />
           </div>

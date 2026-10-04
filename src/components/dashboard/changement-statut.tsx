@@ -3,12 +3,12 @@ import { useState } from "react";
 import { STATUTS_COMMANDE } from "@/lib/constants";
 
 const LIBELLES_STATUTS: Record<string, string> = {
-  en_attente: "En attente",
-  confirmee: "Confirmée",
-  en_preparation: "En préparation",
-  expediee: "Expédiée",
-  livree: "Livrée",
-  annulee: "Annulée",
+  en_attente: "Ausstehend",
+  confirmee: "Bestätigt",
+  en_preparation: "In Vorbereitung",
+  expediee: "Versendet",
+  livree: "Geliefert",
+  annulee: "Storniert",
 };
 
 export function ChangementStatut({
@@ -41,20 +41,20 @@ export function ChangementStatut({
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur est survenue.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
     }
 
-    setMessage({ type: "succes", texte: "Statut mis à jour." });
+    setMessage({ type: "succes", texte: "Status aktualisiert." });
     setCommentaire("");
     setEnCours(false);
   };
 
   return (
     <form onSubmit={enregistrer} className="rounded-2xl border border-border bg-card p-4">
-      <h2 className="mb-3 font-semibold">Modifier le statut</h2>
+      <h2 className="mb-3 font-semibold">Status ändern</h2>
       <div className="flex flex-wrap gap-2">
         <select
           value={statut}
@@ -70,7 +70,7 @@ export function ChangementStatut({
         <input
           value={commentaire}
           onChange={(e) => setCommentaire(e.target.value)}
-          placeholder="Commentaire (optionnel)"
+          placeholder="Kommentar (optional)"
           className="min-w-0 flex-1 rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
         />
         <button
@@ -78,7 +78,7 @@ export function ChangementStatut({
           disabled={enCours}
           className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414] disabled:opacity-60"
         >
-          {enCours ? "Enregistrement…" : "Enregistrer"}
+          {enCours ? "Wird gespeichert…" : "Speichern"}
         </button>
       </div>
       {message && (

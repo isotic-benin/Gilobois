@@ -7,7 +7,7 @@ import { formaterPrix } from "@/lib/format";
 import { TableauCommandes } from "@/components/dashboard/tableau-commandes";
 
 export const metadata: Metadata = {
-  title: "Tableau de bord",
+  title: "Dashboard",
 };
 
 export default async function GerantPage() {
@@ -18,34 +18,34 @@ export default async function GerantPage() {
   if (!stats) {
     return (
       <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-        Base de données indisponible. Veuillez vérifier la configuration MongoDB.
+        Datenbank nicht verfügbar. Bitte überprüfen Sie die MongoDB-Konfiguration.
       </div>
     );
   }
 
   const cartes = [
     {
-      label: "Chiffre d'affaires",
+      label: "Umsatz",
       valeur: formaterPrix(stats.chiffreAffaires),
       icone: FaMoneyBill,
     },
     {
-      label: "Commandes en attente",
+      label: "Ausstehende Bestellungen",
       valeur: String(stats.commandesEnAttente),
       icone: FaCartShopping,
     },
     {
-      label: "Produits en stock faible",
+      label: "Produkte mit niedrigem Lagerbestand",
       valeur: String(stats.stockFaible),
       icone: FaTriangleExclamation,
     },
     {
-      label: "Produits",
+      label: "Produkte",
       valeur: String(stats.nombreProduits),
       icone: FaBox,
     },
     {
-      label: "Avis en attente",
+      label: "Ausstehende Bewertungen",
       valeur: String(stats.avisEnAttente),
       icone: FaStar,
     },
@@ -53,7 +53,7 @@ export default async function GerantPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Tableau de bord</h1>
+      <h1 className="text-2xl font-bold">Dashboard</h1>
 
       <div className="mt-6 grid grid-cols-2 gap-3.5 md:grid-cols-3">
         {cartes.map(({ label, valeur, icone: Icone }) => (
@@ -78,12 +78,12 @@ export default async function GerantPage() {
 
       <section className="mt-6 rounded-2xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(42,33,27,0.03)]">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-semibold">Dernières commandes</h2>
+          <h2 className="font-semibold">Letzte Bestellungen</h2>
           <Link
             href="/gerant/commandes"
             className="text-sm text-primary hover:underline"
           >
-            Tout voir
+            Alle anzeigen
           </Link>
         </div>
         <TableauCommandes commandes={commandes} baseHref="/gerant/commandes" />

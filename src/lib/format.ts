@@ -1,5 +1,5 @@
 export function formaterPrix(prix: number, devise = "EUR"): string {
-  return new Intl.NumberFormat("fr-FR", {
+  return new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: devise,
   }).format(prix);

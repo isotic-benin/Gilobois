@@ -21,14 +21,14 @@ export async function Header() {
       <div className="w-full bg-primary text-primary-foreground border-b border-primary/20">
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-2.5 text-[12px] font-semibold tracking-[0.08em] uppercase sm:px-6">
           <p className="hidden sm:block text-primary-foreground/90">
-            Les meilleurs prix du moment — <span className="font-bold underline underline-offset-2">Promo</span>
+            Die besten Preise gerade — <span className="font-bold underline underline-offset-2">Aktionen</span>
           </p>
           <div className="flex items-center gap-6 mx-auto sm:mx-0">
             <Link
               href="/produits"
               className="flex items-center gap-1.5 font-bold hover:opacity-80 transition-opacity"
             >
-              En profiter →
+              Jetzt kaufen →
             </Link>
             <DepotHeaderLink />
           </div>
@@ -42,13 +42,13 @@ export async function Header() {
           <Link
             href="/"
             className="group flex shrink-0 items-center gap-2.5"
-            aria-label="Perrier Bois"
+            aria-label="Brennstoffe Nagler"
           >
             <span className="flex size-10 items-center justify-center bg-primary text-primary-foreground">
               <FaTree className="size-[20px]" />
             </span>
             <span className="font-heading text-[26px] font-bold leading-none tracking-tight text-foreground">
-              Perrier<span className="opacity-70">Bois</span>
+              Brennstoffe<span className="opacity-70">Nagler</span>
             </span>
           </Link>
 
@@ -59,13 +59,13 @@ export async function Header() {
                 <input
                   type="search"
                   name="recherche"
-                  placeholder="Rechercher un produit..."
-                  aria-label="Rechercher un produit"
+                  placeholder="Produkt suchen..."
+                  aria-label="Produkt suchen"
                   className="h-11 w-full rounded-none border-2 border-border bg-background pl-5 pr-14 text-[14px] text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 />
                 <button
                   type="submit"
-                  aria-label="Rechercher un produit"
+                  aria-label="Produkt suchen"
                   className="absolute right-1.5 flex size-8 items-center justify-center bg-primary text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                   <FaMagnifyingGlass className="size-[15px]" />
@@ -86,7 +86,7 @@ export async function Header() {
                 >
                   <Link href={lienCompte}>
                     <FaUser className="size-[15px]" />
-                    {user.name?.split(" ")[0] ?? "Mon compte"}
+                    {user.name?.split(" ")[0] ?? "Mein Konto"}
                   </Link>
                 </Button>
                 <DeconnexionButton />
@@ -100,7 +100,7 @@ export async function Header() {
               >
                 <Link href="/admin/login">
                   <FaLock className="size-[15px]" />
-                  Administration
+                  Verwaltung
                 </Link>
               </Button>
             )}
@@ -117,12 +117,12 @@ export async function Header() {
               <input
                 type="search"
                 name="recherche"
-                placeholder="Rechercher..."
+                placeholder="Suchen..."
                 className="h-11 w-full rounded-none border-2 border-border bg-background pl-4 pr-14 text-[14px] placeholder:text-muted-foreground focus:border-primary focus:outline-none"
               />
               <button
                 type="submit"
-                aria-label="Rechercher un produit"
+                aria-label="Produkt suchen"
                 className="absolute right-1.5 flex size-8 items-center justify-center bg-primary text-primary-foreground"
               >
                 <FaMagnifyingGlass className="size-[15px]" />
@@ -141,7 +141,7 @@ export async function Header() {
                 href="/produits"
                 className="inline-flex h-[48px] items-center px-4 hover:bg-primary/5 transition-colors hover:text-primary border-b-2 border-transparent hover:border-primary"
               >
-                Tous les produits
+                Alle Produkte
               </Link>
             </li>
             {categories.slice(0, 3).map((cat) => (
@@ -179,7 +179,7 @@ export async function Header() {
                   type="button"
                   className="inline-flex h-[48px] items-center gap-1.5 px-2 hover:bg-primary/5 transition-colors hover:text-primary border-b-2 border-transparent hover:border-primary xl:px-4"
                 >
-                  Plus
+                  Mehr
                   <FaChevronDown className="size-3 text-muted-foreground transition-colors group-hover:text-primary" />
                 </button>
                 <div
@@ -225,7 +225,7 @@ export async function Header() {
                 href="/promotions"
                 className="inline-flex h-[48px] items-center px-4 hover:bg-primary/5 transition-colors hover:text-primary border-b-2 border-transparent hover:border-primary"
               >
-                Promotions
+                Aktionen
               </Link>
             </li>
             <li className="ml-auto">
@@ -233,7 +233,7 @@ export async function Header() {
                 href="/contact"
                 className="inline-flex h-[48px] items-center px-4 text-foreground/70 transition-colors hover:text-foreground border-b-2 border-transparent"
               >
-                Contact
+                Kontakt
               </Link>
             </li>
           </ul>

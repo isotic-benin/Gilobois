@@ -90,12 +90,12 @@ export function GestionCategories() {
       const resultat = await res.json();
       if (resultat.succes) {
         setFormulaire((f) => ({ ...f, image: resultat.donnees.url }));
-        setMessage({ type: "succes", texte: "Image téléversée." });
+        setMessage({ type: "succes", texte: "Bild hochgeladen." });
       } else {
         setMessage({ type: "erreur", texte: resultat.erreur });
       }
     } catch {
-      setMessage({ type: "erreur", texte: "Erreur lors de l'upload." });
+      setMessage({ type: "erreur", texte: "Fehler beim Hochladen." });
     } finally {
       setEnvoiImage(false);
     }
@@ -166,26 +166,26 @@ export function GestionCategories() {
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Une erreur est survenue.",
+        texte: donnees?.erreur ?? "Ein Fehler ist aufgetreten.",
       });
       setEnCours(false);
       return;
     }
 
-    setMessage({ type: "succes", texte: "Catégorie enregistrée." });
+    setMessage({ type: "succes", texte: "Kategorie gespeichert." });
     setEnCours(false);
     reinitialiser();
     void charger();
   };
 
   const supprimer = async (id: string) => {
-    if (!confirm("Supprimer cette catégorie ?")) return;
+    if (!confirm("Diese Kategorie löschen?")) return;
     const res = await fetch(`/api/categories/${id}`, { method: "DELETE" });
     const donnees = await res.json().catch(() => null);
     if (!donnees?.succes) {
       setMessage({
         type: "erreur",
-        texte: donnees?.erreur ?? "Suppression impossible.",
+        texte: donnees?.erreur ?? "Löschen nicht möglich.",
       });
       return;
     }
@@ -194,7 +194,7 @@ export function GestionCategories() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Catégories</h1>
+      <h1 className="text-2xl font-bold">Kategorien</h1>
 
       {message && (
         <p
@@ -213,10 +213,10 @@ export function GestionCategories() {
         className="mt-6 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-2"
       >
         <h2 className="font-semibold sm:col-span-2">
-          {edition ? "Modifier la catégorie" : "Nouvelle catégorie"}
+          {edition ? "Kategorie bearbeiten" : "Neue Kategorie"}
         </h2>
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Nom *</span>
+          <span className="mb-1 block text-sm font-medium">Name *</span>
           <input
             value={formulaire.nom}
             onChange={(e) =>
@@ -244,7 +244,7 @@ export function GestionCategories() {
           />
         </label>
         <label className="block sm:col-span-2">
-          <span className="mb-1 block text-sm font-medium">Catégorie parente</span>
+          <span className="mb-1 block text-sm font-medium">Übergeordnete Kategorie</span>
           <select
             value={formulaire.parentId ?? ""}
             onChange={(e) =>
@@ -255,7 +255,7 @@ export function GestionCategories() {
             }
             className={champClasse}
           >
-            <option value="">Aucune (catégorie principale)</option>
+            <option value="">Keine (Hauptkategorie)</option>
             {categories
               .filter((c) => c._id !== edition)
               .map((c) => (
@@ -268,7 +268,7 @@ export function GestionCategories() {
         </label>
         <label className="block sm:col-span-2">
           <span className="mb-1 block text-sm font-medium">
-            Description
+            Beschreibung
           </span>
           <textarea
             value={formulaire.description}
@@ -280,7 +280,7 @@ export function GestionCategories() {
           />
         </label>
         <div className="sm:col-span-2">
-          <span className="mb-1 block text-sm font-medium">Image</span>
+          <span className="mb-1 block text-sm font-medium">Bild</span>
           <div className="flex flex-wrap items-center gap-3">
             <input
               ref={inputImageRef}
@@ -297,7 +297,7 @@ export function GestionCategories() {
               <>
                 <img
                   src={formulaire.image}
-                  alt="Aperçu de l'image de la catégorie"
+                  alt="Vorschau des Kategoriebilds"
                   className="size-16 rounded-lg border border-border object-cover"
                 />
                 <button
@@ -307,14 +307,14 @@ export function GestionCategories() {
                   className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-muted disabled:opacity-60"
                 >
                   {envoiImage ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-                  Changer l&apos;image
+                  Bild ändern
                 </button>
                 <button
                   type="button"
                   onClick={() => setFormulaire((f) => ({ ...f, image: "" }))}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Retirer
+                  Entfernen
                 </button>
               </>
             ) : (
@@ -325,7 +325,7 @@ export function GestionCategories() {
                 className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-muted disabled:opacity-60"
               >
                 {envoiImage ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-                Téléverser une image
+                Bild hochladen
               </button>
             )}
           </div>
@@ -334,12 +334,12 @@ export function GestionCategories() {
             onChange={(e) =>
               setFormulaire((f) => ({ ...f, image: e.target.value }))
             }
-            placeholder="Ou URL de l'image"
+            placeholder="Oder Bild-URL"
             className={`${champClasse} mt-2`}
           />
         </div>
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Ordre</span>
+          <span className="mb-1 block text-sm font-medium">Reihenfolge</span>
           <input
             type="number"
             min="0"
@@ -361,7 +361,7 @@ export function GestionCategories() {
               setFormulaire((f) => ({ ...f, active: e.target.checked }))
             }
           />
-          Catégorie active
+          Kategorie aktiv
         </label>
         <div className="flex gap-2 sm:col-span-2">
           <button
@@ -370,7 +370,7 @@ export function GestionCategories() {
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-18px_rgba(178,107,30,0.9)] transition-colors hover:bg-[#8f5414] disabled:opacity-60"
           >
             {enCours ? <FaSpinner className="size-4 animate-spin" aria-hidden /> : null}
-            <span>{edition ? "Enregistrer" : "Créer"}</span>
+            <span>{edition ? "Speichern" : "Erstellen"}</span>
           </button>
           {edition && (
             <button
@@ -378,7 +378,7 @@ export function GestionCategories() {
               onClick={reinitialiser}
               className="rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
-              Annuler
+              Abbrechen
             </button>
           )}
         </div>
@@ -395,14 +395,14 @@ export function GestionCategories() {
               {categorie.nom}
               {!categorie.active && (
                 <span className="ml-2 rounded-full bg-destructive/10 px-1.5 py-0.5 text-xs text-destructive">
-                  Inactif
+                  Inaktiv
                 </span>
               )}
             </span>
             <span className="flex shrink-0 gap-1">
               <button
                 type="button"
-                aria-label={`Modifier ${categorie.nom}`}
+                aria-label={`Bearbeiten ${categorie.nom}`}
                 onClick={() => editer(categorie)}
                 className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
               >
@@ -410,7 +410,7 @@ export function GestionCategories() {
               </button>
               <button
                 type="button"
-                aria-label={`Supprimer ${categorie.nom}`}
+                aria-label={`Löschen ${categorie.nom}`}
                 onClick={() => void supprimer(categorie._id)}
                 className="rounded-lg border border-border p-1.5 transition-colors hover:bg-muted"
               >

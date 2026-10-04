@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     );
   } catch (erreur) {
     return apiErreur(
-      erreur instanceof Error ? erreur.message : "Signature invalide",
+      erreur instanceof Error ? erreur.message : "Ungültige Signatur",
       400,
     );
   }

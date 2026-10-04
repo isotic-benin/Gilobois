@@ -13,12 +13,12 @@ export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = creerCommandeSchema.safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données de commande invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Bestelldaten",
       400,
     );
   }
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   const valides = await validerArticles(validation.data.articles);
   if (valides.length === 0) {
     return apiErreur(
-      "Aucun article valide dans le panier (stock ou prix modifié)",
+      "Keine gültigen Artikel im Warenkorb (Lagerbestand oder Preis geändert)",
       400,
     );
   }
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
 
   const page = Math.max(
     1,

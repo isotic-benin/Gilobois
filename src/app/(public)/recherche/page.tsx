@@ -8,7 +8,7 @@ import { TriSelect } from "@/components/product/tri-select";
 import { FilAriane } from "@/components/shared/fil-ariane";
 
 export const metadata: Metadata = {
-  title: "Recherche",
+  title: "Suche",
 };
 
 export default async function RecherchePage({
@@ -33,13 +33,13 @@ export default async function RecherchePage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
-      <FilAriane items={[{ libelle: "Recherche" }]} />
+      <FilAriane items={[{ libelle: "Suche" }]} />
 
       <h1 className="mb-2 text-[28px] font-bold tracking-tight sm:text-[36px]">
-        Résultats pour « {q || "…"} »
+        Suchergebnisse für « {q || "…"} »
       </h1>
       <p className="mb-6 text-sm font-bold uppercase tracking-widest text-muted-foreground">
-        {resultat.total} résultat{resultat.total > 1 ? "s" : ""}
+        {resultat.total} Ergebnis{resultat.total > 1 ? "se" : ""}
       </p>
 
       {q && (
@@ -47,7 +47,7 @@ export default async function RecherchePage({
           <div className="mb-4 flex justify-end">
             <TriSelect chemin="/recherche" params={entrees} />
           </div>
-          <ProductGrid produits={produits} videMessage="Aucun produit ne correspond à votre recherche." />
+          <ProductGrid produits={produits} videMessage="Kein Produkt entspricht Ihrer Suche." />
           <Pagination
             chemin="/recherche"
             params={entrees}

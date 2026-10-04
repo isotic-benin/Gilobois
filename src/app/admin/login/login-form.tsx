@@ -20,20 +20,20 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md border-none shadow-xl shadow-black/5 bg-white rounded-2xl overflow-hidden p-2">
       <CardHeader>
-        <CardTitle className="text-xl">Connexion administration</CardTitle>
+        <CardTitle className="text-xl">Administrations-Anmeldung</CardTitle>
         <CardDescription>
-          Accès réservé au personnel Perrier Bois.
+          Zugang nur für Brennstoffe Nagler-Mitarbeiter.
         </CardDescription>
       </CardHeader>
       <form action={formAction} className="grid gap-4">
         <CardContent className="grid gap-4 pt-0">
           <div className="grid gap-2">
-            <Label htmlFor="email">Adresse e-mail</Label>
+            <Label htmlFor="email">E-Mail-Adresse</Label>
             <Input
               id="email"
               name="email"
               type="email"
-              placeholder="vous@perrierbois.fr"
+              placeholder="sie@brennstoffenagler.de"
               autoComplete="email"
               autoFocus
               aria-invalid={Boolean(state?.erreurs?.email)}
@@ -46,7 +46,7 @@ export function LoginForm() {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="motDePasse">Mot de passe</Label>
+            <Label htmlFor="motDePasse">Passwort</Label>
             <Input
               id="motDePasse"
               name="motDePasse"
@@ -76,7 +76,7 @@ export function LoginForm() {
             className="w-full h-11 text-[15px] font-bold tracking-wide"
             disabled={pending}
           >
-            {pending ? "Connexion…" : "Se connecter"}
+            {pending ? "Anmelden…" : "Anmelden"}
           </Button>
         </CardFooter>
       </form>

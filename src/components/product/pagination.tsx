@@ -34,7 +34,7 @@ export function Pagination({
         <Link
           href={construireURL(chemin, params, { page: String(page - 1) })}
           className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/40 hover:text-primary"
-          aria-label="Page précédente"
+          aria-label="Vorherige Seite"
         >
           <FaChevronLeft className="size-4" />
         </Link>
@@ -65,7 +65,7 @@ export function Pagination({
         <Link
           href={construireURL(chemin, params, { page: String(page + 1) })}
           className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/40 hover:text-primary"
-          aria-label="Page suivante"
+          aria-label="Nächste Seite"
         >
           <FaChevronRight className="size-4" />
         </Link>

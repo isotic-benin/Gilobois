@@ -7,25 +7,25 @@ import { ProductCarousel } from "@/components/product/product-carousel";
 import { TemoignagesCarousel } from "@/components/home/temoignages-carousel";
 
 export const metadata: Metadata = {
-  title: "Perrier Bois - Granulés de bois, Bois de chauffage et Briquettes de bois | Livraison en France",
+  title: "Brennstoffe Nagler - Holzpellets, Brennholz und Holzbriketts | Lieferung in Deutschland",
   description:
-    "Votre spécialiste du bois de chauffage en France : granulés certifiés, briquettes de bois, bois de chauffage. Livraison rapide. Combustibles de haute qualité, 100 % naturels.",
+    "Ihr Spezialist für Brennstoffe in Deutschland: zertifizierte Holzpellets, Holzbriketts, Brennholz. Schnelle Lieferung. Hochwertige, 100% natürliche Brennstoffe.",
   alternates: { canonical: "/" },
 };
 
 const organisationJsonLd = {
   "@context": "https://schema.org",
   "@type": "OnlineStore",
-  name: "Perrier Bois",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://perrier-bois.fr",
+  name: "Brennstoffe Nagler",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://brennstoffenagler.de",
   description:
-    "Granulés de bois, bois de chauffage et briquettes de bois certifiées. Livraison dans toute la France.",
+    "Zertifizierte Holzpellets, Brennholz und Holzbriketts. Lieferung in ganz Deutschland.",
   areaServed: "FR",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    email: process.env.CONTACT_EMAIL ?? "contact@perrierbois.fr",
-    telephone: "+33 6 12 34 56 78",
+    email: process.env.CONTACT_EMAIL ?? "contact@brennstoffenagler.de",
+    telephone: "+49 151 23456789",
   },
 };
 
@@ -50,17 +50,17 @@ export default async function AccueilPage() {
           {/* Main Action Block - Solid Colored */}
           <div className="flex flex-col justify-center bg-primary text-primary-foreground p-10 md:p-16 min-h-[450px]">
             <span className="text-[14px] font-bold tracking-widest uppercase mb-4 opacity-80 border-b-2 border-primary-foreground/20 self-start pb-1">
-              Chauffage Haute Performance
+              Hochleistungsheizung
             </span>
             <h1 className="text-[42px] leading-[1.1] md:text-[56px] font-bold tracking-tight mb-6">
-              L'énergie naturelle, directement chez vous.
+              Natürliche Energie, direkt zu Ihnen.
             </h1>
             <p className="text-[16px] md:text-[18px] opacity-90 max-w-lg mb-10 leading-relaxed">
-              Granulés certifiés, bois de chauffage et briquettes compressées de qualité supérieure. Profitez d'une chaleur durable et 100% certifiée.
+              Zertifizierte Holzpellets, Brennholz und Holzbriketts in höchster Qualität. Genießen Sie nachhaltige und 100% zertifizierte Wärme.
             </p>
             <div className="flex gap-4">
               <Button asChild size="lg" className="bg-background text-foreground hover:bg-background/90 uppercase tracking-widest font-bold h-14 px-8 rounded-none">
-                <Link href="/produits">Voir Nos Produits</Link>
+                <Link href="/produits">Unsere Produkte ansehen</Link>
               </Button>
             </div>
           </div>
@@ -78,15 +78,15 @@ export default async function AccueilPage() {
 
             {/* Bottom Right Info Block */}
             <div className="bg-secondary text-secondary-foreground p-8 md:p-10 flex flex-col justify-center">
-              <h2 className="text-[28px] font-bold mb-4 tracking-tight">Qualité. Fiabilité.</h2>
+              <h2 className="text-[28px] font-bold mb-4 tracking-tight">Qualität. Zuverlässigkeit.</h2>
               <div className="grid grid-cols-2 gap-6 mt-2">
                 <div className="flex items-start gap-3">
                   <div className="bg-primary p-2 mt-1 shrink-0 text-primary-foreground"><FaTruck className="size-4" /></div>
-                  <p className="text-[14px] leading-tight font-semibold">Livraison<br />sur palette</p>
+                  <p className="text-[14px] leading-tight font-semibold">Palettenlieferung</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="bg-primary p-2 mt-1 shrink-0 text-primary-foreground"><FaLeaf className="size-4" /></div>
-                  <p className="text-[14px] leading-tight font-semibold">Bois 100%<br />durable</p>
+                  <p className="text-[14px] leading-tight font-semibold">100% nachhaltiges<br />Holz</p>
                 </div>
               </div>
             </div>
@@ -102,17 +102,17 @@ export default async function AccueilPage() {
           <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <span className="text-[13px] font-black uppercase tracking-widest text-primary border-b-2 border-primary pb-1">
-                Gamme de Combustibles
+                Brennstoffsortiment
               </span>
               <h2 className="mt-6 text-[36px] font-bold text-foreground">
-                Que recherchez-vous ?
+                Was suchen Sie?
               </h2>
             </div>
             <Link
               href="/produits"
               className="inline-flex items-center gap-2 text-[14px] font-bold uppercase tracking-widest text-foreground hover:text-primary transition-colors hover:underline underline-offset-4"
             >
-              Catalogue Complet <FaArrowRight className="size-4" />
+              Vollständiger Katalog <FaArrowRight className="size-4" />
             </Link>
           </div>
 
@@ -120,10 +120,10 @@ export default async function AccueilPage() {
             {categories.slice(0, 4).map((categorie) => {
               const nomLower = categorie.nom.toLowerCase();
               let image = categorie.image;
-              if (nomLower.includes("granul")) image = "/category_granules.png";
-              else if (nomLower.includes("bois") && !nomLower.includes("allume")) image = "/category_bois_chauffage.png";
-              else if (nomLower.includes("briquet")) image = "/category_briquettes.png";
-              else if (nomLower.includes("allume") || nomLower.includes("feu")) image = "/category_allume_feu.png";
+              if (nomLower.includes("pellet") || nomLower.includes("granul")) image = "/category_granules.png";
+              else if ((nomLower.includes("holz") || nomLower.includes("brenn") || nomLower.includes("bois")) && !nomLower.includes("anz")) image = "/category_bois_chauffage.png";
+              else if (nomLower.includes("brikett") || nomLower.includes("briquet")) image = "/category_briquettes.png";
+              else if (nomLower.includes("anzünd") || nomLower.includes("allume") || nomLower.includes("feu")) image = "/category_allume_feu.png";
               else if (!image) image = "/category_granules.png";
 
               return (
@@ -145,7 +145,7 @@ export default async function AccueilPage() {
                     </h3>
                     {categorie.sousCategories.length > 0 && (
                       <p className="mt-2 text-[13px] font-semibold text-muted-foreground uppercase tracking-widest">
-                        {categorie.sousCategories.length} Types
+                        {categorie.sousCategories.length} Typen
                       </p>
                     )}
                   </div>
@@ -162,17 +162,17 @@ export default async function AccueilPage() {
           <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-6">
             <div>
               <span className="text-[13px] font-black uppercase tracking-widest text-primary">
-                Populaires
+                Beliebt
               </span>
               <h2 className="mt-2 text-[36px] font-bold text-foreground">
-                Meilleures Ventes
+                Bestseller
               </h2>
             </div>
             <Link
               href="/produits?tri=ventes"
               className="inline-flex items-center gap-2 text-[14px] font-bold uppercase tracking-widest text-foreground hover:text-primary transition-colors"
             >
-              Voir le classement <FaArrowRight className="size-4" />
+              Rangliste anzeigen <FaArrowRight className="size-4" />
             </Link>
           </div>
 
@@ -186,15 +186,15 @@ export default async function AccueilPage() {
           {/* Promo */}
           <div className="bg-[#ef4444] text-white p-10 md:p-14 flex flex-col justify-center">
             <span className="text-[12px] font-bold uppercase tracking-widest border-l-2 border-white pl-3 mb-4">
-              Bonnes affaires
+              Schnäppchen
             </span>
-            <h3 className="text-[32px] font-bold tracking-tight">Prix cassés de la semaine</h3>
+            <h3 className="text-[32px] font-bold tracking-tight">Wochenangebote</h3>
             <p className="mt-4 text-[16px] leading-relaxed max-w-sm opacity-90">
-              Profitez d'offres exceptionnelles sur une sélection de nos granulés et briquettes.
+              Profitieren Sie von außergewöhnlichen Angeboten auf eine Auswahl unserer Holzpellets und Briketts.
             </p>
             <div className="mt-10">
               <Button asChild size="lg" className="bg-white text-[#ef4444] hover:bg-white/90 uppercase tracking-widest rounded-none font-bold">
-                <Link href="/promotions">Voir les promotions</Link>
+                <Link href="/promotions">Aktionen anzeigen</Link>
               </Button>
             </div>
           </div>
@@ -202,11 +202,11 @@ export default async function AccueilPage() {
           {/* Catalogue */}
           <div className="bg-foreground text-background p-10 md:p-14 flex flex-col justify-center">
             <span className="text-[12px] font-bold uppercase tracking-widest border-l-2 border-primary pl-3 mb-4 text-primary">
-              Notre stock complet
+              Unser vollständiges Sortiment
             </span>
-            <h3 className="text-[32px] font-bold tracking-tight">Qualité garantie.</h3>
+            <h3 className="text-[32px] font-bold tracking-tight">Garantierte Qualität.</h3>
             <p className="mt-4 text-[16px] leading-relaxed max-w-sm opacity-80">
-              Chaque produit est rigorously testé pour assurer un pouvoir calorifique maximal et une combustion propre.
+              Jedes Produkt wird sorgfältig getestet, um maximalen Heizwert und saubere Verbrennung zu gewährleisten.
             </p>
             <div className="mt-10">
               <Button
@@ -215,7 +215,7 @@ export default async function AccueilPage() {
                 size="lg"
                 className="border-2 border-primary text-primary bg-transparent rounded-none uppercase tracking-widest font-bold hover:bg-primary hover:text-primary-foreground"
               >
-                <Link href="/produits">Parcourir</Link>
+                <Link href="/produits">Durchsuchen</Link>
               </Button>
             </div>
           </div>
@@ -239,10 +239,10 @@ export default async function AccueilPage() {
               ))}
             </div>
             <h2 className="text-[32px] font-bold md:text-[42px] leading-tight mb-6">
-              Ne laissez pas l'hiver vous surprendre.
+              Lassen Sie sich vom Winter nicht überraschen.
             </h2>
             <p className="text-[18px] opacity-90 mb-10 leading-relaxed font-medium">
-              Livraison rapide à domicile ou retrait gratuit en dépôt pour tous nos combustibles certifiés.
+              Schnelle Lieferung nach Hause oder kostenlose Abholung im Lager für alle unsere zertifizierten Brennstoffe.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full">
@@ -251,7 +251,7 @@ export default async function AccueilPage() {
                 size="lg"
                 className="bg-background text-foreground hover:bg-background/90 uppercase tracking-widest font-bold h-14 rounded-none px-8"
               >
-                <Link href="/produits">Commander</Link>
+                <Link href="/produits">Bestellen</Link>
               </Button>
               <Button
                 asChild
@@ -259,7 +259,7 @@ export default async function AccueilPage() {
                 size="lg"
                 className="border-2 border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary uppercase tracking-widest font-bold h-14 rounded-none px-8"
               >
-                <Link href="/depots">Trouver un dépôt</Link>
+                <Link href="/depots">Lager finden</Link>
               </Button>
             </div>
           </div>

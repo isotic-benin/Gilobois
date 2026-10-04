@@ -26,7 +26,7 @@ export default async function DashboardLayout({
               <FaTree className="size-4" />
             </span>
             <span className="font-heading text-lg font-bold leading-none tracking-tight text-sidebar-foreground">
-              Perrier<span className="text-[#d19a3f]">Bois</span>
+              Brennstoffe<span className="text-[#d19a3f]">Nagler</span>
             </span>
             <span className="text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/40">
               Backoffice
@@ -43,7 +43,7 @@ export default async function DashboardLayout({
             href="/"
             className="flex items-center gap-2 text-[13px] font-medium text-sidebar-foreground/60 transition-colors hover:text-sidebar-foreground"
           >
-            <FaArrowLeft className="size-3.5" /> Vers la boutique
+            <FaArrowLeft className="size-3.5" /> Zum Shop
           </Link>
         </div>
       </aside>

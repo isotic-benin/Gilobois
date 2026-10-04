@@ -14,21 +14,21 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   const corps = await request.json().catch(() => null);
-  if (!corps) return apiErreur("Corps de requête invalide", 400);
+  if (!corps) return apiErreur("Ungültiger Anfragekörper", 400);
 
   const validation = categorySchema.partial().safeParse(corps);
   if (!validation.success) {
     return apiErreur(
-      validation.error.issues[0]?.message ?? "Données invalides",
+      validation.error.issues[0]?.message ?? "Ungültige Daten",
       400,
     );
   }
@@ -36,7 +36,7 @@ export async function PUT(
   await dbConnect();
 
   const categorie = await Category.findById(id);
-  if (!categorie) return apiErreur("Catégorie introuvable", 404);
+  if (!categorie) return apiErreur("Kategorie nicht gefunden", 404);
 
   const donnees = { ...validation.data };
   if (donnees.slug) {
@@ -56,23 +56,23 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user) return apiErreur("Non authentifié", 401);
+  if (!user) return apiErreur("Nicht authentifiziert", 401);
   if (user.role !== ROLES.ADMIN) {
-    return apiErreur("Action réservée à l'administrateur", 403);
+    return apiErreur("Nur für Administratoren", 403);
   }
 
   const { id } = await params;
-  if (!estObjectId(id)) return apiErreur("Identifiant invalide", 400);
+  if (!estObjectId(id)) return apiErreur("Ungültige ID", 400);
 
   await dbConnect();
 
   const categorie = await Category.findById(id);
-  if (!categorie) return apiErreur("Catégorie introuvable", 404);
+  if (!categorie) return apiErreur("Kategorie nicht gefunden", 404);
 
   const aDesProduits = await Product.exists({ categorieId: id });
   if (aDesProduits) {
     return apiErreur(
-      "Impossible de supprimer : des produits sont rattachés à cette catégorie",
+      "Löschen nicht möglich: Produkte sind dieser Kategorie zugeordnet",
       409,
     );
   }
@@ -80,7 +80,7 @@ export async function DELETE(
   const aDesEnfants = await Category.exists({ parentId: id });
   if (aDesEnfants) {
     return apiErreur(
-      "Impossible de supprimer : cette catégorie contient des sous-catégories",
+      "Löschen nicht möglich: Diese Kategorie enthält Unterkategorien",
       409,
     );
   }

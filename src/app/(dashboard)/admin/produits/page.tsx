@@ -3,7 +3,7 @@ import { requireAdmin } from "@/lib/dal";
 import { GestionProduits } from "@/components/dashboard/gestion-produits";
 
 export const metadata: Metadata = {
-  title: "Produits",
+  title: "Produkte",
 };
 
 export default async function AdminProduitsPage() {

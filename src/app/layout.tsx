@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 
-const SITE_NOM = "Perrier Bois";
+const SITE_NOM = "Brennstoffe Nagler";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -26,37 +26,37 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://perrier-bois.fr",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://brennstoffenagler.de",
   ),
   title: {
     default: SITE_NOM,
     template: `%s | ${SITE_NOM}`,
   },
   description:
-    "Perrier Bois - Votre spécialiste combustibles bois en France : granulés certifiés, bûches compressées, bois de chauffage. Livraison rapide et offerte. +120 points de retrait.",
+    "Brennstoffe Nagler - Ihr Spezialist für Holzbrennstoffe: zertifizierte Pellets, Pressholzbriketts, Brennholz. Schnelle und kostenlose Lieferung. +120 Abholstellen.",
   applicationName: SITE_NOM,
   formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     type: "website",
     siteName: SITE_NOM,
-    locale: "fr_FR",
+    locale: "de_DE",
     url: "/",
     title: SITE_NOM,
     description:
-      "Bois de chauffage, granulés et bûches compressées certifiés. Livraison partout en France métropolitaine.",
+      "Brennholz, zertifizierte Pellets und Pressholzbriketts. Lieferung in ganz Deutschland.",
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_NOM,
     description:
-      "Bois de chauffage, granulés et bûches compressées certifiés. Livraison partout en France métropolitaine.",
+      "Brennholz, zertifizierte Pellets und Pressholzbriketts. Lieferung in ganz Deutschland.",
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="fr"
+      lang="de"
       className={`${manrope.variable} ${fraunces.variable} font-sans h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

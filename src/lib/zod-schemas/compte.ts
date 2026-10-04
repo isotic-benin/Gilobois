@@ -1,23 +1,23 @@
 import { z } from "zod";
 
 export const adresseCompteSchema = z.object({
-  label: z.string().trim().min(2, "Libellé requis"),
-  rue: z.string().trim().min(3, "Adresse requise"),
-  ville: z.string().trim().min(2, "Ville requise"),
+  label: z.string().trim().min(2, "Bezeichnung erforderlich"),
+  rue: z.string().trim().min(3, "Adresse erforderlich"),
+  ville: z.string().trim().min(2, "Stadt erforderlich"),
   codePostal: z.string().trim().default(""),
-  pays: z.string().trim().min(2, "Pays requis"),
+  pays: z.string().trim().min(2, "Land erforderlich"),
   telephone: z.string().trim().default(""),
   parDefaut: z.boolean().default(false),
 });
 
 export const avisSchema = z.object({
-  produitId: z.string().regex(/^[0-9a-f]{24}$/, "Produit invalide"),
-  note: z.coerce.number().int().min(1, "Note minimale : 1").max(5, "Note maximale : 5"),
+  produitId: z.string().regex(/^[0-9a-f]{24}$/, "Ungültiges Produkt"),
+  note: z.coerce.number().int().min(1, "Mindestbewertung: 1").max(5, "Höchstbewertung: 5"),
   commentaire: z
     .string()
     .trim()
-    .min(3, "Commentaire trop court")
-    .max(1000, "Commentaire trop long"),
+    .min(3, "Kommentar zu kurz")
+    .max(1000, "Kommentar zu lang"),
   images: z.array(z.string()).max(4).default([]),
 });
 
@@ -27,21 +27,21 @@ export const modererAvisSchema = z.object({
 });
 
 export const profilSchema = z.object({
-  nom: z.string().trim().min(2, "Nom requis"),
-  prenom: z.string().trim().min(2, "Prénom requis"),
+  nom: z.string().trim().min(2, "Name erforderlich"),
+  prenom: z.string().trim().min(2, "Vorname erforderlich"),
   telephone: z.string().trim().default(""),
 });
 
 export const motDePasseSchema = z
   .object({
-    actuel: z.string().min(6, "Mot de passe actuel requis"),
+    actuel: z.string().min(6, "Aktuelles Passwort erforderlich"),
     nouveau: z
       .string()
-      .min(8, "Le nouveau mot de passe doit contenir au moins 8 caractères"),
+      .min(8, "Das neue Passwort muss mindestens 8 Zeichen enthalten"),
     confirmation: z.string(),
   })
   .refine((data) => data.nouveau === data.confirmation, {
-    message: "Les mots de passe ne correspondent pas",
+    message: "Die Passwörter stimmen nicht überein",
     path: ["confirmation"],
   });
 

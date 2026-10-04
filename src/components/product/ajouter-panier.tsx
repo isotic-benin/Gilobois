@@ -48,7 +48,7 @@ export function AjouterAuPanier({
       quantite,
       stock,
     });
-    setMessage("Ajouté au panier !");
+    setMessage("In den Warenkorb gelegt!");
     setEnCours(false);
   };
 
@@ -59,7 +59,7 @@ export function AjouterAuPanier({
           <button
             type="button"
             onClick={diminuer}
-            aria-label="Diminuer la quantité"
+            aria-label="Menge verringern"
             className="px-3 py-2 hover:bg-muted disabled:opacity-40"
             disabled={quantite <= 1}
           >
@@ -69,7 +69,7 @@ export function AjouterAuPanier({
           <button
             type="button"
             onClick={augmenter}
-            aria-label="Augmenter la quantité"
+            aria-label="Menge erhöhen"
             className="px-3 py-2 hover:bg-muted disabled:opacity-40"
             disabled={indisponible || quantite >= stock}
           >
@@ -84,10 +84,10 @@ export function AjouterAuPanier({
         >
           <FaCartShopping className="size-4" />
           {indisponible
-            ? "Rupture de stock"
+            ? "Nicht verfügbar"
             : enCours
-              ? "Ajout en cours…"
-              : "Ajouter au panier"}
+              ? "Wird hinzugefügt…"
+              : "In den Warenkorb"}
         </Button>
       </div>
       {message && <p className="text-sm font-medium text-emerald-600">{message}</p>}

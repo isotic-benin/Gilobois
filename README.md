@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Create `.env.local` from `.env.example` and set `MONGODB_URI` first. Then run:
 
 ```bash
 npm run dev
@@ -13,6 +13,12 @@ pnpm dev
 # or
 bun dev
 ```
+
+`npm run dev` runs `npm run db:seed` before starting Next.js. The seed runs only
+when the `products`, `categories`, and `users` collections are all empty; if any
+of them already contains data, seeding is skipped. If MongoDB is unavailable or
+the seed fails, the development server does not start. To run the seed manually,
+use `npm run db:seed`.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

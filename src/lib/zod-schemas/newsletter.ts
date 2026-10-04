@@ -1,5 +1,5 @@
 import { z } from "zod";
 
 export const newsletterSchema = z.object({
-  email: z.email("Adresse email invalide"),
+  email: z.email("Ungültige E-Mail-Adresse"),
 });

@@ -26,13 +26,13 @@ export async function POST(request: NextRequest) {
     const user = await getCurrentUser();
     if (!user) {
       return NextResponse.json(
-        { succes: false, erreur: "Non authentifié" },
+        { succes: false, erreur: "Nicht authentifiziert" },
         { status: 401 },
       );
     }
     if (user.role !== ROLES.ADMIN && user.role !== ROLES.GERANT) {
       return NextResponse.json(
-        { succes: false, erreur: "Action réservée à l'équipe boutique" },
+        { succes: false, erreur: "Nur für das Shop-Team" },
         { status: 403 },
       );
     }
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     } catch (err) {
       console.error("[UPLOAD] Erreur parsing formData:", err);
       return NextResponse.json(
-        { succes: false, erreur: "Impossible de lire le formulaire. Vérifiez que le fichier est bien envoyé." },
+        { succes: false, erreur: "Das Formular konnte nicht gelesen werden. Bitte überprüfen Sie, ob die Datei korrekt übermittelt wurde." },
         { status: 400 },
       );
     }
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     if (!fichier || typeof fichier === "string") {
       return NextResponse.json(
-        { succes: false, erreur: "Aucun fichier fourni (champ 'fichier')" },
+        { succes: false, erreur: "Keine Datei angegeben (Feld 'fichier')" },
         { status: 400 },
       );
     }
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           succes: false,
-          erreur: `Type de fichier non autorisé (.${extension}). Extensions acceptées : ${EXTENSIONS_AUTORISEES.join(", ")}`,
+          erreur: `Nicht erlaubter Dateityp (.). Erlaubte Endungen: ${EXTENSIONS_AUTORISEES.join(", ")}`,
         },
         { status: 400 },
       );
@@ -73,14 +73,14 @@ export async function POST(request: NextRequest) {
 
     if (blob.size === 0) {
       return NextResponse.json(
-        { succes: false, erreur: "Fichier vide" },
+        { succes: false, erreur: "Leere Datei" },
         { status: 400 },
       );
     }
 
     if (blob.size > TAILLE_MAX) {
       return NextResponse.json(
-        { succes: false, erreur: "Fichier trop volumineux (max 5 Mo)" },
+        { succes: false, erreur: "Datei zu groß (max. 5 MB)" },
         { status: 400 },
       );
     }
@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
         token: process.env.BLOB_READ_WRITE_TOKEN,
       });
 
-      console.log("[UPLOAD] Fichier envoyé sur Vercel Blob:", resultat.url);
+      console.log("[UPLOAD] Datei auf Vercel Blob hochgeladen:", resultat.url);
 
       return NextResponse.json(
         { succes: true, donnees: { url: resultat.url } },
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
         message.includes("BLOB_READ_WRITE_TOKEN") || message.includes("token")
           ? "Stockage distant non configuré (BLOB_READ_WRITE_TOKEN manquant)."
           : message.includes("private store") || message.includes("private")
-            ? "Le stockage Vercel Blob est en accès privé : passez le store en accès public dans Vercel (Storage > Blob > Settings) pour que les images soient visibles publiquement."
+            ? "Der Vercel Blob-Speicher ist privat: Bitte den Store in Vercel auf öffentlichen Zugriff umstellen (Storage > Blob > Settings), damit Bilder öffentlich sichtbar sind."
             : "Erreur lors de l'envoi vers le stockage distant.";
       return NextResponse.json(
         { succes: false, erreur: erreurBlob },
@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     console.error("[UPLOAD] Erreur inattendue:", err);
     return NextResponse.json(
-      { succes: false, erreur: "Erreur interne lors de l'upload" },
+      { succes: false, erreur: "Interner Fehler beim Upload" },
       { status: 500 },
     );
   }

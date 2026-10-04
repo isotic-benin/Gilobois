@@ -57,7 +57,7 @@ export function GestionNewsletter() {
                   <td className="p-3">{abonne.email}</td>
                   <td className="p-3">
                     {new Date(abonne.dateInscription).toLocaleDateString(
-                      "fr-FR",
+                      "de-DE",
                     )}
                   </td>
                   <td className="p-3">

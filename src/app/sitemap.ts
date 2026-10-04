@@ -3,7 +3,7 @@ import { dbConnect } from "@/lib/db";
 import Category from "@/models/Category";
 import Product from "@/models/Product";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://perrier-bois.fr";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://brennstoffenagler.de";
 
 const pagesStatiques: Array<{ chemin: string; priorite: number; frequence: string }> = [
   { chemin: "", priorite: 1, frequence: "daily" },
