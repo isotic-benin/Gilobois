@@ -7,15 +7,13 @@
  *   MONGODB_URI="mongodb://127.0.0.1:27017/ma_base" node seed.js
  *   (facultatif) SEED_ADMIN_PASSWORD="un-secret-fort" node seed.js
  *
- * Le mot de passe demandé par le propriétaire est utilisé par défaut. Remplacez-le
- * avant tout déploiement public. Les prix sont les prix affichés lors de la
- * consultation des catalogues le 04/10/2026 ; ils doivent être revérifiés avant
- * publication/vente. Les stocks sont mis à 0 car aucune donnée d’inventaire n’a
- * été fournie. Les URL d’images pointent vers les fichiers publics des boutiques
- * sources ; vérifiez les droits d’utilisation avant toute exploitation commerciale.
+ * Définir SEED_FORCE=true pour appliquer les mises à jour des produits seedés
+ * sur une base déjà remplie. Le seed ne réécrit pas les données des utilisateurs.
  *
- * Les opérations sont des upserts, mais ne sont exécutées que si les collections
- * products, categories et users sont toutes vides.
+ * Les données sont initialisées sur une base vide. Sur une base existante, le seed
+ * est ignoré sauf si SEED_FORCE=true ; dans ce cas, il met à jour les produits
+ * identifiés par leurs SKU, retire les anciennes caractéristiques de provenance
+ * et fixe leur stock à 30 sans réinitialiser les données de vente ou les avis.
  */
 
 import './env';
@@ -33,6 +31,7 @@ function getMongoUri(): string {
 const MONGODB_URI = getMongoUri();
 const SEED_ADMIN_EMAIL = (process.env.SEED_ADMIN_EMAIL || 'contact@brennstoffenagler.de').trim().toLowerCase();
 const SEED_ADMIN_PASSWORD = process.env.SEED_ADMIN_PASSWORD || 'ChangezMoi123!';
+const SEED_FORCE = process.env.SEED_FORCE === 'true';
 
 if (SEED_ADMIN_PASSWORD.length < 10) {
   throw new Error('SEED_ADMIN_PASSWORD doit contenir au moins 10 caractères.');
@@ -266,15 +265,18 @@ async function seed() {
   await mongoose.connect(MONGODB_URI);
   console.log('Connecté à MongoDB.');
 
-  const existingData = await Promise.all([
+  const [existingProducts, existingCategories, existingUsers] = await Promise.all([
     Product.exists({}),
     Category.exists({}),
     User.exists({}),
   ]);
-  if (existingData.some(Boolean)) {
-    console.log('Seed ignoré : les collections products, categories ou users contiennent déjà des données.');
+  if ((existingProducts || existingCategories || existingUsers) && !SEED_FORCE) {
+    console.log('Seed ignoré : la base contient déjà des données. Définissez SEED_FORCE=true pour mettre à jour le catalogue.');
     await mongoose.disconnect();
     return;
+  }
+  if (SEED_FORCE) {
+    console.warn('SEED_FORCE=true : produits seedés mis à jour ; catégories existantes, commandes, ventes, avis et comptes préservés.');
   }
 
   const categoryIds = new Map<string, mongoose.Types.ObjectId>();
@@ -282,15 +284,21 @@ async function seed() {
   for (const c of categories) {
     const parentId = c.parentSlug ? categoryIds.get(c.parentSlug) : null;
     if (c.parentSlug && !parentId) throw new Error(`Catégorie parente absente : ${c.parentSlug}`);
-    await Category.findOneAndUpdate(
-      { slug: c.slug },
-      { $set: { nom: c.nom, description: c.description || '', parentId, ordre: c.ordre, active: true, image: '', metaTitle: c.nom, metaDescription: c.description || c.nom } },
-      { upsert: true, new: true, setDefaultsOnInsert: true },
-    );
-    const saved = await Category.findOne({ slug: c.slug }).select('_id').lean();
+    const existing = SEED_FORCE
+      ? await Category.findOne({ slug: c.slug }).select('_id').lean()
+      : null;
+    if (!existing) {
+      await Category.findOneAndUpdate(
+        { slug: c.slug },
+        { $set: { nom: c.nom, description: c.description || '', parentId, ordre: c.ordre, active: true, image: '', metaTitle: c.nom, metaDescription: c.description || c.nom } },
+        { upsert: true, new: true, setDefaultsOnInsert: true },
+      );
+    }
+    const saved = existing ?? await Category.findOne({ slug: c.slug }).select('_id').lean();
+    if (!saved) throw new Error(`Catégorie impossible à récupérer : ${c.slug}`);
     categoryIds.set(c.slug, saved._id);
   }
-  console.log(`${categories.length} catégories insérées/mises à jour.`);
+  console.log(`${categories.length} catégories seed prêtes.`);
 
   const now = new Date();
   for (const p of products) {
@@ -303,8 +311,6 @@ async function seed() {
       { cle: 'Verpackung', valeur: p.format },
       ...(p.longueur ? [{ cle: 'Scheitlänge', valeur: p.longueur }] : []),
       ...(p.poids ? [{ cle: 'Gewicht', valeur: `${p.poids} kg` }] : []),
-      { cle: 'Katalogquelle', valeur: p.source },
-      { cle: 'Produktquelle', valeur: p.url },
       { cle: 'Preis abgerufen am', valeur: '2026-10-04' },
       ...(p.tags.includes('prix-a-partir') ? [{ cle: 'Preishinweis', valeur: 'Angezeigter Ab-Preis; der endgültige Tarif kann je nach Lagerstandort und Lieferziel abweichen.' }] : []),
     ];
@@ -321,7 +327,7 @@ async function seed() {
       prixPromo: promo ? p.prixPromo : null,
       enPromotion: promo,
       pourcentageRemise: remise,
-      stock: 0,
+      stock: 30,
       seuilAlerteStock: 5,
       variantes: [],
       attributs,
@@ -337,18 +343,44 @@ async function seed() {
       metaDescription: desc.courte.slice(0, 155),
       dateMiseAJour: now,
     };
-    await Product.findOneAndUpdate({ sku: p.sku }, { $set: doc, $setOnInsert: { dateCreation: now } }, { upsert: true, new: true, runValidators: true, setDefaultsOnInsert: true });
+    await Product.findOneAndUpdate(
+      { sku: p.sku },
+      { $setOnInsert: { ...doc, dateCreation: now } },
+      { upsert: true, new: true, runValidators: true, setDefaultsOnInsert: true },
+    );
+    await Product.updateOne(
+      { sku: p.sku },
+      {
+        $set: { stock: 30 },
+        $pull: { attributs: { cle: { $in: ['Katalogquelle', 'Produktquelle'] } } },
+      },
+    );
   }
   console.log(`${products.length} produits insérés/mis à jour.`);
 
   const motDePasseHash = await bcrypt.hash(SEED_ADMIN_PASSWORD, 12);
   await User.findOneAndUpdate(
     { email: SEED_ADMIN_EMAIL },
-    { $set: { nom: 'Brennstoff Nagler', prenom: 'Admin', email: SEED_ADMIN_EMAIL, motDePasseHash, role: 'ADMIN', actif: true, telephone: '', avatar: '', emailVerifie: false }, $setOnInsert: { adresses: [], derniereConnexion: null, dateCreation: now } },
+    {
+      $setOnInsert: {
+        nom: 'Brennstoff Nagler',
+        prenom: 'Admin',
+        email: SEED_ADMIN_EMAIL,
+        motDePasseHash,
+        role: 'ADMIN',
+        actif: true,
+        telephone: '',
+        avatar: '',
+        emailVerifie: false,
+        adresses: [],
+        derniereConnexion: null,
+        dateCreation: now,
+      },
+    },
     { upsert: true, new: true, runValidators: true, setDefaultsOnInsert: true },
   );
-  console.log(`Compte ADMIN prêt : ${SEED_ADMIN_EMAIL}`);
-  console.log('Stocks laissés à 0 ; prix et tarifs « à partir de » à vérifier avant mise en vente.');
+  console.log(`Compte ADMIN conservé s'il existe, sinon créé : ${SEED_ADMIN_EMAIL}`);
+  console.log('Stock seed défini à 30 unités par produit.');
   await mongoose.disconnect();
 }
 

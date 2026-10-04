@@ -14,11 +14,27 @@ pnpm dev
 bun dev
 ```
 
-`npm run dev` runs `npm run db:seed` before starting Next.js. The seed runs only
-when the `products`, `categories`, and `users` collections are all empty; if any
-of them already contains data, seeding is skipped. If MongoDB is unavailable or
-the seed fails, the development server does not start. To run the seed manually,
-use `npm run db:seed`.
+`npm run dev` runs `npm run db:seed` before starting Next.js. By default, the
+seed only initializes an empty database. If any of the `products`, `categories`,
+or `users` collections already contains data, seeding is skipped. To apply the
+catalogue seed updates to an existing database, temporarily set `SEED_FORCE=true`
+and run `npm run db:seed`. Forced updates are limited to seed product SKUs:
+they set each stock to 30 and remove the old catalogue/product source
+characteristics. Existing categories, orders, reviews, sales counters, and user
+accounts are preserved. Missing categories required by the seed are created.
+If MongoDB is unavailable or the seed fails, the development server does not
+start.
+
+On PowerShell, run a one-time forced update with:
+
+```powershell
+$env:SEED_FORCE = "true"
+npm run db:seed
+Remove-Item Env:SEED_FORCE
+```
+
+For production, set `SEED_FORCE=true` only for the deployment or one-off seed
+run, then unset it afterwards. Do not commit production database credentials.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
