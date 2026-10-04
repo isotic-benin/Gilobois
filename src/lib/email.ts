@@ -322,21 +322,29 @@ export interface RibPaiement {
   siege: string;
 }
 
+export interface ArticlePaiement {
+  nom: string;
+  variante?: string;
+  quantite: number;
+}
+
 export async function envoyerEmailPaiement({
   email,
   numeroCommande,
   total,
   rib,
+  articles,
 }: {
   email: string;
   numeroCommande: string;
   total: number;
   rib: RibPaiement | null;
+  articles: ArticlePaiement[];
 }): Promise<{ envoye: boolean }> {
   return envoyerEmail({
     to: email,
     sujet: `Zahlung Ihrer Bestellung ${numeroCommande}`,
-    html: construireHtmlPaiement({ numeroCommande, total, rib }),
+    html: construireHtmlPaiement({ numeroCommande, total, rib, articles }),
   });
 }
 
@@ -344,12 +352,35 @@ export function construireHtmlPaiement({
   numeroCommande,
   total,
   rib,
+  articles,
 }: {
   numeroCommande: string;
   total: number;
   rib: RibPaiement | null;
+  articles: ArticlePaiement[];
 }): string {
   const identifiantCommande = echapperHtml(numeroCommande);
+  const lignesArticles = articles
+    .map(
+      (article) => `<tr>
+        <td style="padding:11px 14px;border-top:1px solid #e8e6de;color:#26382f;">
+          <strong>${echapperHtml(article.nom)}</strong>
+          ${article.variante ? `<br><span style="font-size:12px;color:#788078;">${echapperHtml(article.variante)}</span>` : ""}
+        </td>
+        <td align="right" style="padding:11px 14px;border-top:1px solid #e8e6de;color:#26382f;white-space:nowrap;">${article.quantite}</td>
+      </tr>`,
+    )
+    .join("");
+  const articlesHtml = `
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 22px;border:1px solid #e8e6de;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th align="left" style="padding:11px 14px;background-color:#edf2ed;color:#26382f;font-size:13px;">Produits commandés</th>
+          <th align="right" style="padding:11px 14px;background-color:#edf2ed;color:#26382f;font-size:13px;">Quantité</th>
+        </tr>
+      </thead>
+      <tbody>${lignesArticles}</tbody>
+    </table>`;
   const ribHtml = rib
     ? `
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:22px 0;border:1px solid #d9e1da;border-collapse:collapse;">
@@ -372,6 +403,7 @@ export function construireHtmlPaiement({
         <tr><td style="padding:16px 20px;background-color:#f8f7f3;color:#788078;font-size:12px;letter-spacing:1px;">ZU ÜBERWEISENDER BETRAG</td></tr>
         <tr><td style="padding:0 20px 18px;background-color:#f8f7f3;color:#26382f;font-size:26px;font-weight:bold;">${formaterPrix(total)}</td></tr>
       </table>
+      ${articlesHtml}
       ${ribHtml || `<p style="padding:14px 16px;background-color:#fff7e8;border-left:3px solid #c27a3a;color:#6c4b2e;">Die Bankverbindung ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns, bevor Sie die Überweisung ausführen.</p>`}
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:20px 0;border-left:3px solid #c27a3a;background-color:#fff7e8;">
         <tr><td style="padding:14px 16px;color:#6c4b2e;font-size:14px;line-height:1.6;">

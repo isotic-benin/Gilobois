@@ -66,6 +66,11 @@ export async function POST(request: NextRequest) {
     numeroCommande: commande.numeroCommande,
     total: commande.total,
     rib,
+    articles: commande.articles.map((article) => ({
+      nom: article.nom,
+      variante: article.variante,
+      quantite: article.quantite,
+    })),
   });
 
   await envoyerNotificationCommande({

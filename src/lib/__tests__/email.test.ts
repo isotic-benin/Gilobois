@@ -76,6 +76,10 @@ describe("modèles d’e-mail", () => {
     const html = construireHtmlPaiement({
       numeroCommande: 'CMD<&"42',
       total: 123.45,
+      articles: [
+        { nom: "Bûches de chêne", variante: "Longueur 33 cm", quantite: 2 },
+        { nom: "Granulés de bois", quantite: 1 },
+      ],
       rib: {
         titulaire: "<script>alert(1)</script>",
         banque: "Banque & fils",
@@ -91,6 +95,18 @@ describe("modèles d’e-mail", () => {
     expect(html).toContain("&lt;script&gt;alert(1)&lt;/script&gt;");
     expect(html).toContain("CMD&lt;&amp;&quot;42");
     expect(html).toContain("123,45");
+    expect(html).toContain("Produits commandés");
+    expect(html).toContain("Bûches de chêne");
+    expect(html).toContain("Longueur 33 cm");
+    expect(html).toContain("Granulés de bois");
+    expect(html).toContain(">2</td>");
+    expect(html).toContain(">1</td>");
+    expect(
+      html.indexOf("ZU ÜBERWEISENDER BETRAG"),
+    ).toBeLessThan(html.indexOf("Produits commandés"));
+    expect(
+      html.indexOf("Produits commandés"),
+    ).toBeLessThan(html.indexOf("IBAN"));
     expect(html).not.toContain("<script>");
     expect(html).not.toMatch(/<\s+(?:h[1-6]|p|div|tr|td|table)\b|<\/\/|<th[^>]*>[^<]{0,2}<\/?\/th/i);
   });
@@ -99,6 +115,7 @@ describe("modèles d’e-mail", () => {
     const html = construireHtmlPaiement({
       numeroCommande: "CMD-100",
       total: 25,
+      articles: [{ nom: "Produit", quantite: 3 }],
       rib: null,
     });
 
@@ -150,6 +167,7 @@ describe("modèles d’e-mail", () => {
       construireHtmlPaiement({
         numeroCommande: "CMD-2026-001",
         total: 45,
+        articles: [{ nom: "Holzpellets", quantite: 4 }],
         rib: null,
       }),
     );
@@ -157,6 +175,8 @@ describe("modèles d’e-mail", () => {
     expect(text).toContain("Vielen Dank für Ihre Bestellung");
     expect(text).toContain("CMD-2026-001");
     expect(text).toContain("45,00");
+    expect(text).toContain("Holzpellets");
+    expect(text).toContain("4");
     expect(text).toContain("©");
     expect(text).not.toMatch(/<[^>]+>/);
   });
